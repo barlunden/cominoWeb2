@@ -1,16 +1,79 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Comino Web - Nettsider fra bunnen av">
+	<Header />
+	
+	<main>
+		<!-- Hero Section -->
+		<section class="container mx-auto px-6 py-20">
+			<div class="text-center max-w-4xl mx-auto">
+				<h1 class="text-5xl md:text-6xl font-bold mb-6 bg-linear-to-r from-blue-500 to-blue-900 bg-clip-text text-transparent">
+					Nettsider fra bunnen av
+				</h1>
+				<p class="text-xl md:text-2xl text-gray-600 mb-8">
+					Vi lager skreddersydde nettsider som gir bedre resultater og mer fleksibilitet enn Wix, WordPress og andre page builders.
+				</p>
+				<div class="flex flex-col sm:flex-row gap-4 justify-center">
+					<a href="/kontakt" class="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl">
+						Kom i gang
+					</a>
+					<a href="/prosjekt" class="border-2 border-blue-600 text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-50 transition-colors">
+						Se våre prosjekter
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- Features Section -->
+		<section class="bg-gray-50 py-20">
+			<div class="container mx-auto px-6">
+				<h2 class="text-4xl font-bold text-center mb-12">Hvorfor Comino Web?</h2>
+				
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+					<div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+						<div class="text-4xl mb-4">🚀</div>
+						<h3 class="text-2xl font-bold mb-4">Raskere sider</h3>
+						<p class="text-gray-600">
+							Nettsider bygget fra bunnen av er raskere enn page builders. Bedre brukeropplevelse og høyere søkerangering.
+						</p>
+					</div>
+					
+					<div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+						<div class="text-4xl mb-4">🎨</div>
+						<h3 class="text-2xl font-bold mb-4">Full fleksibilitet</h3>
+						<p class="text-gray-600">
+							Ingen grenser. Vi lager nøyaktig det designet du ønsker, uten å være bundet av maler eller plugins.
+						</p>
+					</div>
+					
+					<div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+						<div class="text-4xl mb-4">🔒</div>
+						<h3 class="text-2xl font-bold mb-4">Sikkerhet</h3>
+						<p class="text-gray-600">
+							Ingen tredjepartsplugins eller unødvendig kode. Bare det som trengs for at nettsiden din skal fungere optimalt.
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- CTA Section -->
+		<section class="container mx-auto px-6 py-20">
+			<div class="bg-linear-to-r from-blue-600 to-purple-600 rounded-2xl p-12 text-center text-white">
+				<h2 class="text-4xl font-bold mb-4">Klar for en bedre nettside?</h2>
+				<p class="text-xl mb-8 text-blue-100">
+					La oss lage noe fantastisk sammen
+				</p>
+				<a href="/kontakt" class="inline-block bg-white text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
+					Ta kontakt i dag
+				</a>
+			</div>
+		</section>
+	</main>
+	
+	<Footer />
+</Layout>

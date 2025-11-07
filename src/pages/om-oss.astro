@@ -1,0 +1,76 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Om oss - Comino Web">
+	<Header />
+	
+	<main>
+		<section class="container mx-auto px-6 py-20">
+			<div class="max-w-4xl mx-auto">
+				<h1 class="text-5xl font-bold text-center mb-6">Om Comino Web</h1>
+				<p class="text-xl text-gray-600 text-center mb-16">
+					Vi brenner for å lage nettsider som gjør forskjell
+				</p>
+
+				<div class="prose prose-lg max-w-none">
+					<div class="bg-blue-50 p-8 rounded-xl mb-12">
+						<h2 class="text-3xl font-bold mb-4">Vår filosofi</h2>
+						<p class="text-gray-700 leading-relaxed">
+							Hos Comino Web tror vi på å lage nettsider fra bunnen av. I stedet for å bruke 
+							generiske page builders som Wix eller WordPress, skriver vi kode som er skreddersydd 
+							for ditt prosjekt. Dette gir oss full kontroll over design, funksjonalitet og ytelse.
+						</p>
+					</div>
+
+					<h2 class="text-3xl font-bold mb-6">Hvorfor fra bunnen av?</h2>
+					
+					<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+						<div class="bg-white p-6 rounded-lg shadow-md">
+							<h3 class="text-xl font-bold mb-3">⚡ Bedre ytelse</h3>
+							<p class="text-gray-600">
+								Ingen unødvendig kode eller plugins. Bare det som trengs for at siden din skal 
+								være lynrask.
+							</p>
+						</div>
+						
+						<div class="bg-white p-6 rounded-lg shadow-md">
+							<h3 class="text-xl font-bold mb-3">🎨 Frihet i design</h3>
+							<p class="text-gray-600">
+								Vi er ikke bundet av maler eller tema. Vi lager nøyaktig det designet du vil ha.
+							</p>
+						</div>
+						
+						<div class="bg-white p-6 rounded-lg shadow-md">
+							<h3 class="text-xl font-bold mb-3">🔧 Full kontroll</h3>
+							<p class="text-gray-600">
+								Du eier all koden. Ingen bindinger til tredjepartsplattformer eller abonnement.
+							</p>
+						</div>
+						
+						<div class="bg-white p-6 rounded-lg shadow-md">
+							<h3 class="text-xl font-bold mb-3">🚀 Moderne teknologi</h3>
+							<p class="text-gray-600">
+								Vi bruker de nyeste verktøyene og rammeverkene for best mulig resultat.
+							</p>
+						</div>
+					</div>
+
+					<div class="bg-linear-to-r from-blue-600 to-purple-600 text-white p-8 rounded-xl">
+						<h2 class="text-3xl font-bold mb-4">Klar for å ta steget?</h2>
+						<p class="text-blue-100 mb-6">
+							La oss lage en nettside som virkelig representerer bedriften din.
+						</p>
+						<a href="/kontakt" class="inline-block bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+							Ta kontakt
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+	
+	<Footer />
+</Layout>

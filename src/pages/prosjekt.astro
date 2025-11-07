@@ -1,0 +1,74 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Våre Prosjekter - Comino Web">
+	<Header />
+	
+	<main>
+		<section class="container mx-auto px-6 py-20">
+			<h1 class="text-5xl font-bold text-center mb-6">Våre Prosjekter</h1>
+			<p class="text-xl text-gray-600 text-center max-w-3xl mx-auto mb-16">
+				Se hva vi har laget for fornøyde kunder
+			</p>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+				<!-- Placeholder prosjekt - kan erstattes med ekte prosjekter senere -->
+				<div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+					<div class="h-48 bg-linear-to-br from-blue-500 to-purple-600"></div>
+					<div class="p-6">
+						<h3 class="text-xl font-bold mb-2">Prosjekt 1</h3>
+						<p class="text-gray-600 mb-4">
+							Moderne bedriftsnettsider med fokus på brukeropplevelse og konvertering.
+						</p>
+						<div class="flex flex-wrap gap-2">
+							<span class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm">Astro</span>
+							<span class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm">Tailwind</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+					<div class="h-48 bg-linear-to-br from-green-500 to-teal-600"></div>
+					<div class="p-6">
+						<h3 class="text-xl font-bold mb-2">Prosjekt 2</h3>
+						<p class="text-gray-600 mb-4">
+							E-handelsløsning med skreddersydd design og betalingsintegrasjon.
+						</p>
+						<div class="flex flex-wrap gap-2">
+							<span class="px-3 py-1 bg-green-100 text-green-600 rounded-full text-sm">React</span>
+							<span class="px-3 py-1 bg-green-100 text-green-600 rounded-full text-sm">Node.js</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+					<div class="h-48 bg-linear-to-br from-orange-500 to-red-600"></div>
+					<div class="p-6">
+						<h3 class="text-xl font-bold mb-2">Prosjekt 3</h3>
+						<p class="text-gray-600 mb-4">
+							Webapplikasjon med kompleks funksjonalitet og database-integrasjon.
+						</p>
+						<div class="flex flex-wrap gap-2">
+							<span class="px-3 py-1 bg-orange-100 text-orange-600 rounded-full text-sm">TypeScript</span>
+							<span class="px-3 py-1 bg-orange-100 text-orange-600 rounded-full text-sm">PostgreSQL</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="text-center mt-16">
+				<p class="text-gray-600 mb-6">
+					Vil du se mer, eller har du et prosjekt i tankene?
+				</p>
+				<a href="/kontakt" class="inline-block bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg">
+					Ta kontakt
+				</a>
+			</div>
+		</section>
+	</main>
+	
+	<Footer />
+</Layout>

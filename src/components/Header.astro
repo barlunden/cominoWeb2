@@ -1,0 +1,75 @@
+---
+// Navigasjonsheader for alle sider
+const currentPath = Astro.url.pathname;
+---
+
+<header class="fixed top-0 w-full bg-white/95 backdrop-blur-sm shadow-sm z-50">
+	<nav class="container mx-auto px-6 py-4">
+		<div class="flex items-center justify-between">
+			<a href="/" class="flex items-center hover:opacity-80 transition-opacity">
+				<!-- Erstatt med logo når du har lagt den i /public/logo.svg eller /public/logo.png -->
+				<img src="/LogoComino.png" alt="Comino Web" class="h-10" />
+				<!-- Fallback hvis logo ikke finnes ennå: -->
+				<!-- <span class="text-2xl font-bold text-blue-600">Comino Web</span> -->
+			</a>
+			
+			<ul class="hidden md:flex space-x-8">
+				<li>
+					<a 
+						href="/" 
+						class:list={[
+							"hover:text-blue-600 transition-colors",
+							currentPath === "/" ? "text-blue-600 font-semibold" : "text-gray-700"
+						]}
+					>
+						Hjem
+					</a>
+				</li>
+				<li>
+					<a 
+						href="/tjenester" 
+						class:list={[
+							"hover:text-blue-600 transition-colors",
+							currentPath === "/tjenester" ? "text-blue-600 font-semibold" : "text-gray-700"
+						]}
+					>
+						Tjenester
+					</a>
+				</li>
+				<li>
+					<a 
+						href="/prosjekt" 
+						class:list={[
+							"hover:text-blue-600 transition-colors",
+							currentPath === "/prosjekt" ? "text-blue-600 font-semibold" : "text-gray-700"
+						]}
+					>
+						Prosjekter
+					</a>
+				</li>
+				<li>
+					<a 
+						href="/om-oss" 
+						class:list={[
+							"hover:text-blue-600 transition-colors",
+							currentPath === "/om-oss" ? "text-blue-600 font-semibold" : "text-gray-700"
+						]}
+					>
+						Om oss
+					</a>
+				</li>
+				<li>
+					<a 
+						href="/kontakt" 
+						class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+					>
+						Kontakt
+					</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</header>
+
+<!-- Spacer for fixed header -->
+<div class="h-20"></div>
