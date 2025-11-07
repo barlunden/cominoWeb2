@@ -1,0 +1,44 @@
+---
+
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+const articles = await Astro.glob('./artikler/*.md');
+
+
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+const articles = await Astro.glob('./artikler/*.md');
+---
+
+<Layout title="Artikler - Comino Web">
+	<Header />
+	<main>
+		<section class="container mx-auto px-6 py-20">
+			<div class="max-w-3xl mx-auto">
+				<h1 class="text-5xl font-bold mb-8">Artikler</h1>
+				<p class="text-xl text-gray-600 mb-12">Her finner du fagartikler, tips og innsikt fra Comino Web.</p>
+
+				<ul class="space-y-8">
+					{articles.length === 0 && (
+						<li class="text-gray-500">Ingen artikler publisert ennå.</li>
+					)}
+					{articles.map(article => (
+						<li>
+							<a href={article.url} class="block p-6 rounded-xl border border-gray-200 hover:border-blue-600 hover:bg-blue-50 transition-colors">
+								<h2 class="text-2xl font-bold mb-2">{article.frontmatter.title ?? 'Uten tittel'}</h2>
+								{article.frontmatter.description && (
+									<p class="text-gray-600">{article.frontmatter.description}</p>
+								)}
+								<span class="text-blue-600 font-semibold">Les mer →</span>
+							</a>
+						</li>
+					))}
+				</ul>
+			</div>
+		</section>
+	</main>
+	<Footer />
+</Layout>

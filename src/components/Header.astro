@@ -16,13 +16,13 @@ const currentPath = Astro.url.pathname;
 			<ul class="hidden md:flex space-x-8">
 				<li>
 					<a 
-						href="/" 
+						href="/artikler" 
 						class:list={[
 							"hover:text-blue-600 transition-colors",
-							currentPath === "/" ? "text-blue-600 font-semibold" : "text-gray-700"
+							currentPath.startsWith("/artikler") ? "text-blue-600 font-semibold" : "text-gray-700"
 						]}
 					>
-						Hjem
+						Artikler
 					</a>
 				</li>
 				<li>
