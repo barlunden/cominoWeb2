@@ -9,23 +9,30 @@ import Footer from '../components/Footer.astro';
 	
 	<main>
 		<!-- Hero Section -->
-		<section class="container mx-auto px-6 py-20">
-			<div class="text-center max-w-4xl mx-auto">
-				<h1 class="text-5xl md:text-6xl font-bold mb-6 bg-linear-to-r from-blue-500 to-blue-900 bg-clip-text text-transparent">
-					Nettsider fra bunnen av
-				</h1>
-				<p class="text-xl md:text-2xl text-gray-600 mb-8">
-					Vi lager skreddersydde nettsider som gir bedre resultater og mer fleksibilitet enn Wix, WordPress og andre page builders.
-				</p>
-				<div class="flex flex-col sm:flex-row gap-4 justify-center">
-					<a href="/kontakt" class="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl">
-						Kom i gang
-					</a>
-					<a href="/prosjekt" class="border-2 border-blue-600 text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-50 transition-colors">
-						Se våre prosjekter
-					</a>
-				</div>
-			</div>
+				<section 
+					class="relative overflow-hidden px-0 py-0 flex items-center justify-center min-h-[420px] md:min-h-[520px]"
+					style="background: linear-gradient(rgba(10,24,48,0.60),rgba(10,24,48,0.60)), url('/hero.png') center/cover no-repeat;"
+				>
+					<div class="container mx-auto px-6 py-20 relative z-10">
+						<div class="text-center max-w-4xl mx-auto text-white drop-shadow-xl">
+							<h1 class="text-5xl md:text-6xl font-bold mb-6">
+								Nettsider fra bunnen av
+							</h1>
+							<p class="text-xl md:text-2xl mb-8">
+								Vi lager skreddersydde nettsider som gir bedre resultater og mer fleksibilitet enn Wix, WordPress og andre page builders.
+							</p>
+							<div class="flex flex-col sm:flex-row gap-4 justify-center">
+								<a href="/kontakt" class="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl">
+									Kom i gang
+								</a>
+								<a href="/prosjekt" class="border-2 border-blue-100 text-blue-100 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white hover:text-blue-700 transition-colors">
+									Se våre prosjekter
+								</a>
+							</div>
+						</div>
+					</div>
+					<span class="absolute inset-0 w-full h-full bg-linear-to-b from-transparent to-white/80 pointer-events-none z-0"></span>
+				</section>
 		</section>
 
 		<!-- Features Section -->
