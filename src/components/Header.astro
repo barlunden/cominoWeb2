@@ -4,72 +4,437 @@ const currentPath = Astro.url.pathname;
 ---
 
 <header class="fixed top-0 w-full bg-white/95 backdrop-blur-sm shadow-sm z-50">
-	<nav class="container mx-auto px-6 py-4">
-		<div class="flex items-center justify-between">
-			<a href="/" class="flex items-center hover:opacity-80 transition-opacity">
-				<!-- Erstatt med logo når du har lagt den i /public/logo.svg eller /public/logo.png -->
-				<img src="/LogoComino.png" alt="Comino Web" class="h-10" />
-				<!-- Fallback hvis logo ikke finnes ennå: -->
-				<!-- <span class="text-2xl font-bold text-blue-600">Comino Web</span> -->
-			</a>
-			
-			<ul class="hidden md:flex space-x-8">
-				<li>
-					<a 
-						href="/artikler" 
-						class:list={[
-							"hover:text-blue-600 transition-colors",
-							currentPath.startsWith("/artikler") ? "text-blue-600 font-semibold" : "text-gray-700"
-						]}
-					>
-						Artikler
-					</a>
-				</li>
-				<li>
-					<a 
-						href="/tjenester" 
-						class:list={[
-							"hover:text-blue-600 transition-colors",
-							currentPath === "/tjenester" ? "text-blue-600 font-semibold" : "text-gray-700"
-						]}
-					>
-						Tjenester
-					</a>
-				</li>
-				<li>
-					<a 
-						href="/prosjekt" 
-						class:list={[
-							"hover:text-blue-600 transition-colors",
-							currentPath === "/prosjekt" ? "text-blue-600 font-semibold" : "text-gray-700"
-						]}
-					>
-						Prosjekter
-					</a>
-				</li>
-				<li>
-					<a 
-						href="/om-oss" 
-						class:list={[
-							"hover:text-blue-600 transition-colors",
-							currentPath === "/om-oss" ? "text-blue-600 font-semibold" : "text-gray-700"
-						]}
-					>
-						Om oss
-					</a>
-				</li>
-				<li>
-					<a 
-						href="/kontakt" 
-						class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-					>
-						Kontakt
-					</a>
-				</li>
-			</ul>
-		</div>
-	</nav>
+  <nav class="container mx-auto px-6 py-4">
+    <div class="flex items-center justify-between">
+      <a href="/" class="flex items-center hover:opacity-80 transition-opacity" id="home">
+        <img src="/LogoComino.png" alt="Comino Web" class="h-10" />
+      </a>
+      <!-- Hamburgermeny -->
+      <button
+        class="hamburger md:hidden"
+        aria-label="Åpne meny"
+        aria-expanded="false"
+        id="hamburger-btn"
+        type="button"
+      >
+        <span class="block w-8 h-1 bg-blue-800 mb-1"></span>
+        <span class="block w-8 h-1 bg-blue-800 mb-1"></span>
+        <span class="block w-8 h-1 bg-blue-800"></span>
+      </button>
+
+      <!-- Mobilmeny -->
+
+
+      <!-- Desktopmeny -->
+      <ul class="hidden md:flex space-x-8">
+        <li>
+          <a
+            href="/artikler"
+            class:list={[
+              "hover:text-blue-600 transition-colors",
+              currentPath.startsWith("/artikler")
+                ? "text-blue-600 font-semibold"
+                : "text-gray-700",
+            ]}
+          >
+            Artikler
+          </a>
+        </li>
+        <li>
+          <a
+            href="/tjenester"
+            class:list={[
+              "hover:text-blue-600 transition-colors",
+              currentPath === "/tjenester"
+                ? "text-blue-600 font-semibold"
+                : "text-gray-700",
+            ]}
+          >
+            Tjenester
+          </a>
+        </li>
+        <li>
+          <a
+            href="/prosjekt"
+            class:list={[
+              "hover:text-blue-600 transition-colors",
+              currentPath === "/prosjekt"
+                ? "text-blue-600 font-semibold"
+                : "text-gray-700",
+            ]}
+          >
+            Prosjekter
+          </a>
+        </li>
+        <li>
+          <a
+            href="/om-oss"
+            class:list={[
+              "hover:text-blue-600 transition-colors",
+              currentPath === "/om-oss"
+                ? "text-blue-600 font-semibold"
+                : "text-gray-700",
+            ]}
+          >
+            Om oss
+          </a>
+        </li>
+        <li>
+          <a
+            href="/kontakt"
+            class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            Kontakt
+          </a>
+        </li>
+      </ul>
+
+      <ul class="dropdown-menu mobile-menu" id="mobilmeny-menu">
+    <button class="mobile-menu-exit" aria-label="Lukk meny" type="button" id="mobilmeny-exit-btn">&times;</button>
+    <li>
+          <a
+            href="/artikler"
+            class:list={[
+              "hover:text-blue-600 transition-colors",
+              currentPath.startsWith("/artikler")
+                ? "text-blue-600 font-semibold"
+                : "text-gray-700",
+            ]}
+          >
+            Artikler
+          </a>
+        </li>
+        <li>
+          <a
+            href="/tjenester"
+            class:list={[
+              "hover:text-blue-600 transition-colors",
+              currentPath === "/tjenester"
+                ? "text-blue-600 font-semibold"
+                : "text-gray-700",
+            ]}
+          >
+            Tjenester
+          </a>
+        </li>
+        <li>
+          <a
+            href="/prosjekt"
+            class:list={[
+              "hover:text-blue-600 transition-colors",
+              currentPath === "/prosjekt"
+                ? "text-blue-600 font-semibold"
+                : "text-gray-700",
+            ]}
+          >
+            Prosjekter
+          </a>
+        </li>
+        <li>
+          <a
+            href="/om-oss"
+            class:list={[
+              "hover:text-blue-600 transition-colors",
+              currentPath === "/om-oss"
+                ? "text-blue-600 font-semibold"
+                : "text-gray-700",
+            ]}
+          >
+            Om oss
+          </a>
+        </li>
+        <li>
+          <a
+            href="/kontakt"
+            class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            Kontakt
+          </a>
+        </li>
+  </ul>
+
+    </div>
+  </nav>
 </header>
 
 <!-- Spacer for fixed header -->
 <div class="h-20"></div>
+
+<script type="module" is:inline>
+    // Desktop dropdowns
+    /* const dropdowns = [
+      { btn: "tjenester-btn", menu: "tjenester-menu" },
+      { btn: "prosjekter-btn", menu: "prosjekter-menu" },
+    ];
+
+    dropdowns.forEach(({ btn, menu }) => {
+      const button = document.getElementById(btn);
+      const menuEl = document.getElementById(menu);
+      if (button && menuEl) {
+        function closeDropdown() {
+          menuEl.classList.remove("open");
+          button.setAttribute("aria-expanded", "false");
+          button.classList.remove("dropdown-open");
+        }
+        button.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const isOpen = menuEl.classList.toggle("open");
+          button.setAttribute("aria-expanded", isOpen ? "true" : "false");
+          button.classList.toggle("dropdown-open", isOpen);
+        });
+        document.addEventListener("click", (e) => {
+          if (!button.parentElement.contains(e.target)) closeDropdown();
+        });
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") closeDropdown();
+        });
+      }
+    }); */
+
+    // Hamburgermeny
+    const hamburgerBtn = document.getElementById("hamburger-btn");
+    const mobilMenu = document.getElementById("mobilmeny-menu");
+    // Legg til exit-knapp
+    const mobilMenuExitBtn = document.getElementById("mobilmeny-exit-btn");
+    if (hamburgerBtn && mobilMenu) {
+      function closeMobilDropdown() {
+        mobilMenu.classList.remove("open");
+        hamburgerBtn.setAttribute("aria-expanded", "false");
+        hamburgerBtn.classList.remove("dropdown-open");
+      }
+      hamburgerBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const isOpen = mobilMenu.classList.toggle("open");
+        hamburgerBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        hamburgerBtn.classList.toggle("dropdown-open", isOpen);
+      });
+      document.addEventListener("click", (e) => {
+        if (!hamburgerBtn.parentElement.contains(e.target)) closeMobilDropdown();
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeMobilDropdown();
+      });
+      mobilMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          closeMobilDropdown();
+        });
+      });
+      // Exit-knapp funksjonalitet
+      if (mobilMenuExitBtn) {
+        mobilMenuExitBtn.addEventListener('click', () => {
+          closeMobilDropdown();
+        });
+      }
+    }
+  </script>
+
+  <style>
+    .navbar {
+      padding: 1rem;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .logo {
+      max-height: 52px;
+      max-width: 80vw;
+      height: auto;
+      width: auto;
+    }
+    .nav-list {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      flex-wrap: wrap;
+    }
+    .desktop-only {
+      display: block;
+    }
+    .mobile-only {
+      display: none;
+    }
+    .hamburger {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      display: none; /* <-- Legg til denne linjen igjen */
+    }
+    @media (max-width: 845px) {
+      .navbar {
+        align-items: center;
+      }
+      .logo {
+        margin-bottom: 1rem;
+      }
+      .nav-list {
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+      }
+      .desktop-only {
+        display: none;
+      }
+      .mobile-only {
+        display: block;
+      }
+      .hamburger {
+        display: block;
+        margin-left: auto;
+      }
+      .mobile-menu {
+        display: none;
+      }
+      .mobile-menu.open {
+        display: block;
+      }
+    }
+    a,
+    .dropdown-toggle {
+      color: hsl(240, 5%, 90%);
+      text-decoration: none;
+      
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition:
+        color 0.2s,
+        background 0.2s;
+      padding: 0.3rem 0.7rem;
+      font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+    }
+    /* For alle menylenker og dropdowns, også i .dropdown-menu */
+    a:hover,
+    .dropdown-toggle:hover,
+    a:focus,
+    .dropdown-toggle:focus,
+    .dropdown-menu a:hover,
+    .dropdown-menu a:focus {
+      color: hsl(45, 2%, 52%);
+      outline: none;
+    }
+    a:active,
+    .dropdown-toggle:active,
+    .dropdown-menu a:active {
+      color: hsl(43, 4%, 53%);
+    }
+    a.active,
+    .dropdown-toggle.active,
+    .dropdown-toggle.dropdown-open {
+      color: hsl(43, 5%, 43%);
+    }
+    .dropdown {
+      position: relative;
+    }
+    .icon-wrapper {
+      display: inline-flex;
+      align-items: center;
+      margin-left: 0.4em; /* juster etter behov */
+    }
+    .icon-wrapper .nav-roof {
+      transition: transform 0.2s;
+      vertical-align: middle;
+    }
+    .dropdown-toggle.dropdown-open .icon-wrapper .nav-roof {
+      transform: rotate(180deg);
+    }
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 110%;
+      left: 0;
+      /* background: #fff;  // fjern */
+      background: rgba(23, 24, 31, 0.98); /* matcher bg-background-dark/80 */
+      border: 1px solid #222; /* mørkere kant for å matche mørk bakgrunn */
+      min-width: 220px;
+      z-index: 100;
+      box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.08);
+      padding: 0.5rem 0;
+    }
+    .dropdown-menu.open {
+      display: block;
+      animation: fadeIn 0.2s;
+    }
+    .dropdown-menu li {
+      margin: 0;
+    }
+    .dropdown-menu a {
+      display: block;
+      padding: 0.5rem 1.5rem;
+      font-size: 1rem;
+      /* color: hsl(240, 5%, 10%); // fjern */
+      color: hsl(240, 5%, 90%); /* matcher text-text-light */
+      background: none;
+      border: none;
+      text-align: left;
+      width: 100%;
+      transition: background 0.2s, color 0.2s;
+    }
+    .dropdown-menu a.active {
+      color: hsl(43, 3%, 33%);
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .dropdown-menu a:hover,
+    .dropdown-menu a:focus {
+      color: hsl(45, 2%, 52%);
+      background: rgba(255,255,255,0.04);
+    }
+    .dropdown-menu ul {
+      padding-left: 1rem;
+      margin: 0;
+    }
+    @media (max-width: 845px) {
+      .dropdown-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        min-width: 0;
+        box-shadow: none;
+        border: none;
+        padding: 2rem 0 1rem 0;
+        /* background: rgba(255, 255, 255, 0.98); // fjern */
+        background: rgba(23, 24, 31, 0.98); /* matcher bg-background-dark/80 */
+        z-index: 9999;
+      }
+      .dropdown-menu ul {
+        padding-left: 1rem;
+      }
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .mobile-menu-exit {
+      display: none;
+    }
+    @media (max-width: 845px) {
+      .mobile-menu-exit {
+        display: block;
+        position: absolute;
+        top: 1rem;
+        right: 1.5rem;
+        background: none;
+        border: none;
+        color: hsl(240, 5%, 90%);
+        font-size: 2.2rem;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 10001;
+        padding: 0;
+        line-height: 1;
+      }
+    }
+  </style>
