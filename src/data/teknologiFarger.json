@@ -1,0 +1,11 @@
+{
+  "Astro": "bg-orange-100 text-orange-600",
+  "Tailwind": "bg-cyan-100 text-cyan-600",
+  "React": "bg-blue-100 text-blue-600",
+  "Node.js": "bg-green-100 text-green-600",
+  "TypeScript": "bg-blue-50 text-blue-700",
+  "PostgreSQL": "bg-teal-100 text-teal-700",
+  "CSS": "bg-blue-50 text-blue-500",
+  "HTML": "bg-orange-50 text-orange-500",
+  "Express": "bg-gray-200 text-gray-800"
+}

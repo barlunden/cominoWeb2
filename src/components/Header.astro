@@ -27,7 +27,7 @@ const currentPath = Astro.url.pathname;
       </button>
 
       <!-- Mobilmeny -->
-      <ul class="dropdown-menu mobile-menu" id="mobilmeny-menu">
+      <ul class="dropdown-menu mobile-menu bg-blue-900 text-lg" id="mobilmeny-menu">
         <button
           class="mobile-menu-exit"
           aria-label="Lukk meny"
@@ -38,10 +38,10 @@ const currentPath = Astro.url.pathname;
           <a
             href="/artikler"
             class:list={[
-              "hover:text-blue-600 transition-colors",
+              "hover:text-blue-400 p-4 transition-colors",
               currentPath.startsWith("/artikler")
-                ? "text-blue-600 font-semibold"
-                : "text-gray-700",
+                ? "text-blue-400 p-4 font-semibold"
+                : "text-gray-300 p-4",
             ]}
           >
             Artikler
@@ -51,10 +51,10 @@ const currentPath = Astro.url.pathname;
           <a
             href="/tjenester"
             class:list={[
-              "hover:text-blue-600 transition-colors",
+              "hover:text-blue-400 p-4 transition-colors",
               currentPath === "/tjenester"
-                ? "text-blue-600 font-semibold"
-                : "text-gray-700",
+                ? "text-blue-400 p-4 font-semibold"
+                : "text-gray-300 p-4",
             ]}
           >
             Tjenester
@@ -64,10 +64,10 @@ const currentPath = Astro.url.pathname;
           <a
             href="/prosjekt"
             class:list={[
-              "hover:text-blue-600 transition-colors",
+              "hover:text-blue-400 p-4 transition-colors",
               currentPath === "/prosjekt"
-                ? "text-blue-600 font-semibold"
-                : "text-gray-700",
+                ? "text-blue-400 p-4 font-semibold"
+                : "text-gray-300 p-4",
             ]}
           >
             Prosjekter
@@ -77,10 +77,10 @@ const currentPath = Astro.url.pathname;
           <a
             href="/om-oss"
             class:list={[
-              "hover:text-blue-600 transition-colors",
+              "hover:text-blue-400 p-4 transition-colors",
               currentPath === "/om-oss"
-                ? "text-blue-600 font-semibold"
-                : "text-gray-700",
+                ? "text-blue-400 p-4 font-semibold"
+                : "text-gray-300 p-4",
             ]}
           >
             Om oss
@@ -89,7 +89,12 @@ const currentPath = Astro.url.pathname;
         <li>
           <a
             href="/kontakt"
-            class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+            class:list={[
+              "hover:text-blue-400 p-4 transition-colors",
+              currentPath === "/om-oss"
+                ? "text-blue-400 p-4 font-semibold"
+                : "text-gray-300 p-4",
+            ]}
           >
             Kontakt
           </a>
@@ -257,32 +262,11 @@ const currentPath = Astro.url.pathname;
       display: block;
     }
   }
-  a {
-    color: #005790;
-    text-decoration: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    transition:
-      color 0.2s,
-      background 0.2s;
-    padding: 0.3rem 0.7rem;
-    font-family: inherit;
-    display: inline-flex;
-    align-items: center;
-  }
-  /* For alle menylenker og dropdowns, også i .dropdown-menu */
-  .dropdown {
-    position: relative;
-  }
   .dropdown-menu {
     display: none;
     position: absolute;
     top: 110%;
     left: 0;
-    /* background: #fff;  // fjern */
-    background: #005790; /* matcher bg-background-dark/80 */
-    border: 1px solid #222; /* mørkere kant for å matche mørk bakgrunn */
     min-width: 220px;
     z-index: 100;
     box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.08);
@@ -295,24 +279,9 @@ const currentPath = Astro.url.pathname;
   .dropdown-menu li {
     margin: 0;
   }
-  .dropdown-menu a {
-    display: block;
-    padding: 0.5rem 1.5rem;
-    font-size: 1rem;
-    /* color: hsl(240, 5%, 10%); // fjern */
-
-    background: none;
-    border: none;
-    text-align: left;
-    width: 100%;
-    transition:
-      background 0.2s,
-      color 0.2s;
-  }
   @media (max-width: 845px) {
     .dropdown-menu {
       position: fixed;
-      color: white;
       top: 0;
       left: 0;
       width: 100vw;
@@ -320,11 +289,7 @@ const currentPath = Astro.url.pathname;
       box-shadow: none;
       border: none;
       padding: 2rem 0 1rem 0;
-      background: #005790; /* matcher bg-background-dark/80 */
       z-index: 9999;
-    }
-    .dropdown-menu ul {
-      padding-left: 1rem;
     }
   }
   @keyframes fadeIn {

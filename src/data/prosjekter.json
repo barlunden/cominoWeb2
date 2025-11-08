@@ -1,0 +1,44 @@
+[
+    {
+        "navn": "Langli Takst AS",
+        "beskrivelse": "Moderne, responsive bedriftsnettsider som enkelt lar brukeren finne relevant informasjon.",
+        "farger": "bg-linear-to-br from-blue-500 to-purple-600",
+        "bilde": "/prosjekter/langlitakst.png",
+        "teknologier": [
+            "Astro",
+            "Tailwind"
+        ],
+        "teknologiFarger": [
+            "bg-blue-100 text-blue-600",
+            "bg-blue-100 text-blue-600"
+        ]
+    },
+    {
+        "navn": "Norsk Franklinregister",
+        "beskrivelse": "Sider for bilentusiaster. Deling av bilder og kunnskap om det sjeldne bilmerket Franklin.",
+        "farger": "bg-linear-to-br from-green-500 to-teal-600",
+        "bilde": "",
+        "teknologier": [
+            "React",
+            "Node.js"
+        ],
+        "teknologiFarger": [
+            "bg-green-100 text-green-600",
+            "bg-green-100 text-green-600"
+        ]
+    },
+    {
+        "navn": "Prosjekt 3",
+        "beskrivelse": "Webapplikasjon med kompleks funksjonalitet og database-integrasjon.",
+        "farger": "bg-linear-to-br from-orange-500 to-red-600",
+        "bilde": "",
+        "teknologier": [
+            "TypeScript",
+            "PostgreSQL"
+        ],
+        "teknologiFarger": [
+            "bg-orange-100 text-orange-600",
+            "bg-orange-100 text-orange-600"
+        ]
+    }
+]
