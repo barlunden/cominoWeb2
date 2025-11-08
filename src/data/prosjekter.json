@@ -7,38 +7,27 @@
         "teknologier": [
             "Astro",
             "Tailwind"
-        ],
-        "teknologiFarger": [
-            "bg-blue-100 text-blue-600",
-            "bg-blue-100 text-blue-600"
         ]
     },
     {
         "navn": "Norsk Franklinregister",
         "beskrivelse": "Sider for bilentusiaster. Deling av bilder og kunnskap om det sjeldne bilmerket Franklin.",
         "farger": "bg-linear-to-br from-green-500 to-teal-600",
-        "bilde": "",
+        "bilde": "/prosjekter/norskfranklin.png",
         "teknologier": [
-            "React",
-            "Node.js"
-        ],
-        "teknologiFarger": [
-            "bg-green-100 text-green-600",
-            "bg-green-100 text-green-600"
+            "Astro",
+            "Tailwind",
+            "React"
         ]
     },
     {
-        "navn": "Prosjekt 3",
-        "beskrivelse": "Webapplikasjon med kompleks funksjonalitet og database-integrasjon.",
+        "navn": "Bergen Spectrum Orchestra",
+        "beskrivelse": "Promosider for vitalt og fremoverlent orkester.",
         "farger": "bg-linear-to-br from-orange-500 to-red-600",
-        "bilde": "",
+        "bilde": "/prosjekter/bespec.png",
         "teknologier": [
-            "TypeScript",
-            "PostgreSQL"
-        ],
-        "teknologiFarger": [
-            "bg-orange-100 text-orange-600",
-            "bg-orange-100 text-orange-600"
+            "Astro",
+            "Tailwind"
         ]
     }
 ]
