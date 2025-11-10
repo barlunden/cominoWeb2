@@ -27,7 +27,8 @@
         "bilde": "bespec.png",
         "teknologier": [
             "Astro",
-            "Tailwind"
+            "Tailwind",
+            "React"
         ]
     }
 ]

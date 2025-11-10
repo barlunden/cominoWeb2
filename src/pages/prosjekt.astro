@@ -1,20 +1,25 @@
 ---
+// For optimal bildeoptimalisering i Astro må alle bilder importeres statisk fra src/assets/images.
+// bildeMap kobler filnavn fra prosjekter.json til importerte bilder, slik at vi kan bruke <Image>-komponenten.
+// Dette gir responsive, optimaliserte bilder og best ytelse.
+// NB: Nye bilder må importeres og legges til i bildeMap manuelt.
+
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { Image } from "astro:assets";
-import langliTakstImg from "../assets/images/langlitakst.png"
-import norskFranklinImg from "../assets/images/norskfranklin.png"
-import bergenSpectrumImg from "../assets/images/bespec.png"
+import langliTakstImg from "../assets/images/langlitakst.png";
+import norskFranklinImg from "../assets/images/norskfranklin.png";
+import bergenSpectrumImg from "../assets/images/bespec.png";
 
 import prosjekter from "../data/prosjekter.json";
 import teknologiFarger from "../data/teknologiFarger.json";
 
 const bildeMap: Record<string, ImageMetadata> = {
-    "langlitakst.png": langliTakstImg,
-    "norskfranklin.png": norskFranklinImg,
-    "bespec.png": bergenSpectrumImg,
-}
+  "langlitakst.png": langliTakstImg,
+  "norskfranklin.png": norskFranklinImg,
+  "bespec.png": bergenSpectrumImg,
+};
 ---
 
 <Layout title="Våre Prosjekter - Comino Web">
@@ -27,7 +32,7 @@ const bildeMap: Record<string, ImageMetadata> = {
         Se hva vi har laget for fornøyde kunder
       </p>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 h-full">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 h-full">
         {
           prosjekter.map((prosjekt) => (
             <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow h-full flex flex-col">
@@ -44,12 +49,12 @@ const bildeMap: Record<string, ImageMetadata> = {
                 )}
               </div>
               <div class="p-6 flex flex-col grow h-full">
-                <h3 class="text-xl font-bold mb-2">{prosjekt.navn}</h3>
+                <h2 class="text-xl font-bold mb-2">{prosjekt.navn}</h2>
                 <p class="text-gray-600 mb-4 grow">{prosjekt.beskrivelse}</p>
                 <div class="flex flex-wrap gap-2 mt-auto pt-2">
                   {prosjekt.teknologier.map((teknologi) => (
                     <span
-                      class={`px-3 py-1 rounded-full text-sm ${teknologiFarger[teknologi as keyof typeof teknologiFarger] || 'bg-gray-100 text-gray-600'}`}
+                      class={`px-3 py-1 rounded-sm text-sm font-semibold shadow-md hover:shadow-lg transition-shadow ${teknologiFarger[teknologi as keyof typeof teknologiFarger] || "bg-gray-100 text-gray-600"}`}
                     >
                       {teknologi}
                     </span>
@@ -67,7 +72,7 @@ const bildeMap: Record<string, ImageMetadata> = {
         </p>
         <a
           href="/kontakt"
-          class="inline-block bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg"
+          class="inline-block bg-blue-800 text-white px-6 py-3 rounded-2xl text-lg font-semibold hover:bg-blue-900 transition-colors shadow-lg"
         >
           Ta kontakt
         </a>
