@@ -3,7 +3,7 @@
         "navn": "Langli Takst AS",
         "beskrivelse": "Moderne, responsive bedriftsnettsider som enkelt lar brukeren finne relevant informasjon.",
         "farger": "bg-linear-to-br from-blue-500 to-purple-600",
-        "bilde": "/prosjekter/langlitakst.png",
+        "bilde": "langlitakst.png",
         "teknologier": [
             "Astro",
             "Tailwind"
@@ -13,7 +13,7 @@
         "navn": "Norsk Franklinregister",
         "beskrivelse": "Sider for bilentusiaster. Deling av bilder og kunnskap om det sjeldne bilmerket Franklin.",
         "farger": "bg-linear-to-br from-green-500 to-teal-600",
-        "bilde": "/prosjekter/norskfranklin.png",
+        "bilde": "norskfranklin.png",
         "teknologier": [
             "Astro",
             "Tailwind",
@@ -24,7 +24,7 @@
         "navn": "Bergen Spectrum Orchestra",
         "beskrivelse": "Promosider for vitalt og fremoverlent orkester.",
         "farger": "bg-linear-to-br from-orange-500 to-red-600",
-        "bilde": "/prosjekter/bespec.png",
+        "bilde": "bespec.png",
         "teknologier": [
             "Astro",
             "Tailwind"

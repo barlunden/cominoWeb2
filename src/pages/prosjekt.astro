@@ -2,8 +2,19 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import { Image } from "astro:assets";
+import langliTakstImg from "../assets/images/langlitakst.png"
+import norskFranklinImg from "../assets/images/norskfranklin.png"
+import bergenSpectrumImg from "../assets/images/bespec.png"
+
 import prosjekter from "../data/prosjekter.json";
 import teknologiFarger from "../data/teknologiFarger.json";
+
+const bildeMap: Record<string, ImageMetadata> = {
+    "langlitakst.png": langliTakstImg,
+    "norskfranklin.png": norskFranklinImg,
+    "bespec.png": bergenSpectrumImg,
+}
 ---
 
 <Layout title="Våre Prosjekter - Comino Web">
@@ -21,9 +32,9 @@ import teknologiFarger from "../data/teknologiFarger.json";
           prosjekter.map((prosjekt) => (
             <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow h-full flex flex-col">
               <div class="w-full min-h-48 h-48 flex">
-                {prosjekt.bilde && prosjekt.bilde !== "" ? (
-                  <img
-                    src={prosjekt.bilde}
+                {prosjekt.bilde && bildeMap[prosjekt.bilde] ? (
+                  <Image
+                    src={bildeMap[prosjekt.bilde]}
                     alt={prosjekt.navn}
                     class="w-full h-full object-cover"
                     loading="lazy"
