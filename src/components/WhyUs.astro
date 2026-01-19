@@ -1,0 +1,49 @@
+---
+// src/components/WhyUs.astro
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+
+const features = await getCollection('features');
+const sortedFeatures = features.sort((a, b) => a.data.order - b.data.order);
+---
+
+<section class="py-24 bg-primary text-white overflow-hidden">
+  <div class="container mx-auto px-6">
+    <div class="grid lg:grid-cols-2 gap-20 items-center">
+      <div>
+        <h2 class="text-4xl md:text-5xl font-bold mb-8 tracking-tight">
+          Hvorfor velge <span class="text-blue-400">Comino Web?</span>
+        </h2>
+        <p class="text-blue-100 text-lg max-w-xl leading-relaxed">
+          Vi forener moderne teknologi med en dyp forståelse for forretningsutvikling. 
+          Resultatet er digitale løsninger som faktisk flytter grenser.
+        </p>
+      </div>
+      
+      <div class="grid gap-10">
+        {sortedFeatures.map((feature: CollectionEntry<'features'>) => (
+          <div class="flex gap-6 group">
+            <div class="w-14 h-14 shrink-0 bg-white/10 rounded-2xl flex items-center justify-center border border-white/20 group-hover:bg-blue-400/20 group-hover:border-blue-400/50 transition-all duration-500">
+               {feature.data.iconName === 'lightning' && (
+                 <svg class="w-7 h-7 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                 </svg>
+               )}
+               {feature.data.iconName === 'scaling' && (
+                 <svg class="w-7 h-7 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                 </svg>
+               )}
+            </div>
+            <div>
+              <h3 class="text-2xl font-bold mb-3">{feature.data.title}</h3>
+              <p class="text-blue-100/70 leading-relaxed text-lg">
+                {feature.data.description}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

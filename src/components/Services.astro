@@ -1,0 +1,74 @@
+---
+// src/components/Services.astro
+interface ServiceItem {
+  title: string;
+  desc: string;
+  icon: string;
+}
+
+interface Props {
+  items: ServiceItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<section id="tjenester" class="py-24 bg-white">
+  <div class="container mx-auto px-6">
+    <div class="max-w-2xl mb-16">
+      <h2 class="text-4xl font-bold text-slate-900 mb-4">Våre tjenester</h2>
+      <p class="text-lg text-slate-600">
+        Vi leverer alt fra enkle nettsider til komplekse webapplikasjoner, 
+        alltid med fokus på ytelse og brukervennlighet.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      {items.map((item) => (
+        /* Lagt til 'flex flex-col' på kortet for å styre vertikal flyt 
+        */
+        <div class="group relative p-8 rounded-3xl border border-slate-200 bg-slate-50 transition-all duration-300 hover:bg-white hover:shadow-2xl hover:border-primary/30 flex flex-col">
+          
+          <div class="mb-6 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-blue-100/50 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300 shadow-sm shrink-0">
+            {item.icon === 'code' && (
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+              </svg>
+            )}
+
+            {item.icon === 'settings' && (
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12a7.5 7.5 0 1 1 15 0 7.5 7.5 0 0 1-15 0Z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+              </svg>
+            )}
+
+            {item.icon === 'users' && (
+              <svg xmlns="http://www.w3.org/2000/astro" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a5.97 5.97 0 0 0-.942 3.197m0 0a5.997 5.997 0 0 0 1.51 3.77M12 12.75a3.375 3.375 0 1 1 0-6.75 3.375 3.375 0 0 1 0 6.75ZM21 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-3-2.25H18M9 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-3-2.25H6" />
+              </svg>
+            )}
+          </div>
+
+          <h3 class="text-2xl font-bold text-slate-900 mb-4 group-hover:text-primary transition-colors">
+            {item.title}
+          </h3>
+          
+          {/* 'flex-grow' sørger for at dette avsnittet tar opp all ledig plass, 
+             noe som dytter neste element helt til bunns.
+          */}
+          <p class="text-slate-600 leading-relaxed grow">
+            {item.desc}
+          </p>
+          
+          <div class="mt-8 flex items-center text-primary font-semibold opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0 shrink-0">
+            Les mer
+            <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
