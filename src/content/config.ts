@@ -14,12 +14,12 @@ const projects = defineCollection({
   type: 'content',
   schema: ({ image }) => z.object({
     title: z.string(),
-    customer: z.string(),
     description: z.string(),
-    // Astro optimaliserer bildet automatisk via denne referansen
-    thumbnail: image(), 
-    tags: z.array(z.string()),
-    publishDate: z.date(),
+    thumbnail: image(),
+    technologies: z.array(z.string()),
+    order: z.number().default(0), // Denne linjen må være med!
+    customer: z.string().optional(), // Valgfri hvis du vil beholde den
+    publishDate: z.date().optional(),
     featured: z.boolean().default(false),
   }),
 });
@@ -34,8 +34,21 @@ const features = defineCollection({
   }),
 });
 
+// src/content/config.ts
+const articles = defineCollection({
+  type: 'content',
+  schema: ({ image }) => z.object({
+    title: z.string().default("Uten tittel"),
+    description: z.string().default("Ingen beskrivelse tilgjengelig"),
+    publishDate: z.coerce.date(), // 'coerce' prøver å fikse dato-formatering automatisk
+    image: image().optional(),
+    tags: z.array(z.string()).default(['Generelt']),
+  }),
+});
+
 export const collections = {
   'services': services,
   'projects': projects,
   'features': features,
+  'articles': articles
 };

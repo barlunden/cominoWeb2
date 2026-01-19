@@ -1,0 +1,73 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { Image } from 'astro:assets';
+
+// 1. Generer stier for alle prosjekter
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map(entry => ({
+    params: { slug: entry.slug }, props: { entry },
+  }));
+}
+
+// 2. Hent prosjektet fra props
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<Layout title={`${entry.data.title} - Comino Web`}>
+  <Navbar />
+  
+  <main class="pt-32 pb-20 bg-white">
+    <article class="container mx-auto px-6 max-w-5xl">
+      
+      <div class="grid lg:grid-cols-2 gap-12 items-center mb-16">
+        <div>
+          <h1 class="text-4xl md:text-6xl font-bold text-slate-900 leading-tight mb-6">
+            {entry.data.title}
+          </h1>
+          <p class="text-xl text-slate-600 mb-8 leading-relaxed">
+            {entry.data.description}
+          </p>
+          
+          <div class="flex flex-wrap gap-3">
+            {entry.data.technologies.map((tech) => (
+              <span class="px-4 py-1.5 bg-slate-100 text-slate-700 rounded-full text-sm font-bold border border-slate-200">
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div class="rounded-3xl overflow-hidden shadow-2xl">
+          <Image 
+            src={entry.data.thumbnail} 
+            alt={entry.data.title}
+            class="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+
+      <div class="prose prose-lg prose-slate max-w-none 
+        prose-headings:text-slate-900 
+        prose-a:text-primary
+        prose-img:rounded-3xl">
+        <Content />
+      </div>
+
+      <footer class="mt-20 pt-10 border-t border-slate-100">
+        <a href="/prosjekt" class="inline-flex items-center font-bold text-primary hover:gap-2 transition-all">
+          <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          Se alle prosjekter
+        </a>
+      </footer>
+    </article>
+  </main>
+
+  <Footer />
+</Layout>

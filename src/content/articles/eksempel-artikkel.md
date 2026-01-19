@@ -1,7 +1,8 @@
 ---
-layout: ../../layouts/ArticleLayout.astro
-title: "Eksempelartikkel: Slik skriver du i markdown"
-description: "En kort introduksjon til markdown-artikler i Comino Web."
+title: "Min første artikkel"
+description: "En kort beskrivelse her"
+publishDate: 2026-01-19
+tags: ["Webutvikling"]
 ---
 # Eksempelartikkel
 

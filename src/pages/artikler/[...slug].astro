@@ -1,0 +1,80 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { Image } from 'astro:assets';
+
+// 1. Generer stier for alle artikler
+export async function getStaticPaths() {
+  const articles = await getCollection('articles');
+  return articles.map(entry => ({
+    params: { slug: entry.slug }, props: { entry },
+  }));
+}
+
+// 2. Hent artikkelen fra props
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+const formatDate = (date: Date) => {
+  return new Intl.DateTimeFormat('nb-NO', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  }).format(date);
+};
+---
+
+<Layout title={`${entry.data.title} - Comino Web`}>
+  <Navbar />
+  
+  <main class="pt-32 pb-20 bg-white">
+    <article class="container mx-auto px-6 max-w-4xl">
+      <header class="mb-12 text-center">
+        <div class="flex items-center justify-center gap-3 text-slate-500 mb-6 font-medium">
+          <time datetime={entry.data.publishDate.toISOString()}>
+            {formatDate(entry.data.publishDate)}
+          </time>
+          <span class="w-1.5 h-1.5 rounded-full bg-primary/30"></span>
+          <span class="text-primary font-bold uppercase tracking-wider text-xs">
+            {entry.data.tags[0]}
+          </span>
+        </div>
+        
+        <h1 class="text-4xl md:text-6xl font-bold text-slate-900 leading-tight mb-8">
+          {entry.data.title}
+        </h1>
+
+        {entry.data.image && (
+          <div class="rounded-3xl overflow-hidden shadow-2xl mb-12 aspect-video">
+            <Image 
+              src={entry.data.image} 
+              alt={entry.data.title}
+              class="w-full h-full object-cover"
+            />
+          </div>
+        )}
+      </header>
+
+      <div class="prose prose-lg prose-slate max-w-none 
+        prose-headings:text-slate-900 prose-headings:font-bold 
+        prose-a:text-primary hover:prose-a:text-primary-hover
+        prose-strong:text-slate-900
+        prose-img:rounded-2xl prose-img:shadow-lg">
+        <Content />
+      </div>
+
+      <footer class="mt-16 pt-8 border-t border-slate-100 flex justify-between items-center">
+        <a href="/artikler" class="flex items-center text-primary font-bold hover:-translate-x-1 transition-transform">
+          <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          Tilbake til oversikten
+        </a>
+      </footer>
+    </article>
+  </main>
+
+  <Footer />
+</Layout>

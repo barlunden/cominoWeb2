@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@plugin "@tailwindcss/typography";
+
 @theme {
   /* Di eksisterende palett */
   --color-blue-50: #eff8ff;

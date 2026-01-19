@@ -1,10 +1,9 @@
 ---
-layout: ../../layouts/ArticleLayout.astro
-title: "Derfor bør du kode fra bunnen av"
-description: "Oppdag fordelene med å bygge nettsider fra grunnen – bedre ytelse, fleksibilitet og ekte eierskap til koden."
-author: "Comino Web"
-publishDate: "2025-11-09"
-heroImage: "/images/comino-hero-bg.png"
+title: "Hvorfor velge Astro for din neste nettside?"
+description: "Vi ser på fordelene med Zero-JS arkitektur og hvordan det påvirker SEO."
+publishDate: 2026-01-19
+image: ""
+tags: ["Teknologi", "SEO"]
 ---
 
 ## Skreddersydd løsninger for ekte behov
