@@ -1,8 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
-import Navbar from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
 import { Image } from 'astro:assets';
 
 // 1. Generer stier for alle prosjekter
@@ -19,7 +17,6 @@ const { Content } = await entry.render();
 ---
 
 <Layout title={`${entry.data.title} - Comino Web`}>
-  <Navbar />
   
   <main class="pt-32 pb-20 bg-white">
     <article class="container mx-auto px-6 max-w-5xl">
@@ -69,5 +66,4 @@ const { Content } = await entry.render();
     </article>
   </main>
 
-  <Footer />
 </Layout>

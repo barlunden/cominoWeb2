@@ -1,6 +1,5 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Navbar from "../components/Header.astro"; // Bruker vår nye Navbar
 import Footer from "../components/Footer.astro";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
@@ -20,7 +19,6 @@ const techStyles: Record<string, string> = {
 ---
 
 <Layout title="Våre Prosjekter - Comino Web">
-  <Navbar />
 
   <main class="bg-slate-50 min-h-screen pt-24 pb-20">
     <section class="container mx-auto px-6">
@@ -94,6 +92,4 @@ const techStyles: Record<string, string> = {
       </div>
     </section>
   </main>
-
-  <Footer />
 </Layout>
