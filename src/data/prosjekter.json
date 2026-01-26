@@ -21,10 +21,10 @@
         ]
     },
     {
-        "navn": "Bergen Spectrum Orchestra",
+        "navn": "Frøyen Takst AS",
         "beskrivelse": "Promosider for vitalt og fremoverlent orkester.",
         "farger": "bg-linear-to-br from-orange-500 to-red-600",
-        "bilde": "bespec.png",
+        "bilde": "froyenTakst.png",
         "teknologier": [
             "Astro",
             "Tailwind",
