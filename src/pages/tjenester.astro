@@ -1,74 +1,93 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+// Service data defined in frontmatter for easy maintenance
+const services = [
+  {
+    title: "Bedriftsnettsider",
+    description: "Profesjonelle sider som ikke bare ser bra ut, men som er bygd som presisjonsverktøy for å hente inn kunder.",
+    features: ["Moderne Astro-arkitektur", "Optimal SEO-struktur", "Lynrask lastetid", "Responsivt design"],
+    icon: "M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" // Code icon
+  },
+  {
+    title: "Nettbutikker",
+    description: "E-handelsløsninger uten alt 'bloat'. Vi fokuserer på konvertering og en sømløs kjøpsopplevelse.",
+    features: ["Sikker betaling", "Skreddersydd utsjekk", "Lagerstyring", "Lynrask navigasjon"],
+    icon: "M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" // Shopping bag
+  },
+  {
+    title: "Webapplikasjoner",
+    description: "Når ferdige løsninger ikke strekker til. Vi koder spesialverktøy som løser deres spesifikke behov.",
+    features: ["API-integrasjoner", "Brukersystem", "Databasestyring", "Automatisering"],
+    icon: "M13 10V3L4 14h7v7l9-11h-7z" // Lightning bolt
+  },
+  {
+    title: "Vedlikehold & Support",
+    description: "Vi passer på 'urverket' i kulissene slik at dere kan fokusere på det dere er best til.",
+    features: ["Sikkerhetsovervåking", "Ytelsesoptimalisering", "Løpende oppdateringer", "Prioritert support"],
+    icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" // Shield
+  }
+];
 ---
 
-<Layout title="Våre Tjenester - Comino Web">
-	<main>
-		<section class="container mx-auto px-6 py-20">
-			<h1 class="text-5xl font-bold text-center mb-6">Våre Tjenester</h1>
-			<p class="text-xl text-gray-600 text-center max-w-3xl mx-auto mb-16">
-				Vi tilbyr skreddersydde løsninger for alle typer nettsider og webapplikasjoner
-			</p>
+<Layout title="Tjenester - Comino Web">
+  <main class="bg-white dark:bg-slate-950 transition-colors duration-300">
+    <section class="container mx-auto px-6 pt-32 pb-24">
+      
+      <div class="max-w-3xl mx-auto text-center mb-20">
+        <h1 class="text-5xl md:text-7xl font-extrabold text-slate-900 dark:text-white mb-8">
+          Våre <span class="text-primary italic">tjenester</span>
+        </h1>
+        <p class="text-xl text-slate-600 dark:text-slate-400 leading-relaxed">
+          Vi koder skreddersydde løsninger fra bunnen av. Ingen unødvendig kode, 
+          bare presisjon og ytelse i hver eneste linje.
+        </p>
+      </div>
 
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-				<div class="bg-white border-2 border-gray-200 rounded-xl p-8 hover:border-blue-600 transition-colors">
-					<h3 class="text-2xl font-bold mb-4">Bedriftsnettsider</h3>
-					<p class="text-gray-600 mb-4">
-						Profesjonelle nettsider som presenterer bedriften din på beste måte. Responsivt design som fungerer perfekt på alle enheter.
-					</p>
-					<ul class="space-y-2 text-gray-700">
-						<li>✓ Moderne design</li>
-						<li>✓ SEO-optimalisert</li>
-						<li>✓ Kontaktskjema</li>
-						<li>✓ Rask lasting</li>
-					</ul>
-				</div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        {services.map(service => (
+          <div class="group bg-slate-50 dark:bg-slate-900 p-8 md:p-10 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 hover:border-primary/30 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/5">
+            <div class="w-14 h-14 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 transition-transform duration-300">
+              <svg class="w-7 h-7 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d={service.icon} />
+              </svg>
+            </div>
+            
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4 italic">
+              {service.title}
+            </h3>
+            
+            <p class="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed">
+              {service.description}
+            </p>
+            
+            <ul class="space-y-3">
+              {service.features.map(feature => (
+                <li class="flex items-center gap-3 text-slate-700 dark:text-slate-300 font-medium">
+                  <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
 
-				<div class="bg-white border-2 border-gray-200 rounded-xl p-8 hover:border-blue-600 transition-colors">
-					<h3 class="text-2xl font-bold mb-4">Nettbutikker</h3>
-					<p class="text-gray-600 mb-4">
-						Kraftige e-handelsløsninger med betalingsintegrasjon, produkthåndtering og ordreadministrasjon.
-					</p>
-					<ul class="space-y-2 text-gray-700">
-						<li>✓ Betalingsintegrasjon</li>
-						<li>✓ Produktkatalog</li>
-						<li>✓ Ordrehåndtering</li>
-						<li>✓ Kundeportal</li>
-					</ul>
-				</div>
-
-				<div class="bg-white border-2 border-gray-200 rounded-xl p-8 hover:border-blue-600 transition-colors">
-					<h3 class="text-2xl font-bold mb-4">Webapplikasjoner</h3>
-					<p class="text-gray-600 mb-4">
-						Skreddersydde webapplikasjoner for spesifikke behov. Fra enkle verktøy til komplekse systemer.
-					</p>
-					<ul class="space-y-2 text-gray-700">
-						<li>✓ Tilpasset funksjonalitet</li>
-						<li>✓ Brukersystem</li>
-						<li>✓ Database-integrasjon</li>
-						<li>✓ API-utvikling</li>
-					</ul>
-				</div>
-
-				<div class="bg-white border-2 border-gray-200 rounded-xl p-8 hover:border-blue-600 transition-colors">
-					<h3 class="text-2xl font-bold mb-4">Vedlikehold & Support</h3>
-					<p class="text-gray-600 mb-4">
-						Vi hjelper deg med å holde nettsiden din oppdatert og trygg over tid.
-					</p>
-					<ul class="space-y-2 text-gray-700">
-						<li>✓ Regelmessige oppdateringer</li>
-						<li>✓ Sikkerhetsovervåking</li>
-						<li>✓ Innholdsendringer</li>
-						<li>✓ Teknisk support</li>
-					</ul>
-				</div>
-			</div>
-
-			<div class="text-center mt-16">
-				<a href="/kontakt" class="inline-block bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg">
-					Be om tilbud
-				</a>
-			</div>
-		</section>
-	</main>
+      <div class="mt-24 text-center">
+        <div class="bg-slate-900 rounded-[3rem] p-12 md:p-16 relative overflow-hidden">
+          <div class="relative z-10">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Klar for en raskere hverdag?</h2>
+            <p class="text-slate-400 mb-10 max-w-xl mx-auto">
+              Vi tar gjerne en uforpliktende prat om hvordan vi kan hjelpe din bedrift med moderne teknologi.
+            </p>
+            <a href="/kontakt" class="inline-flex items-center justify-center px-10 py-5 bg-primary text-white font-bold rounded-2xl hover:scale-105 transition-all shadow-xl shadow-primary/20">
+              Be om et uforpliktende tilbud
+              <svg class="w-5 h-5 ml-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+            </a>
+          </div>
+          <div class="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl -mr-32 -mt-32"></div>
+        </div>
+      </div>
+    </section>
+  </main>
 </Layout>
