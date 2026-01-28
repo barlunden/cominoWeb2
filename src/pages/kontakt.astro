@@ -1,72 +1,79 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ContactForm from '../components/ContactForm';
 ---
 
-<Layout title="Kontakt oss - Comino Web">
-	
-	<main>
-		<section class="container mx-auto px-6 py-20">
-			<div class="max-w-4xl mx-auto">
-				<h1 class="text-5xl font-bold text-center mb-6">Ta kontakt</h1>
-				<p class="text-xl text-gray-600 text-center mb-16">
-					Har du et prosjekt i tankene? Send oss en melding!
-				</p>
+<Layout title="Kontakt oss | Comino Web">
+  <main class="pt-32 pb-20 bg-white dark:bg-slate-950">
+    <div class="container mx-auto px-6 max-w-6xl">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-20">
+        
+        <div>
+          <h1 class="text-5xl md:text-6xl font-extrabold text-slate-900 dark:text-white mb-8">
+            La oss finne <span class="text-primary italic">takten</span> sammen.
+          </h1>
+          <p class="text-lg text-slate-600 dark:text-slate-400 mb-12 max-w-md leading-relaxed">
+            Enten du har et fiks ferdig prosjekt eller bare en løs idé, 
+            hører vi gjerne fra deg. Vi svarer vanligvis innen 24 timer.
+          </p>
 
-				<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-					<div>
-						<h2 class="text-2xl font-bold mb-6">Send oss en melding</h2>
-						<ContactForm client:load />
-					</div>
+          <div class="space-y-8">
+            <div class="flex items-center gap-6 group">
+              <div class="w-14 h-14 bg-slate-50 dark:bg-slate-900 rounded-2xl flex items-center justify-center group-hover:bg-primary/10 transition-colors">
+                <svg class="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+              </div>
+              <div>
+                <p class="text-sm font-bold text-slate-400 uppercase tracking-widest">E-post</p>
+                <a href="mailto:info@cominoweb.no" class="text-xl font-bold text-slate-900 dark:text-white hover:text-primary transition-colors">info@cominoweb.no</a>
+              </div>
+            </div>
 
-					<div>
-						<h2 class="text-2xl font-bold mb-6">Kontaktinformasjon</h2>
-						
-						<div class="space-y-6">
-							<div class="flex items-start">
-								<div class="text-2xl mr-4">📧</div>
-								<div>
-									<h3 class="font-semibold mb-1">E-post</h3>
-									<a href="mailto:kontakt@cominoweb.no" class="text-blue-600 hover:text-blue-700">
-										kontakt@cominoweb.no
-									</a>
-								</div>
-							</div>
+            <div class="flex items-center gap-6 group">
+              <div class="w-14 h-14 bg-slate-50 dark:bg-slate-900 rounded-2xl flex items-center justify-center group-hover:bg-primary/10 transition-colors">
+                <svg class="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+              </div>
+              <div>
+                <p class="text-sm font-bold text-slate-400 uppercase tracking-widest">Telefon</p>
+                <span class="text-xl font-bold text-slate-900 dark:text-white">+47 410 87 338</span>
+              </div>
+            </div>
+          </div>
+        </div>
 
-							<div class="flex items-start">
-								<div class="text-2xl mr-4">📱</div>
-								<div>
-									<h3 class="font-semibold mb-1">Telefon</h3>
-									<a href="tel:+47XXXXXXX" class="text-blue-600 hover:text-blue-700">
-										+47 XXX XX XXX
-									</a>
-								</div>
-							</div>
+        <div class="bg-slate-50 dark:bg-slate-900 p-8 md:p-10 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-2xl shadow-slate-200/50 dark:shadow-none">
+          <form class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="space-y-2">
+                <label for="name" class="text-sm font-bold text-slate-700 dark:text-slate-300 ml-1">Navn</label>
+                <input type="text" id="name" class="w-full px-6 py-4 rounded-2xl border-none bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary transition-all" placeholder="Ditt navn" />
+              </div>
+              <div class="space-y-2">
+                <label for="email" class="text-sm font-bold text-slate-700 dark:text-slate-300 ml-1">E-post</label>
+                <input type="email" id="email" class="w-full px-6 py-4 rounded-2xl border-none bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary transition-all" placeholder="din@epost.no" />
+              </div>
+            </div>
 
-							<div class="flex items-start">
-								<div class="text-2xl mr-4">⏰</div>
-								<div>
-									<h3 class="font-semibold mb-1">Åpningstider</h3>
-									<p class="text-gray-600">
-										Mandag - Fredag: 09:00 - 17:00<br />
-										Vi svarer vanligvis innen 24 timer
-									</p>
-								</div>
-							</div>
-						</div>
+            <div class="space-y-2">
+              <label for="subject" class="text-sm font-bold text-slate-700 dark:text-slate-300 ml-1">Hva trenger du hjelp med?</label>
+              <select id="subject" class="w-full px-6 py-4 rounded-2xl border-none bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary transition-all appearance-none">
+                <option>Ny nettside</option>
+                <option>SEO / Synlighet</option>
+                <option>Annet</option>
+              </select>
+            </div>
 
-						<div class="mt-8 p-6 bg-blue-50 rounded-lg">
-							<h3 class="font-semibold mb-2">💡 Ikke sikker på hva du trenger?</h3>
-							<p class="text-gray-700">
-								Ingen problem! Ta kontakt, så kan vi ha en uformell prat om ditt prosjekt 
-								og finne den beste løsningen for deg.
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	</main>
-	
+            <div class="space-y-2">
+              <label for="message" class="text-sm font-bold text-slate-700 dark:text-slate-300 ml-1">Melding</label>
+              <textarea id="message" rows="4" class="w-full px-6 py-4 rounded-2xl border-none bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary transition-all" placeholder="Fortell oss litt om prosjektet ditt..."></textarea>
+            </div>
 
+            <button type="submit" class="w-full py-5 bg-primary text-white font-bold rounded-2xl hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg shadow-primary/25 flex items-center justify-center gap-3">
+              Send melding
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </main>
 </Layout>

@@ -1,72 +1,93 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+// Metadata for SEO
+const title = "Om oss | Comino Web";
+const description = "Møt Åge og Steinar i Comino Web. Vi bygger raske og trygge nettsider med fokus på detaljer og presisjon.";
 ---
 
-<Layout title="Om oss - Comino Web">
-	
-	<main>
-		<section class="container mx-auto px-6 py-20">
-			<div class="max-w-4xl mx-auto">
-				<h1 class="text-5xl font-bold text-center mb-6">Om Comino Web</h1>
-				<p class="text-xl text-gray-600 text-center mb-16">
-					Vi brenner for å lage nettsider som gjør forskjell
-				</p>
+<Layout title={title} description={description}>
+  <main class="bg-white dark:bg-slate-950 transition-colors duration-300">
+    <section class="container mx-auto px-6 pt-32 pb-16 text-center">
+      <div class="max-w-3xl mx-auto">
+        <h1 class="text-5xl md:text-7xl font-extrabold text-slate-900 dark:text-white leading-tight mb-8">
+          Hei! Vi er <span class="text-primary italic">Comino Web</span>.
+        </h1>
+        <p class="text-xl md:text-2xl text-slate-700 dark:text-slate-300 leading-relaxed font-medium">
+          Vi består av oss to: <strong>Åge</strong> og <strong>Steinar</strong>. 
+          Vi hjelper småbedrifter med å få nettsider som faktisk fungerer.
+        </p>
+      </div>
+    </section>
 
-				<div class="prose prose-lg max-w-none">
-					<div class="bg-blue-50 p-8 rounded-xl mb-12">
-						<h2 class="text-3xl font-bold mb-4">Vår filosofi</h2>
-						<p class="text-gray-700 leading-relaxed">
-							Hos Comino Web tror vi på å lage nettsider fra bunnen av. I stedet for å bruke 
-							generiske page builders som Wix eller WordPress, skriver vi kode som er skreddersydd 
-							for ditt prosjekt. Dette gir oss full kontroll over design, funksjonalitet og ytelse.
-						</p>
-					</div>
+    <section class="container mx-auto px-6 py-12">
+      <div class="max-w-4xl mx-auto">
+        
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center mb-24">
+          <div class="md:col-span-7">
+            <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-6 underline decoration-primary decoration-4 underline-offset-8">
+              Detaljene som utgjør forskjellen
+            </h2>
+            <div class="prose prose-slate dark:prose-invert">
+              <p>
+                Vi kommer begge fra miljøer der det ikke finnes rom for slurv. Enten man står foran et orkester eller skal utføre en illusjon på en scene, er det de små marginene som avgjør resultatet.
+              </p>
+              <p>
+                Denne yrkesstoltheten har vi tatt med oss inn i webutvikling. En god nettside handler om alle de små detaljene i koden som gjør siden <strong>rask, sikker og stabil</strong>.
+              </p>
+            </div>
+          </div>
+          <div class="md:col-span-5 bg-slate-50 dark:bg-slate-900 p-8 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm text-center italic text-slate-600 dark:text-slate-400">
+            "En digital løsning skal være like presis som et velsmurt urverk."
+          </div>
+        </div>
 
-					<h2 class="text-3xl font-bold mb-6">Hvorfor fra bunnen av?</h2>
-					
-					<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-						<div class="bg-white p-6 rounded-lg shadow-md">
-							<h3 class="text-xl font-bold mb-3">⚡ Bedre ytelse</h3>
-							<p class="text-gray-600">
-								Ingen unødvendig kode eller plugins. Bare det som trengs for at siden din skal 
-								være lynrask.
-							</p>
-						</div>
-						
-						<div class="bg-white p-6 rounded-lg shadow-md">
-							<h3 class="text-xl font-bold mb-3">🎨 Frihet i design</h3>
-							<p class="text-gray-600">
-								Vi er ikke bundet av maler eller tema. Vi lager nøyaktig det designet du vil ha.
-							</p>
-						</div>
-						
-						<div class="bg-white p-6 rounded-lg shadow-md">
-							<h3 class="text-xl font-bold mb-3">🔧 Full kontroll</h3>
-							<p class="text-gray-600">
-								Du eier all koden. Ingen bindinger til tredjepartsplattformer eller abonnement.
-							</p>
-						</div>
-						
-						<div class="bg-white p-6 rounded-lg shadow-md">
-							<h3 class="text-xl font-bold mb-3">🚀 Moderne teknologi</h3>
-							<p class="text-gray-600">
-								Vi bruker de nyeste verktøyene og rammeverkene for best mulig resultat.
-							</p>
-						</div>
-					</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
+          <div class="p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm">
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">Åge</h3>
+            <p class="text-slate-700 dark:text-slate-400 leading-relaxed">
+              Bakgrunn som musiker og dirigent. For meg handler webutvikling om struktur og nøyaktighet. Jeg liker å ha kontroll på alle ledd, slik at ingenting blir overlatt til tilfeldighetene.
+            </p>
+          </div>
+          <div class="p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm">
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">Steinar</h3>
+            <p class="text-slate-700 dark:text-slate-400 leading-relaxed">
+              Amatørmusiker, dirigent og tryllekunstner. Han er opptatt av det som skjer "under panseret" og finpusser koden slik at alt fungerer sømløst – akkurat slik en god tryllekunstner planlegger hver bevegelse.
+            </p>
+          </div>
+        </div>
 
-					<div class="bg-linear-to-r from-blue-600 to-purple-600 text-white p-8 rounded-xl">
-						<h2 class="text-3xl font-bold mb-4">Klar for å ta steget?</h2>
-						<p class="text-blue-100 mb-6">
-							La oss lage en nettside som virkelig representerer bedriften din.
-						</p>
-						<a href="/kontakt" class="inline-block bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-							Ta kontakt
-						</a>
-					</div>
-				</div>
-			</div>
-		</section>
-	</main>
+        <div class="bg-blue-950 text-white p-10 md:p-16 rounded-[3rem] mb-24">
+          <h2 class="text-3xl text-slate-100 font-bold mb-10 text-center">Hvorfor velge oss?</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div class="text-center md:text-left">
+              <div class=" text-4xl mb-4">⚡</div>
+              <h4 class="font-bold text-blue-400 text-xl mb-2">Laster med en gang</h4>
+              <p class="text-slate-100 font-semibold text-sm">Takket være Astro-teknologi laster siden din lynraskt uten unødvendig "bloat".</p>
+            </div>
+            <div class="text-center md:text-left">
+              <div class=" text-4xl mb-4">🛡️</div>
+              <h4 class="font-bold text-blue-400 text-xl mb-2">Trygg og solid</h4>
+              <p class="text-slate-100 font-semibold text-sm">Vi bygger alt fra bunnen. Det gir en løsning som er ekstremt sikker over tid.</p>
+            </div>
+            <div class="text-center md:text-left">
+              <div class=" text-4xl mb-4">💬</div>
+              <h4 class="font-bold text-blue-400 text-xl mb-2">Ryddig prosess</h4>
+              <p class="text-slate-100 font-semibold text-sm">Vi snakker vanlig norsk og holder deg oppdatert uten for mye teknisk prat.</p>
+            </div>
+          </div>
+        </div>
 
+        <div class="text-center pb-20">
+          <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-6">Lyst på en prat om din neste nettside?</h2>
+          <p class="text-slate-600 dark:text-slate-400 mb-10 max-w-lg mx-auto">
+            Send oss en melding, så tar vi en uforpliktende sjekk av hva du trenger.
+          </p>
+          <a href="/kontakt" class="inline-block bg-primary text-white px-12 py-5 rounded-2xl font-bold hover:shadow-2xl hover:shadow-primary/30 transition-all hover:-translate-y-1">
+            Kontakt oss
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
 </Layout>

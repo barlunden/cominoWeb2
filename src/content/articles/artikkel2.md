@@ -2,7 +2,7 @@
 title: "Hvorfor velge Astro for din neste nettside?"
 description: "Vi ser på fordelene med Zero-JS arkitektur og hvordan det påvirker SEO."
 publishDate: 2026-01-19
-image: ""
+image: "../../assets/images/lightningSpeed.png"
 tags: ["Teknologi", "SEO"]
 ---
 

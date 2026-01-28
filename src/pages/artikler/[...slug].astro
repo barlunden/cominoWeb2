@@ -3,16 +3,33 @@ import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 
-// 1. Generer stier for alle artikler
 export async function getStaticPaths() {
   const articles = await getCollection('articles');
-  return articles.map(entry => ({
-    params: { slug: entry.slug }, props: { entry },
-  }));
+  
+  // Sorterer kronologisk for navigasjon
+  const sortedArticles = articles.sort((a, b) => 
+    b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+  );
+
+  return sortedArticles.map((entry, index) => {
+    // Finn relaterte artiklar basert på felles tags (maks 3)
+    const related = sortedArticles
+      .filter(item => item.slug !== entry.slug && item.data.tags.some(tag => entry.data.tags.includes(tag)))
+      .slice(0, 3);
+
+    return {
+      params: { slug: entry.slug },
+      props: { 
+        entry,
+        prevPost: index === sortedArticles.length - 1 ? null : sortedArticles[index + 1],
+        nextPost: index === 0 ? null : sortedArticles[index - 1],
+        related
+      },
+    };
+  });
 }
 
-// 2. Hent artikkelen fra props
-const { entry } = Astro.props;
+const { entry, prevPost, nextPost, related } = Astro.props;
 const { Content } = await entry.render();
 
 const formatDate = (date: Date) => {
@@ -25,7 +42,6 @@ const formatDate = (date: Date) => {
 ---
 
 <Layout title={`${entry.data.title} - Comino Web`}>
-  
   <main class="pt-32 pb-20 bg-white">
     <article class="container mx-auto px-6 max-w-4xl">
       <header class="mb-12 text-center">
@@ -62,15 +78,48 @@ const formatDate = (date: Date) => {
         <Content />
       </div>
 
-      <footer class="mt-16 pt-8 border-t border-slate-100 flex justify-between items-center">
-        <a href="/artikler" class="flex items-center text-primary font-bold hover:-translate-x-1 transition-transform">
-          <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-          </svg>
-          Tilbake til oversikten
-        </a>
+      {related.length > 0 && (
+        <section class="mt-20 pt-12 border-t border-slate-100">
+          <h3 class="text-2xl font-bold text-slate-900 mb-8 text-center">Les mer om {entry.data.tags[0]}</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {related.map(post => (
+              <a href={`/artikler/${post.slug}`} class="group">
+                <div class="aspect-video rounded-xl overflow-hidden mb-4 bg-slate-100">
+                  {post.data.image && <Image src={post.data.image} alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />}
+                </div>
+                <h4 class="font-bold text-slate-900 group-hover:text-primary transition-colors line-clamp-2">{post.data.title}</h4>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <footer class="mt-16 pt-8 border-t border-slate-100 space-y-12">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+          {prevPost ? (
+            <a href={`/artikler/${prevPost.slug}`} class="flex items-center text-slate-600 hover:text-primary transition-colors font-medium">
+              <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+              Forrige: {prevPost.data.title}
+            </a>
+          ) : <div />}
+
+          {nextPost && (
+            <a href={`/artikler/${nextPost.slug}`} class="flex items-center text-slate-600 hover:text-primary transition-colors font-medium text-right">
+              Neste: {nextPost.data.title}
+              <svg class="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            </a>
+          )}
+        </div>
+
+        <div class="flex justify-center">
+          <a href="/artikler" class="flex items-center text-primary font-bold hover:-translate-x-1 transition-transform">
+            <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+            Tilbake til oversikten
+          </a>
+        </div>
       </footer>
     </article>
   </main>
-
 </Layout>

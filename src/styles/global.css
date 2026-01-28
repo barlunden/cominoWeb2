@@ -20,6 +20,7 @@
   /* Dette gjer at du kan skrive class="bg-primary" eller "text-primary" */
   --color-primary: var(--color-blue-800);
   --color-primary-hover: var(--color-blue-900);
+  --color-primary-light: var(--color-blue-300);
   
   /* Legg gjerne til ein aksentfarge for å bryte opp litt (f.eks. for knappar eller detaljar) */
   --color-accent: var(--color-blue-400);
