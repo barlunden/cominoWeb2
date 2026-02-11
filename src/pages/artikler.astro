@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
+import PageHeader from '../components/PageHeader.astro';
 
 const allArticles = await getCollection('articles');
 // Sorter artikler etter dato (nyeste først)
@@ -21,12 +22,11 @@ const formatDate = (date: Date) => {
 <Layout title="Artikler & Innsikt - Comino Web">
   <main class="bg-slate-50 min-h-screen pt-24 mt-20 pb-20">
     <section class="container mx-auto px-6">
-      <div class="max-w-4xl mx-auto text-center mb-16">
-        <h1 class="text-5xl font-bold text-slate-900 mb-6 tracking-tight">Artikler & Innsikt</h1>
-        <p class="text-xl text-slate-600">
-          Vi deler våre erfaringer om webutvikling, designstrategi og digital vekst.
-        </p>
-      </div>
+      <PageHeader
+        title="Artikler &"
+        accentWord='innsikt'
+        description='Vi deler våre erfaringer om webutvikling, designstrategi og digital vekst.'
+      />
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
         {sortedArticles.length === 0 && (

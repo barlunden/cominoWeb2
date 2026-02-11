@@ -1,0 +1,25 @@
+---
+// src/components/Logo.astro
+// src/components/Logo.astro
+interface Props {
+  variant?: 'light' | 'dark';
+}
+
+const { variant = 'light' } = Astro.props;
+
+// Logic for colors based on background
+// light variant = for white/light backgrounds (Navbar)
+// dark variant = for dark backgrounds (Footer)
+const baseTextColor = variant === 'light' ? 'text-slate-900' : 'text-white';
+const accentColor = variant === 'light' ? 'text-primary' : 'text-primary-light';
+---
+
+<a href="/" class="flex items-center gap-2 group cursor-pointer">
+  <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center group-hover:scale-105 transition-transform">
+    <span class="text-white font-black text-xl">CW</span>
+  </div>
+
+  <span class={`text-xl font-bold tracking-tight ${baseTextColor}`}>
+    Comino<span class={accentColor}>Web</span>
+  </span>
+</a>

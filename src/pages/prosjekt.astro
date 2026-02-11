@@ -4,6 +4,7 @@ import Footer from "../components/Footer.astro";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
+import PageHeader from "../components/PageHeader.astro";
 
 // Hent alle prosjekter fra Content Collections
 const allProjects = await getCollection("projects");
@@ -20,15 +21,13 @@ const techStyles: Record<string, string> = {
 
 <Layout title="Våre Prosjekter - Comino Web">
 
-  <main class="bg-slate-50 min-h-screen pt-24 pb-20">
+  <main class="bg-slate-50 min-h-screen pt-24 mt-20 pb-20">
     <section class="container mx-auto px-6">
-      <div class="max-w-3xl mx-auto text-center mb-16">
-        <h1 class="text-5xl font-bold text-slate-900 mb-6 tracking-tight">Våre Prosjekter</h1>
-        <p class="text-xl text-slate-600">
-          Vi er stolte av løsningene vi utvikler sammen med kundene våre. 
-          Her er et utvalg av nylige leveranser.
-        </p>
-      </div>
+      <PageHeader 
+  title="Utvalgte" 
+  accentWord="prosjekter" 
+  description="En oversikt over løsninger vi har bygget med fokus på fart, sikkerhet og brukervennlighet." 
+/>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {sortedProjects.map((project) => (

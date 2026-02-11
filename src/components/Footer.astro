@@ -1,4 +1,6 @@
 ---
+import Logo from "./Logo.astro";
+
 /* src/components/Footer.astro */
 const currentYear = new Date().getFullYear();
 
@@ -17,32 +19,22 @@ const links = [
     <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
       
       <div class="md:col-span-5">
-        <a href="/" class="flex items-center gap-2 mb-6 group">
+        <Logo variant="dark" />
+        <!-- <a href="/" class="flex items-center gap-2 mb-6 group">
           <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
             <span class="text-white font-black text-sm">C</span>
           </div>
-          <span class="text-xl font-bold tracking-tight">
-            Comino<span class="text-primary">Web</span>
-          </span>
-        </a>
-        <p class="text-slate-300 text-lg leading-relaxed max-w-sm">
+          <span class="text-xl font-bold tracking-tight text-white">
+  Comino<span class="text-primary [text-shadow:0_0_15px_rgba(var(--color-primary-rgb),0.5)]">Web</span>
+</span>
+        </a> -->
+        <p class="text-slate-300 text-lg leading-relaxed max-w-sm mt-2">
           Vi koder skreddersydde løsninger fra bunnen av. 
           Bedre ytelse, SEO og fleksibilitet enn ferdigplattformer som WordPress.
         </p>
       </div>
       
-      <div class="md:col-span-3">
-        <h4 class="text-sm font-bold uppercase tracking-widest text-primary mb-6">Navigasjon</h4>
-        <ul class="grid grid-cols-2 md:grid-cols-1 gap-y-3">
-          {links.map(link => (
-            <li>
-              <a href={link.href} class="text-slate-300 hover:text-white transition-colors">
-                {link.name}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
+      
       
       <div class="md:col-span-4">
         <h4 class="text-sm font-bold uppercase tracking-widest text-primary mb-6">Kontakt</h4>
