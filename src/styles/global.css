@@ -2,6 +2,8 @@
 
 @plugin "@tailwindcss/typography";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --variant-dark: .dark;
   /* Di eksisterende palett */
