@@ -42,19 +42,33 @@
   }
 }
 
-/* Fikser firkantede hjørner under View Transitions */
-::view-transition-old(*),
-::view-transition-new(*) {
-  /* Dette tvinger animasjonen til å respektere objektets form */
+/* Vi retter oss mot de midlertidige lagene som skapes under View Transitions */
+::view-transition-old(img-*),
+::view-transition-new(img-*) {
+  /* Dette sørger for at 'skyggen' eller beholderen under animasjonen alltid er rund */
+  border-radius: 2.5rem;
+  overflow: hidden;
+  /* Dette hindrer at bildet 'blør' utenfor den runde formen mens det flytter seg */
   height: 100%;
   width: 100%;
-  border-radius: inherit;
-  object-fit: cover;
-  overflow: hidden;
 }
 
-/* Spesifikk fiks for bildene dine med stor radius */
-[transition\:name^="img-"] {
-  border-radius: 2.5rem; /* Eller den verdien du bruker: rounded-[2.5rem] */
-  overflow: hidden;
+/* For å sikre at det ser bra ut når det starter fra kortet (hvor det bare er runde hjørner oppe) */
+::view-transition-old(img-*) {
+  /* Vi kan prøve å tvinge den til å starte med avrunding kun oppe */
+  border-top-left-radius: 2.5rem;
+  border-top-right-radius: 2.5rem;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
+
+/* Og lande med full avrunding */
+::view-transition-new(img-*) {
+  border-radius: 2.5rem;
+}
+
+::view-transition-group(nav-indicator) {
+  animation-duration: 0.5s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+

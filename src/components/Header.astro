@@ -1,77 +1,119 @@
 ---
 import Logo from "./Logo.astro";
-import ThemeToggle from "./ThemeToggle.astro";
 
-// Navigasjonsheader for Comino Web v2
 const currentPath = Astro.url.pathname;
 
 const navLinks = [
-  { name: 'Artikler', href: '/artikler' },
-  { name: 'Tjenester', href: '/tjenester' },
-  { name: 'Prosjekter', href: '/prosjekt' },
-  { name: 'Om oss', href: '/om-oss' },
+  { name: "Artikler", href: "/artikler" },
+  { name: "Tjenester", href: "/tjenester" },
+  { name: "Prosjekter", href: "/prosjekt" },
+  { name: "Om oss", href: "/om-oss" },
 ];
 
-const isActive = (path: string) => 
-  path === '/' ? currentPath === '/' : currentPath.startsWith(path);
+const isActive = (path: string) =>
+  path === "/" ? currentPath === "/" : currentPath.startsWith(path);
 ---
 
-<header class="fixed top-0 w-full bg-white/95 backdrop-blur-md shadow-sm z-100 border-b border-slate-100">
+<header
+  class="fixed top-0 w-full bg-white/95 dark:bg-slate-950/95 backdrop-blur-md shadow-sm z-100 border-b border-slate-100 dark:border-slate-800 transition-colors duration-300"
+>
   <nav class="container mx-auto px-6 h-20 flex items-center justify-between">
-    
-    <!-- <a href="/" class="flex items-center shrink-0 relative z-120">
-       <img src="/LogoComino.png" alt="Comino Web" class="h-10 w-auto object-contain" />
-    </a> -->
     <Logo />
 
-    <button
-      class="group md:hidden w-12 h-12 flex items-center justify-center relative z-120 cursor-pointer"
-      aria-label="Meny"
-      id="hamburger-btn"
-    >
-      <div class="relative w-8 h-5">
-        <span id="line-1" class="absolute block w-8 h-0.5 bg-primary transition-all duration-300 top-0"></span>
-        <span id="line-2" class="absolute block w-8 h-0.5 bg-primary transition-all duration-300 top-2"></span>
-        <span id="line-3" class="absolute block w-8 h-0.5 bg-primary transition-all duration-300 top-4"></span>
-      </div>
-    </button>
+    <div class="flex items-center gap-4">
+      <button
+        class="group md:hidden w-12 h-12 flex items-center justify-center relative z-120 cursor-pointer"
+        aria-label="Meny"
+        id="hamburger-btn"
+      >
+        <div class="relative w-8 h-5">
+          <span
+            id="line-1"
+            class="absolute block w-8 h-0.5 bg-primary transition-all duration-300 top-0"
+          ></span>
+          <span
+            id="line-2"
+            class="absolute block w-8 h-0.5 bg-primary transition-all duration-300 top-2"
+          ></span>
+          <span
+            id="line-3"
+            class="absolute block w-8 h-0.5 bg-primary transition-all duration-300 top-4"
+          ></span>
+        </div>
+      </button>
 
-    <ul class="hidden md:flex items-center space-x-8">
-      {navLinks.map(link => (
+      <ul class="hidden md:flex items-center space-x-8">
+        {
+          navLinks.map((link) => {
+            const active = isActive(link.href);
+            return (
+              <li class="relative group">
+                <a
+                  href={link.href}
+                  class:list={[
+                    "transition-colors font-semibold py-2",
+                    active
+                      ? "text-primary"
+                      : "text-slate-600 dark:text-slate-400 hover:text-primary",
+                  ]}
+                >
+                  {link.name}
+                </a>
+
+                {/* Her er den magiske markøren */}
+                {active && (
+                  <div
+                    transition:name="nav-indicator"
+                    class="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary"
+                  />
+                )}
+              </li>
+            );
+          })
+        }
         <li>
-          <a href={link.href} class:list={["transition-colors font-semibold", isActive(link.href) ? "text-primary" : "text-slate-600 hover:text-primary"]}>
-            {link.name}
+          <a
+            href="/kontakt"
+            class="bg-primary text-white px-5 py-2.5 rounded-xl font-semibold hover:scale-105 transition-all shadow-sm"
+          >
+            Kontakt
           </a>
         </li>
-      ))}
-      <li>
-        <a href="/kontakt" class="bg-primary text-white px-5 py-2.5 rounded-xl font-semibold hover:bg-primary-hover transition-all shadow-sm">
-          Kontakt
-        </a>
-      </li>
-    </ul>
-    
+      </ul>
+    </div>
   </nav>
 
-  <div 
-    id="mobilmeny-menu" 
-    class="hidden fixed inset-0 bg-white z-110 flex-col p-6 h-screen w-screen overflow-y-auto pt-28"
+  <div
+    id="mobilmeny-menu"
+    class="hidden fixed inset-0 bg-white dark:bg-slate-950 z-110 flex-col p-6 h-screen w-screen overflow-y-auto pt-28 transition-colors duration-300"
   >
     <nav class="flex flex-col space-y-6">
-      {navLinks.map(link => (
-        <a
-          href={link.href}
-          class:list={[
-            "text-2xl font-bold border-b border-slate-100 pb-4",
-            isActive(link.href) ? "text-primary border-primary" : "text-slate-600"
-          ]}
-        >
-          {link.name}
-        </a>
-      ))}
-      <a 
-        href="/kontakt" 
-        class="bg-primary text-white text-center px-8 py-4 rounded-xl font-bold text-xl mt-4 shadow-lg"
+      {
+        navLinks.map((link) => {
+          const active = isActive(link.href);
+          return (
+            <a
+              href={link.href}
+              class:list={[
+                "relative text-2xl font-bold pl-6 pb-4 border-b border-slate-100 dark:border-slate-800",
+                active ? "text-primary" : "text-slate-600 dark:text-slate-300",
+              ]}
+            >
+              {/* Den vertikale markøren for mobil */}
+              {active && (
+                <div
+                  transition:name="nav-indicator-mobile"
+                  class="absolute left-0 top-0 bottom-0 w-1 bg-primary"
+                />
+              )}
+              {link.name}
+            </a>
+          );
+        })
+      }
+      <a
+        href="/kontakt"
+        class="bg-primary text-white text-center px-8 py-4 rounded-xl font-bold text-xl mt-4 shadow-lg shadow-primary/20"
       >
         Kontakt oss
       </a>
@@ -79,56 +121,49 @@ const isActive = (path: string) =>
   </div>
 </header>
 
-<script is:inline>
-  // Vi bruker en enkel funksjon for å styre alt
-  const setupNavbar = () => {
+<script>
+  const initNavbar = () => {
     const btn = document.getElementById("hamburger-btn");
     const menu = document.getElementById("mobilmeny-menu");
+
+    // Hent linjene individuelt for bedre kontroll
     const l1 = document.getElementById("line-1");
     const l2 = document.getElementById("line-2");
     const l3 = document.getElementById("line-3");
 
-    if (!btn || !menu) return;
+    // Sjekk at ALLE elementene finnes før vi fortsetter
+    if (!btn || !menu || !l1 || !l2 || !l3) return;
 
-    btn.addEventListener("click", () => {
-      const isOpen = menu.classList.contains('flex');
-      
+    const toggleMenu = () => {
+      const isOpen = menu.classList.contains("flex");
+
       if (!isOpen) {
-        // Åpne
-        menu.classList.remove('hidden');
-        menu.classList.add('flex');
-        document.body.style.overflow = 'hidden';
-        
-        // Animasjon til X
+        menu.classList.replace("hidden", "flex");
+        document.body.style.overflow = "hidden";
+
+        // TypeScript vet nå at disse ikke er null pga. sjekken over
         l1.style.transform = "translateY(8px) rotate(45deg)";
         l2.style.opacity = "0";
         l3.style.transform = "translateY(-8px) rotate(-45deg)";
       } else {
-        // Lukk
-        menu.classList.add('hidden');
-        menu.classList.remove('flex');
-        document.body.style.overflow = '';
-        
-        // Tilbake til hamburger
+        menu.classList.replace("flex", "hidden");
+        document.body.style.overflow = "";
+
         l1.style.transform = "translateY(0) rotate(0)";
         l2.style.opacity = "1";
         l3.style.transform = "translateY(0) rotate(0)";
       }
-    });
+    };
 
-    // Lukk menyen når man klikker på en lenke
-    menu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        menu.classList.add('hidden');
-        menu.classList.remove('flex');
-        document.body.style.overflow = '';
-        l1.style.transform = "translateY(0) rotate(0)";
-        l2.style.opacity = "1";
-        l3.style.transform = "translateY(0) rotate(0)";
+    btn.addEventListener("click", toggleMenu);
+
+    menu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        if (menu.classList.contains("flex")) toggleMenu();
       });
     });
   };
 
-  // Kjør oppsettet
-  setupNavbar();
+  initNavbar();
+  document.addEventListener("astro:after-swap", initNavbar);
 </script>

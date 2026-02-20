@@ -34,19 +34,21 @@ const techStyles: Record<string, string> = {
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {
           sortedProjects.map((project) => (
-            <div class="group bg-white dark:bg-slate-900 shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col relative">
+            <div class="group  rounded-[2.5rem] bg-white dark:bg-slate-900 shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col relative">
               <a
                 href={`/prosjekt/${project.slug}`}
                 class="absolute inset-0 z-10"
                 aria-label={`Les mer om ${project.data.title}`}
               />
 
-              <div class="aspect-video overflow-hidden bg-slate-100 dark:bg-slate-800">
+              <div
+                class="aspect-video overflow-hidden rounded-t-[2.5rem] bg-slate-100"
+                transition:name={`container-${project.slug}`}
+              >
                 <Image
                   src={project.data.thumbnail}
                   alt={project.data.title}
-                  transition:name={`img-${project.slug}`}
-                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
 
