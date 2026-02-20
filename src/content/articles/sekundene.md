@@ -4,6 +4,7 @@ description: "Mister du kunder fordi nettsiden din er treg? Lær hvorfor hastigh
 publishDate: 2026-01-28
 image: "../../assets/images/conductorWand.png"
 tags: ["Lynraske nettsider", "Astro rammeverk", "Brukervennlighet", "SEO tips", "Konvertering", "Webutvikling for småbedrifter"]
+draft: true
 ---
 
 # Seks sekunder er alt du har – er nettsiden din rask nok til å holde på kunden?

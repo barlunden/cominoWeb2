@@ -5,6 +5,7 @@ publishDate: 2026-01-25
 image: "../../assets/images/nattero.png"
 tags: ["Nettsikkerhet", "Astro", "Webutvikling", "Vedlikehold", "Trygghet på nett"]
 category: Digital strategi
+draft: true
 ---
 
 # Nattero: Sover du godt, eller lever nettsiden din sitt eget liv?

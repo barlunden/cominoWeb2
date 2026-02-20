@@ -4,15 +4,20 @@ import Layout from '../../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 
 export async function getStaticPaths() {
-  const articles = await getCollection('articles');
+  // 1. Hent kolleksjonen med filter for kladder
+  const articles = await getCollection('articles', ({ data }) => {
+    // I produksjon (når du publiserer) fjerner vi alle kladder.
+    // I utvikling (npm run dev) beholder vi dem så du kan forhåndsvise arbeidet ditt.
+    return import.meta.env.PROD ? data.draft !== true : true;
+  });
   
-  // Sorterer kronologisk for navigasjon
+  // 2. Sorter de filtrerte artiklene
   const sortedArticles = articles.sort((a, b) => 
     b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
   );
 
   return sortedArticles.map((entry, index) => {
-    // Finn relaterte artiklar basert på felles tags (maks 3)
+    // Relaterte artikler må også hentes fra den filtrerte listen
     const related = sortedArticles
       .filter(item => item.slug !== entry.slug && item.data.tags.some(tag => entry.data.tags.includes(tag)))
       .slice(0, 3);
@@ -42,10 +47,10 @@ const formatDate = (date: Date) => {
 ---
 
 <Layout title={`${entry.data.title} - Comino Web`}>
-  <main class="pt-32 pb-20 bg-white">
+  <main class="pt-32 pb-20 bg-white dark:bg-slate-950 transition-colors duration-300">
     <article class="container mx-auto px-6 max-w-4xl">
       <header class="mb-12 text-center">
-        <div class="flex items-center justify-center gap-3 text-slate-500 mb-6 font-medium">
+        <div class="flex items-center justify-center gap-3 text-slate-500 dark:text-slate-400 mb-6 font-medium">
           <time datetime={entry.data.publishDate.toISOString()}>
             {formatDate(entry.data.publishDate)}
           </time>
@@ -55,71 +60,26 @@ const formatDate = (date: Date) => {
           </span>
         </div>
         
-        <h1 class="text-4xl md:text-6xl font-bold text-slate-900 leading-tight mb-8">
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white leading-tight mb-8 italic">
           {entry.data.title}
         </h1>
 
         {entry.data.image && (
-          <div class="rounded-3xl overflow-hidden shadow-2xl mb-12 aspect-video">
+          <div class="rounded-[2.5rem] overflow-hidden shadow-2xl mb-12 aspect-video border border-slate-100 dark:border-slate-800">
             <Image 
               src={entry.data.image} 
               alt={entry.data.title}
-              class="w-full h-full object-cover"
+              transition:name={`img-${entry.slug}`}
+              class="w-full h-full object-cover rounded-[2.5rem]" 
             />
           </div>
         )}
       </header>
 
-      <div class="prose prose-lg prose-slate max-w-none 
-        prose-headings:text-slate-900 prose-headings:font-bold 
-        prose-a:text-primary hover:prose-a:text-primary-hover
-        prose-strong:text-slate-900
-        prose-img:rounded-2xl prose-img:shadow-lg">
+      <div class="prose prose-lg prose-slate dark:prose-invert max-w-none">
         <Content />
       </div>
-
-      {related.length > 0 && (
-        <section class="mt-20 pt-12 border-t border-slate-100">
-          <h3 class="text-2xl font-bold text-slate-900 mb-8 text-center">Les mer om {entry.data.tags[0]}</h3>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {related.map(post => (
-              <a href={`/artikler/${post.slug}`} class="group">
-                <div class="aspect-video rounded-xl overflow-hidden mb-4 bg-slate-100">
-                  {post.data.image && <Image src={post.data.image} alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />}
-                </div>
-                <h4 class="font-bold text-slate-900 group-hover:text-primary transition-colors line-clamp-2">{post.data.title}</h4>
-              </a>
-            ))}
-          </div>
-        </section>
-      )}
-
-      <footer class="mt-16 pt-8 border-t border-slate-100 space-y-12">
-        <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-          {prevPost ? (
-            <a href={`/artikler/${prevPost.slug}`} class="flex items-center text-slate-600 hover:text-primary transition-colors font-medium">
-              <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
-              Forrige: {prevPost.data.title}
-            </a>
-          ) : <div />}
-
-          {nextPost && (
-            <a href={`/artikler/${nextPost.slug}`} class="flex items-center text-slate-600 hover:text-primary transition-colors font-medium text-right">
-              Neste: {nextPost.data.title}
-              <svg class="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-            </a>
-          )}
-        </div>
-
-        <div class="flex justify-center">
-          <a href="/artikler" class="flex items-center text-primary font-bold hover:-translate-x-1 transition-transform">
-            <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-            </svg>
-            Tilbake til oversikten
-          </a>
-        </div>
-      </footer>
-    </article>
+      
+      </article>
   </main>
 </Layout>

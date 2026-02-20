@@ -43,6 +43,7 @@ const articles = defineCollection({
     publishDate: z.coerce.date(), // 'coerce' prøver å fikse dato-formatering automatisk
     image: image().optional(),
     tags: z.array(z.string()).default(['Generelt']),
+    draft: z.boolean().optional().default(false),
   }),
 });
 

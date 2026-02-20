@@ -4,6 +4,7 @@ description: "Vi ser på fordelene med Zero-JS arkitektur og hvordan det påvirk
 publishDate: 2026-01-19
 image: "../../assets/images/lightningSpeed.png"
 tags: ["Teknologi", "SEO"]
+draft: false
 ---
 
 ## Skreddersydd løsninger for ekte behov

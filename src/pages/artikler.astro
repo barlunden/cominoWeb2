@@ -1,20 +1,23 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
-import { Image } from 'astro:assets';
-import PageHeader from '../components/PageHeader.astro';
+import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import PageHeader from "../components/PageHeader.astro";
 
-const allArticles = await getCollection('articles');
+const allArticles = await getCollection('articles', ({ data }) => {
+  // Vis alle i utvikling, men skjul kladder i produksjon
+  return data.draft !== true;
+});
 // Sorter artikler etter dato (nyeste først)
-const sortedArticles = allArticles.sort((a, b) => 
-  b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+const sortedArticles = allArticles.sort(
+  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
 );
 
 const formatDate = (date: Date) => {
-  return new Intl.DateTimeFormat('nb-NO', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
+  return new Intl.DateTimeFormat("nb-NO", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
   }).format(date);
 };
 ---
@@ -24,69 +27,99 @@ const formatDate = (date: Date) => {
     <section class="container mx-auto px-6">
       <PageHeader
         title="Artikler &"
-        accentWord='innsikt'
-        description='Vi deler våre erfaringer om webutvikling, designstrategi og digital vekst.'
+        accentWord="innsikt"
+        description="Vi deler våre erfaringer om webutvikling, designstrategi og digital vekst."
       />
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
-        {sortedArticles.length === 0 && (
-          <p class="text-slate-500 text-center col-span-2 py-20 italic">
-            Ingen artikler publisert ennå. Kommer snart!
-          </p>
-        )}
+        {
+          sortedArticles.length === 0 && (
+            <p class="text-slate-500 text-center col-span-2 py-20 italic">
+              Ingen artikler publisert ennå. Kommer snart!
+            </p>
+          )
+        }
 
-        {sortedArticles.map(article => (
-          <article class="group bg-white rounded-3xl border border-slate-200 overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col">
-            <a href={`/artikler/${article.slug}`} class="block overflow-hidden aspect-video bg-slate-200">
-              {article.data.image ? (
-                <Image 
-                  src={article.data.image} 
-                  alt={article.data.title}
-                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              ) : (
-                <div class="w-full h-full bg-linear-to-br from-primary/20 to-blue-500/20 flex items-center justify-center">
-                  <svg class="w-12 h-12 text-primary/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10l4 4v10a2 2 0 01-2 2z" />
-                    <path stroke-width="1.5" d="M14 4v4h4" />
-                  </svg>
-                </div>
-              )}
-            </a>
+        {
+          sortedArticles.map((article) => (
+            <article class="group bg-white dark:bg-slate-900 rounded-[2.5rem] border border-slate-200 dark:border-slate-800 overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col relative">
+              {/* Gjør hele kortet klikkbart for bedre UX på mobil */}
+              <a
+                href={`/artikler/${article.slug}`}
+                class="absolute inset-0 z-10"
+                aria-label={article.data.title}
+              />
 
-            <div class="p-8 flex flex-col flex-1">
-              <div class="flex items-center gap-4 mb-4 text-sm text-slate-500 font-medium">
-                <time datetime={article.data.publishDate.toISOString()}>
-                  {formatDate(article.data.publishDate)}
-                </time>
-                <span class="w-1 h-1 rounded-full bg-slate-300"></span>
-                <span class="text-primary uppercase tracking-wider text-[10px] font-bold">
-                  {article.data.tags[0]}
-                </span>
+              <div class="block overflow-hidden aspect-video bg-slate-200 dark:bg-slate-800 rounded-t-[2.5rem]">
+                {article.data.image ? (
+                  <Image
+                    src={article.data.image}
+                    alt={article.data.title}
+                    transition:name={`img-${article.slug}`}
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 rounded-t-[2.5rem]"
+                  />
+                ) : (
+                  /* Fallback hvis bilde mangler */
+                  <div
+                    class="w-full h-full bg-linear-to-br from-primary/20 to-blue-500/20 flex items-center justify-center"
+                    transition:name={`img-${article.slug}`}
+                  >
+                    <svg
+                      class="w-12 h-12 text-primary/40"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-width="1.5"
+                        d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10l4 4v10a2 2 0 01-2 2z"
+                      />
+                      <path stroke-width="1.5" d="M14 4v4h4" />
+                    </svg>
+                  </div>
+                )}
               </div>
 
-              <a href={`/artikler/${article.slug}`} class="block group-hover:text-primary transition-colors">
-                <h2 class="text-2xl font-bold text-slate-900 mb-3 leading-tight">
+              <div class="p-8 flex flex-col flex-1 relative z-20 pointer-events-none">
+                <div class="flex items-center gap-4 mb-4 text-sm text-slate-500 dark:text-slate-400 font-medium">
+                  <time datetime={article.data.publishDate.toISOString()}>
+                    {formatDate(article.data.publishDate)}
+                  </time>
+                  <span class="w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-700" />
+                  <span class="text-primary uppercase tracking-wider text-[10px] font-bold">
+                    {article.data.tags[0]}
+                  </span>
+                </div>
+
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-3 leading-tight group-hover:text-primary transition-colors italic">
                   {article.data.title}
                 </h2>
-              </a>
-              
-              <p class="text-slate-600 mb-6 flex-1 line-clamp-3">
-                {article.data.description}
-              </p>
 
-              <a 
-                href={`/artikler/${article.slug}`}
-                class="inline-flex items-center text-primary font-bold hover:gap-2 transition-all"
-              >
-                Les hele artikkelen
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                </svg>
-              </a>
-            </div>
-          </article>
-        ))}
+                <p class="text-slate-600 dark:text-slate-400 mb-6 flex-1 line-clamp-3">
+                  {article.data.description}
+                </p>
+
+                <div class="inline-flex items-center text-primary font-bold group-hover:gap-2 transition-all">
+                  Les hele artikkelen
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-4 h-4 ml-1"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </article>
+          ))
+        }
       </div>
     </section>
   </main>
