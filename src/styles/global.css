@@ -41,3 +41,20 @@
     @apply font-bold tracking-tight text-blue-950;
   }
 }
+
+/* Fikser firkantede hjørner under View Transitions */
+::view-transition-old(*),
+::view-transition-new(*) {
+  /* Dette tvinger animasjonen til å respektere objektets form */
+  height: 100%;
+  width: 100%;
+  border-radius: inherit;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+/* Spesifikk fiks for bildene dine med stor radius */
+[transition\:name^="img-"] {
+  border-radius: 2.5rem; /* Eller den verdien du bruker: rounded-[2.5rem] */
+  overflow: hidden;
+}

@@ -1,6 +1,5 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Footer from "../components/Footer.astro";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
@@ -10,84 +9,114 @@ import PageHeader from "../components/PageHeader.astro";
 const allProjects = await getCollection("projects");
 const sortedProjects = allProjects.sort((a, b) => a.data.order - b.data.order);
 
-// Teknologifarger (Kan også flyttes til global.css som @theme variabler)
+// Teknologifarger - Oppdatert for å fungere bedre i både lyst og mørkt tema
 const techStyles: Record<string, string> = {
-  "Astro": "bg-orange-100 text-orange-700",
-  "React": "bg-blue-100 text-blue-700",
-  "Tailwind": "bg-sky-100 text-sky-700",
-  "Node.js": "bg-green-100 text-green-700",
+  Astro:
+    "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400",
+  React: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
+  Tailwind: "bg-sky-100 text-sky-700 dark:bg-sky-900/30 dark:text-sky-400",
+  "Node.js":
+    "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
 };
 ---
 
 <Layout title="Våre Prosjekter - Comino Web">
-
-  <main class="bg-slate-50 dark:bg-slate-950 min-h-screen pt-24 mt-20 pb-20">
+  <main
+    class="bg-slate-50 dark:bg-slate-950 min-h-screen pt-24 mt-20 pb-20 transition-colors duration-300"
+  >
     <section class="container mx-auto px-6">
-      <PageHeader 
-  title="Utvalgte" 
-  accentWord="prosjekter" 
-  description="En oversikt over løsninger vi har bygget med fokus på fart, sikkerhet og brukervennlighet." 
-/>
+      <PageHeader
+        title="Utvalgte"
+        accentWord="prosjekter"
+        description="En oversikt over løsninger vi har bygget med fokus på fart, sikkerhet og brukervennlighet."
+      />
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-        {sortedProjects.map((project) => (
-  <div class="group bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col relative">
-    
-    <a href={`/prosjekt/${project.slug}`} class="absolute inset-0 z-10" aria-label={`Les mer om ${project.data.title}`}></a>
+        {
+          sortedProjects.map((project) => (
+            <div class="group bg-white dark:bg-slate-900 shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col relative">
+              <a
+                href={`/prosjekt/${project.slug}`}
+                class="absolute inset-0 z-10"
+                aria-label={`Les mer om ${project.data.title}`}
+              />
 
-    <div class="aspect-video overflow-hidden bg-slate-100">
-      <Image
-        src={project.data.thumbnail}
-        alt={project.data.title}
-        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-      />
-    </div>
+              <div class="aspect-video overflow-hidden bg-slate-100 dark:bg-slate-800">
+                <Image
+                  src={project.data.thumbnail}
+                  alt={project.data.title}
+                  transition:name={`img-${project.slug}`}
+                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+              </div>
 
-    <div class="p-8 flex flex-col flex-1">
-      <div class="flex-1">
-        <h2 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-primary transition-colors">
-          {project.data.title}
-        </h2>
-        <p class="text-slate-600 mb-6 leading-relaxed line-clamp-3">
-          {project.data.description}
-        </p>
+              <div class="p-8 flex flex-col flex-1">
+                <div class="flex-1">
+                  <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors italic">
+                    {project.data.title}
+                  </h2>
+                  <p class="text-slate-600 dark:text-slate-400 mb-6 leading-relaxed line-clamp-3">
+                    {project.data.description}
+                  </p>
+                </div>
+
+                <div class="mt-auto pt-6 border-t border-slate-50 dark:border-slate-800 flex items-center justify-between relative z-20 pointer-events-none">
+                  <div class="flex flex-wrap gap-2">
+                    {project.data.technologies.slice(0, 2).map((tech) => (
+                      <span class="px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[10px] font-bold uppercase tracking-wider">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  <span class="text-primary font-bold text-sm inline-flex items-center group-hover:translate-x-1 transition-transform">
+                    Se case
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="w-4 h-4 ml-1"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))
+        }
       </div>
 
-      <div class="mt-auto pt-6 border-t border-slate-50 flex items-center justify-between relative z-20">
-        <div class="flex flex-wrap gap-2">
-          {project.data.technologies.slice(0, 2).map((tech) => (
-            <span class="px-2 py-1 bg-slate-100 text-slate-600 rounded text-[10px] font-bold uppercase tracking-wider">
-              {tech}
-            </span>
-          ))}
-          {project.data.technologies.length > 2 && (
-             <span class="text-[10px] text-slate-400 font-bold">+ {project.data.technologies.length - 2}</span>
-          )}
+      <div
+        class="mt-24 text-center bg-white dark:bg-slate-900 rounded-[3rem] p-12 md:p-20 border border-slate-100 dark:border-slate-800 shadow-sm relative overflow-hidden"
+      >
+        <div class="relative z-10">
+          <h3 class="text-3xl font-bold mb-4 text-slate-900 dark:text-white">
+            Har du et spennende prosjekt i tankene?
+          </h3>
+          <p
+            class="text-slate-600 dark:text-slate-400 mb-10 max-w-xl mx-auto text-lg"
+          >
+            Vi tar gjerne en uforpliktende prat om hvordan vi kan hjelpe deg med
+            din neste digitale løsning.
+          </p>
+          <a
+            href="/kontakt"
+            class="inline-flex items-center justify-center bg-primary text-white px-10 py-5 rounded-2xl text-lg font-bold hover:scale-105 transition-all shadow-xl shadow-primary/20"
+          >
+            La oss prate sammen
+          </a>
         </div>
-        
-        <span class="text-primary font-bold text-sm inline-flex items-center group-hover:gap-1 transition-all">
-          Se case
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-          </svg>
-        </span>
-      </div>
-    </div>
-  </div>
-))}
-      </div>
-
-      <div class="mt-24 text-center bg-white rounded-3xl p-12 border border-slate-100 shadow-sm">
-        <h3 class="text-2xl font-bold mb-4">Har du et spennende prosjekt i tankene?</h3>
-        <p class="text-slate-600 mb-8 max-w-xl mx-auto">
-          Vi tar gjerne en uforpliktende prat om hvordan vi kan hjelpe deg med din neste digitale løsning.
-        </p>
-        <a
-          href="/kontakt"
-          class="inline-flex items-center justify-center bg-primary text-white px-10 py-4 rounded-xl text-lg font-bold hover:bg-primary-hover transition-all shadow-lg hover:shadow-primary/20"
+        <div
+          class="absolute -bottom-24 -right-24 w-64 h-64 bg-primary/5 rounded-full blur-3xl"
         >
-          La oss prate sammen
-        </a>
+        </div>
       </div>
     </section>
   </main>

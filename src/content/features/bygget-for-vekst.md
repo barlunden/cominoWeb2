@@ -1,12 +1,12 @@
 ---
-title: "Bygget for vekst"
-description: "Vi leverer arkitektur som tåler skalering, slik at de digitale løsningene deres kan vokse i takt med ambisjonene deres uten kostbar teknisk gjeld."
+title: "Solid håndverk"
+description: "Vi bygger sider som er enkle å eie og som tåler å bli brukt i mange år fremover."
 iconName: "scaling"
 order: 2
 ---
 
-Mange bedrifter opplever at de vokser ut av nettsidene sine. Hos Comino Web bygger vi 
-modulært helt fra start. Det betyr at en enkel firmaside i dag sømløst kan utvides 
-til en avansert webapplikasjon eller kundeportal i morgen. Ved å bruke 
-komponentbasert utvikling med Astro og React, sikrer vi at koden er 
-fremtidsrettet, lett å vedlikeholde og enkel å bygge videre på.
+Mange opplever at nettsiden deres blir utdatert eller begynner å "lugge" etter kort tid. 
+Hos Comino Web koder vi løsningene fra bunnen av i stedet for å bruke billige ferdigmaler. 
+Dette gjør at siden din står på en trygg grunnmur. Om du trenger en enkel side i dag, 
+er den bygget slik at vi enkelt kan legge til nye funksjoner etter hvert som bedriften 
+din endrer seg – uten at vi må kaste det gamle og starte på nytt.
