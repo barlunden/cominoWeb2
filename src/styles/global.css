@@ -3,6 +3,7 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
+  --variant-dark: .dark;
   /* Di eksisterende palett */
   --color-blue-50: #eff8ff;
   --color-blue-100: #def0ff;
@@ -15,6 +16,7 @@
   --color-blue-800: #005790;
   --color-blue-900: #074673;
   --color-blue-950: #042d4d;
+
 
   /* Definer funksjonelle namn direkte i theme-blokka */
   /* Dette gjer at du kan skrive class="bg-primary" eller "text-primary" */

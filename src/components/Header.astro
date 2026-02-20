@@ -1,5 +1,6 @@
 ---
 import Logo from "./Logo.astro";
+import ThemeToggle from "./ThemeToggle.astro";
 
 // Navigasjonsheader for Comino Web v2
 const currentPath = Astro.url.pathname;
@@ -49,6 +50,7 @@ const isActive = (path: string) =>
         </a>
       </li>
     </ul>
+    
   </nav>
 
   <div 
