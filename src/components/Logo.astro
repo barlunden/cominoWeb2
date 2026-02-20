@@ -1,25 +1,28 @@
 ---
 // src/components/Logo.astro
-// src/components/Logo.astro
-interface Props {
-  variant?: 'light' | 'dark';
-}
-
-const { variant = 'light' } = Astro.props;
-
-// Logic for colors based on background
-// light variant = for white/light backgrounds (Navbar)
-// dark variant = for dark backgrounds (Footer)
-const baseTextColor = variant === 'light' ? 'text-slate-900' : 'text-white';
-const accentColor = variant === 'light' ? 'text-primary' : 'text-primary-light';
 ---
 
-<a href="/" class="flex items-center gap-2 group cursor-pointer">
-  <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center group-hover:scale-105 group-hover:font-semibold group-hover:text-shadow-black transition-all">
-    <span class="text-white text-xl">CW</span>
+<a href="/" class="comino-logo flex items-center gap-2 group cursor-pointer">
+  <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center group-hover:scale-105 transition-all">
+    <span class="text-white text-xl font-bold">CW</span>
   </div>
 
-  <span class={`text-xl font-bold tracking-tight ${baseTextColor}`}>
-    Comino<span class={accentColor}>Web</span>
+  <span class="logo-text text-xl font-bold tracking-tight transition-colors duration-300 text-slate-900 dark:text-white">
+    Comino<span class="logo-accent text-primary dark:text-primary-light">Web</span>
   </span>
 </a>
+
+<style>
+  /* SPESIALREGEL FOR FOOTER:
+    Sidan footeren din alltid er mørk, må vi overstyre system-innstillinga 
+    akkurat der. Vi tvingar logoen til å vere "dark mode-versjon" 
+    uansett kva OS-et seier.
+  */
+  :global(footer) .logo-text {
+    color: white !important;
+  }
+  
+  :global(footer) .logo-accent {
+    color: var(--color-primary-light) !important; /* Bruk din primary-light variabel */
+  }
+</style>
