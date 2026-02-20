@@ -5,6 +5,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import ContactModal from "../components/ContactModal.astro";
 import ThemeToggle from "../components/ThemeToggle.astro";
+
 interface Props {
   title: string;
   description?: string;
@@ -22,19 +23,34 @@ const { title, description = "Comino Web - Vi lager nettsider fra bunnen av" } =
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.png" />
     <meta name="generator" content={Astro.generator} />
-    <ClientRouter /> <title>{title}</title>
+    <ClientRouter /> 
+    <title>{title}</title>
+
     <script is:inline>
-  const theme = (() => {
-    if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-      return localStorage.getItem('theme');
-    }
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  })();
-  
-  if (theme === 'dark') document.documentElement.classList.add('dark');
-</script>
+      const applyTheme = () => {
+        const theme = (() => {
+          if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+            return localStorage.getItem('theme');
+          }
+          return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        })();
+        
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      };
+
+      // Køyr med ein gong (blocking)
+      applyTheme();
+
+      // Sørg for at temaet overlever View Transition-bytte
+      document.addEventListener('astro:after-swap', applyTheme);
+    </script>
   </head>
-  <body class="bg-slate-50 text-gray-900 antialiased">
+  
+  <body class="bg-slate-50 dark:bg-zinc-950 text-gray-900 dark:text-gray-100 antialiased transition-colors duration-500">
     <Header />
     <slot />
     <Footer />
@@ -42,3 +58,17 @@ const { title, description = "Comino Web - Vi lager nettsider fra bunnen av" } =
     <ThemeToggle />
   </body>
 </html>
+
+<style is:global>
+  /* Tvingar nettlesaren til å forstå kva farge som skal liggje "bak" alt */
+  :root {
+    color-scheme: light;
+  }
+  :root.dark {
+    color-scheme: dark;
+  }
+  
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+</style>
