@@ -13,7 +13,7 @@ interface Props {
 const { items } = Astro.props;
 ---
 
-<section id="tjenester" class="py-24 bg-white dark:bg-zinc-950 transition-colors duration-500">
+<section id="tjenester" class="py-24 bg-page-light dark:bg-page-dark transition-colors duration-500">
   <div class="container mx-auto px-6">
     <div class="max-w-2xl mb-16">
       <h2 class="text-4xl font-bold text-slate-900 dark:text-white mb-4 transition-colors">Våre tjenester</h2>
@@ -25,7 +25,7 @@ const { items } = Astro.props;
 
     <div class="grid md:grid-cols-3 gap-8">
       {items.map((item) => (
-        <div class="group relative p-8 rounded-3xl border border-slate-200 dark:border-zinc-800 bg-slate-50 dark:bg-zinc-900/50 transition-all duration-300 hover:bg-white dark:hover:bg-zinc-900 hover:shadow-2xl dark:hover:shadow-primary/5 hover:border-primary/30 flex flex-col">
+        <div class="group relative p-8 rounded-3xl border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 transition-all duration-300 hover:bg-white dark:hover:bg-zinc-900 hover:shadow-2xl dark:hover:shadow-primary/5 hover:border-primary/30 flex flex-col">
           
           <div class="mb-6 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-blue-100/50 dark:bg-primary/10 text-primary dark:text-primary-light group-hover:bg-primary group-hover:text-white transition-all duration-300 shadow-sm shrink-0">
             {item.icon === 'code' && (

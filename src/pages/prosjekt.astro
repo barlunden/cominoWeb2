@@ -22,7 +22,7 @@ const techStyles: Record<string, string> = {
 
 <Layout title="Våre Prosjekter - Comino Web">
   <main
-    class="bg-slate-50 dark:bg-slate-950 min-h-screen pt-24 mt-20 pb-20 transition-colors duration-300"
+    class="bg-page-light dark:bg-page-dark min-h-screen pt-24 mt-20 pb-20 transition-colors duration-300"
   >
     <section class="container mx-auto px-6">
       <PageHeader
@@ -34,7 +34,7 @@ const techStyles: Record<string, string> = {
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {
           sortedProjects.map((project) => (
-            <div class="group  rounded-[2.5rem] bg-white dark:bg-slate-900 shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col relative">
+            <div class="group  rounded-[2.5rem] bg-white dark:bg-slate-950 shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col relative">
               <a
                 href={`/prosjekt/${project.slug}`}
                 class="absolute inset-0 z-10"
@@ -96,7 +96,7 @@ const techStyles: Record<string, string> = {
       </div>
 
       <div
-        class="mt-24 text-center bg-white dark:bg-slate-900 rounded-[3rem] p-12 md:p-20 border border-slate-100 dark:border-slate-800 shadow-sm relative overflow-hidden"
+        class="mt-24 text-center bg-white dark:bg-slate-950 rounded-[3rem] p-12 md:p-20 border border-slate-100 dark:border-slate-800 shadow-sm relative overflow-hidden"
       >
         <div class="relative z-10">
           <h3 class="text-3xl font-bold mb-4 text-slate-900 dark:text-white">

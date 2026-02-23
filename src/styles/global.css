@@ -6,7 +6,8 @@
 
 @theme {
   --variant-dark: .dark;
-  /* Di eksisterende palett */
+
+  /* Blåtoner (Comino-paletten) */
   --color-blue-50: #eff8ff;
   --color-blue-100: #def0ff;
   --color-blue-200: #b6e4ff;
@@ -19,58 +20,77 @@
   --color-blue-900: #074673;
   --color-blue-950: #042d4d;
 
+  /* NYE MYKE BAKGRUNNSFARGER */
+  /* En behagelig off-white/gråblå som ikke skjærer i øynene */
+  --color-page-light: #f8fafc; 
+  /* En dyp, moderne midnattsblå som er "lunere" enn nesten-svart */
+  --color-page-dark: #0f172a; 
 
-  /* Definer funksjonelle namn direkte i theme-blokka */
-  /* Dette gjer at du kan skrive class="bg-primary" eller "text-primary" */
+  /* Funksjonelle navn */
   --color-primary: var(--color-blue-600);
   --color-primary-hover: var(--color-blue-700);
   --color-primary-light: var(--color-blue-300);
-  
-  /* Legg gjerne til ein aksentfarge for å bryte opp litt (f.eks. for knappar eller detaljar) */
   --color-accent: var(--color-blue-400);
 
-  /* Font-oppsett (viss du brukar spesifikke fontar) */
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
-/* Globale overrides som ikkje er knytt til utility-klasser */
 @layer base {
   body {
-    @apply bg-white text-slate-900 antialiased;
+    /* Bruker den nye myke hvitfargen som standard */
+    @apply bg-page-light text-slate-800 antialiased transition-colors duration-300;
+  }
+  
+  .dark body {
+    /* Bruker den nye midnattsblå i mørk modus */
+    @apply bg-page-dark text-slate-200;
   }
   
   h1, h2, h3, h4 {
-    @apply font-bold tracking-tight text-blue-950;
+    @apply font-bold tracking-tight text-slate-900;
+  }
+
+  .dark h1, .dark h2, .dark h3, .dark h4 {
+    @apply text-white;
+  }
+
+  /* Gjør linker i tekst litt mer behagelige */
+  a {
+    @apply transition-colors duration-200;
   }
 }
 
-/* Vi retter oss mot de midlertidige lagene som skapes under View Transitions */
+/* --- VIEW TRANSITIONS (BILDER) --- */
+
 ::view-transition-old(img-*),
 ::view-transition-new(img-*) {
-  /* Dette sørger for at 'skyggen' eller beholderen under animasjonen alltid er rund */
   border-radius: 2.5rem;
   overflow: hidden;
-  /* Dette hindrer at bildet 'blør' utenfor den runde formen mens det flytter seg */
   height: 100%;
   width: 100%;
 }
 
-/* For å sikre at det ser bra ut når det starter fra kortet (hvor det bare er runde hjørner oppe) */
 ::view-transition-old(img-*) {
-  /* Vi kan prøve å tvinge den til å starte med avrunding kun oppe */
   border-top-left-radius: 2.5rem;
   border-top-right-radius: 2.5rem;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
 
-/* Og lande med full avrunding */
 ::view-transition-new(img-*) {
   border-radius: 2.5rem;
 }
 
-::view-transition-group(nav-indicator) {
+/* --- VIEW TRANSITIONS (NAVIGASJON) --- */
+
+::view-transition-group(nav-indicator),
+::view-transition-group(nav-indicator-mobile) {
   animation-duration: 0.5s;
   animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Sørger for at navigasjonsmarkøren ikke ser firkantet ut under animasjon */
+::view-transition-new(nav-indicator),
+::view-transition-new(nav-indicator-mobile) {
+  border-radius: 9999px;
+}
