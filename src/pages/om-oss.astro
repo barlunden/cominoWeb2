@@ -3,46 +3,74 @@ import Layout from "../layouts/Layout.astro";
 import PageHeader from "../components/PageHeader.astro";
 
 const title = "Om oss | Comino Web";
-const description = "Møt Åge og Steinar i Comino Web. Vi bygger raske og trygge nettsider med fokus på detaljer og presisjon.";
+const description =
+  "Møt Åge og Steinar i Comino Web. Vi koder lynraske og trygge nettsider med fokus på teknisk presisjon og solid håndverk.";
 ---
 
 <Layout title={title} description={description}>
-  <main class="bg-page-light dark:bg-page-dark transition-colors duration-500 min-h-screen">
+  <main
+    class="bg-page-light dark:bg-page-dark transition-colors duration-500 min-h-screen"
+  >
     <section class="container mx-auto px-6 pt-24 mt-20 pb-16">
       <PageHeader
-        preTitle="Håndverkere i kode"
+        preTitle="Profesjonelt håndverk"
         title="Om"
         accentWord="oss"
-        description="Vi er Åge og Steinar. Vi bygger ikke bare nettsider – vi konstruerer digitale verktøy med kirurgisk presisjon."
+        description="Vi er Åge og Steinar. Vi bygger ikke nettsider på samlebånd – vi koder digitale verktøy fra bunnen av med ekstrem nøyaktighet."
       />
     </section>
 
     <section class="container mx-auto px-6 py-12">
       <div class="max-w-5xl mx-auto">
-        
         {/* Hovedseksjon: Fokus på koding */}
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center mb-32">
           <div class="lg:col-span-7">
-            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-6 italic">
-              Logikk, struktur og <span class="text-primary">ren kildekode</span>
+            <h2
+              class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-6 italic"
+            >
+              Kildekode bygget for <span class="text-primary">prestasjon</span>
             </h2>
-            <div class="prose prose-lg prose-slate dark:prose-invert leading-relaxed">
+            <div
+              class="prose prose-lg prose-slate dark:prose-invert leading-relaxed"
+            >
               <p>
-                Hos oss starter ethvert prosjekt i en tekst-editor, ikke i et ferdig oppsett. Vi mener at de beste digitale løsningene bygges fra bunnen av, linje for linje. 
+                Hos oss starter ethvert prosjekt i en tekst-editor, ikke i et
+                ferdigmal-system. Vi mener at de beste digitale løsningene
+                krever full kontroll over hver eneste linje med kode.
               </p>
               <p>
-                Dette gir oss full kontroll over **ytelse, sikkerhet og skalerbarhet**. Vi bruker moderne verktøy som Astro og Tailwind CSS for å sikre at din bedrift får en løsning som er lynrask i dag, og enkel å utvide i morgen.
+                Ved å skrive koden selv fjerner vi alt unødvendig rusk.
+                Resultatet er nettsider med maksimal <span
+                  class="italic font-semibold text-primary">ytelse</span>, <span class="italic font-semibold text-primary"
+                  >sikkerhet</span
+                > og <span class="italic font-semibold text-primary"
+                  >stabilitet</span
+                >. Vi bruker moderne verktøy som Astro for å sikre at din
+                bedrift får en løsning som er lynrask i dag og enkel å eie i
+                fremtiden.
               </p>
             </div>
           </div>
-          
+
           <div class="lg:col-span-5">
             <div class="relative group">
-              <div class="absolute -inset-2 bg-linear-to-r from-primary to-blue-400 rounded-[2.5rem] blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
-              <div class="relative bg-white dark:bg-slate-900 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-800 shadow-xl">
-                <code class="text-sm text-blue-600 dark:text-blue-400 font-mono block mb-4">// Presisjon i hver linje</code>
-                <p class="italic text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
-                  "En digital løsning skal være like presis som et velsmurt urverk. Hvis koden under panseret er rotete, vil det før eller siden merkes på utsiden."
+              <div
+                class="absolute -inset-2 bg-linear-to-r from-primary to-blue-400 rounded-[2.5rem] blur opacity-20 group-hover:opacity-40 transition duration-1000"
+              >
+              </div>
+              <div
+                class="relative bg-white dark:bg-slate-900 p-8 rounded-4xl border border-slate-200 dark:border-slate-800 shadow-xl"
+              >
+                <code
+                  class="text-sm text-blue-600 dark:text-blue-400 font-mono block mb-4"
+                  >// Detaljene utgjør helheten</code
+                >
+                <p
+                  class="italic text-lg text-slate-700 dark:text-slate-300 leading-relaxed"
+                >
+                  "Teknisk kvalitet handler om marginer. Når koden under
+                  panseret er presis, merkes det umiddelbart på hastigheten og
+                  stabiliteten utad."
                 </p>
               </div>
             </div>
@@ -51,54 +79,109 @@ const description = "Møt Åge og Steinar i Comino Web. Vi bygger raske og trygg
 
         {/* Team-seksjon */}
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-32">
-          <div class="group p-10 rounded-[2.5rem] bg-white dark:bg-slate-800/30 border border-slate-200 dark:border-slate-800/60 transition-all hover:shadow-2xl">
-            <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-blue-50 dark:bg-slate-800 text-primary mb-6">
-               <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2z" /></svg>
+          <div
+            class="group p-10 rounded-[2.5rem] bg-white dark:bg-slate-800/30 border border-slate-200 dark:border-slate-800/60 transition-all hover:shadow-2xl"
+          >
+            <div
+              class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-blue-50 dark:bg-slate-800 text-primary mb-6"
+            >
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                ><path
+                  stroke-width="2"
+                  d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2z"
+                ></path></svg
+              >
             </div>
-            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">Åge</h3>
-            <p class="text-slate-600 dark:text-slate-400 leading-relaxed italic mb-4">Utvikler & Dirigent</p>
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">
+              Åge
+            </h3>
+            <p class="text-primary font-mono text-sm mb-6">
+              Utvikler & Dirigent
+            </p>
             <p class="text-slate-700 dark:text-slate-400 leading-relaxed">
-              Med bakgrunn fra podiet som dirigent, vet jeg at suksess ligger i samspillet. I webutvikling oversetter jeg dette til struktur og nøyaktighet. Jeg sørger for at arkitekturen i koden er like stødig som en symfoni.
+              Fra dirigentpulten er jeg vant til å ha oversikt over komplekse
+              partiturer der hver detalj må stemme for at helheten skal fungere.
+              I Comino Web oversetter jeg denne nøyaktigheten til teknisk
+              arkitektur. Jeg sørger for at prosjektet ditt er bygget på en
+              logisk og stødig grunnmur.
             </p>
           </div>
 
-          <div class="group p-10 rounded-[2.5rem] bg-white dark:bg-slate-800/30 border border-slate-200 dark:border-slate-800/60 transition-all hover:shadow-2xl">
-            <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-blue-50 dark:bg-slate-800 text-primary mb-6">
-               <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 00-1 1v1a2 2 0 11-4 0v-1a1 1 0 00-1-1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" /></svg>
+          <div
+            class="group p-10 rounded-[2.5rem] bg-white dark:bg-slate-800/30 border border-slate-200 dark:border-slate-800/60 transition-all hover:shadow-2xl"
+          >
+            <div
+              class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-blue-50 dark:bg-slate-800 text-primary mb-6"
+            >
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                ><path
+                  stroke-width="2"
+                  d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 00-1 1v1a2 2 0 11-4 0v-1a1 1 0 00-1-1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"
+                ></path></svg
+              >
             </div>
-            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">Steinar</h3>
-            <p class="text-slate-600 dark:text-slate-400 leading-relaxed italic mb-4">Utvikler & Tryllekunstner</p>
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">
+              Steinar
+            </h3>
+            <p class="text-primary font-mono text-sm mb-6">
+              Utvikler & Tryllekunstner
+            </p>
             <p class="text-slate-700 dark:text-slate-400 leading-relaxed">
-              Som tryllekunstner vet jeg at det som skjer usett er det viktigste for opplevelsen. Jeg finpusser koden "under panseret" slik at alt fungerer sømløst for brukeren – uten at de trenger å vite hvorfor det går så fort.
+              Som tryllekunstner vet jeg at det usynlige arbeidet i kulissene
+              avgjør opplevelsen på scenen. Jeg bruker den samme kompromissløse
+              holdningen til timing og marginer når jeg skriver koden din, slik
+              at alt fungerer lynraskt og sømløst for brukerne dine.
             </p>
           </div>
         </div>
 
         {/* Verdi-seksjon */}
-        <div class="bg-slate-900 dark:bg-slate-900/40 border border-slate-800 rounded-[3rem] p-10 md:p-16 mb-32 relative overflow-hidden">
-          <div class="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl -mr-32 -mt-32"></div>
-          
-          <h2 class="text-3xl text-white font-bold mb-12 text-center italic">Våre leveranse-prinsipper</h2>
+        <div
+          class="bg-slate-900 dark:bg-slate-900/40 border border-slate-800 rounded-[3rem] p-10 md:p-16 mb-32 relative overflow-hidden"
+        >
+          <div
+            class="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl -mr-32 -mt-32"
+          >
+          </div>
+
+          <h2 class="text-3xl text-white font-bold mb-12 text-center italic">
+            Våre prinsipper for kvalitet
+          </h2>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10">
             <div>
               <div class="text-blue-400 font-mono mb-4">01.</div>
-              <h4 class="font-bold text-white text-xl mb-3">Ytelse først</h4>
+              <h4 class="font-bold text-white text-xl mb-3">Ren kildekode</h4>
               <p class="text-slate-400 text-sm leading-relaxed">
-                Vi bygger nettsider som laster på millisekunder. Hastighet er ikke bare luksus, det er kritisk for konvertering.
+                Vi bruker ikke tunge ferdigløsninger eller unødvendig kode. Du
+                får en lettvektig og effektiv nettside som laster umiddelbart.
               </p>
             </div>
             <div>
               <div class="text-blue-400 font-mono mb-4">02.</div>
-              <h4 class="font-bold text-white text-xl mb-3">Sikkerhet i bunn</h4>
+              <h4 class="font-bold text-white text-xl mb-3">
+                Teknisk trygghet
+              </h4>
               <p class="text-slate-400 text-sm leading-relaxed">
-                Ved å bruke statiske generatorer og moderne arkitektur fjerner vi de vanligste sikkerhetshullene.
+                Ved å kode fra bunnen av med moderne arkitektur fjerner vi de
+                vanligste sikkerhetshullene før de i det hele tatt oppstår.
               </p>
             </div>
             <div>
               <div class="text-blue-400 font-mono mb-4">03.</div>
-              <h4 class="font-bold text-white text-xl mb-3">Ingen "Bloat"</h4>
+              <h4 class="font-bold text-white text-xl mb-3">
+                Langsiktig verdi
+              </h4>
               <p class="text-slate-400 text-sm leading-relaxed">
-                Vi bruker ikke tunge ferdigløsninger. Du får nøyaktig den koden du trenger, og ingenting annet.
+                En side bygget med presisjon varer lenger og er enklere å
+                utvide. Vi bygger for fremtiden, ikke bare for i dag.
               </p>
             </div>
           </div>
@@ -106,15 +189,23 @@ const description = "Møt Åge og Steinar i Comino Web. Vi bygger raske og trygg
 
         {/* Enkel CTA */}
         <div class="text-center pb-20">
-          <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-6 italic">
-            Skal vi bygge noe sammen?
+          <h2
+            class="text-3xl font-bold text-slate-900 dark:text-white mb-6 italic"
+          >
+            Klar for en nettside som spiller på lag?
           </h2>
           <a
             href="/kontakt"
             class="inline-flex items-center bg-primary text-white px-10 py-5 rounded-2xl font-bold hover:scale-105 transition-all shadow-xl shadow-primary/20"
           >
             Start en samtale
-            <svg class="w-5 h-5 ml-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+            <svg
+              class="w-5 h-5 ml-3"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              ><path stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg
+            >
           </a>
         </div>
       </div>

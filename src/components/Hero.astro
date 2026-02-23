@@ -1,72 +1,113 @@
 ---
 /* src/components/Hero.astro */
+import { Image } from "astro:assets";
+import desktopImage from "../assets/images/desktop.png"; 
 ---
 
 <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-page-light dark:bg-page-dark transition-colors duration-500">
-  <div class="absolute inset-0 -z-10 overflow-hidden">
-    <div class="absolute left-[50%] top-0 h-[1000px] w-[1000px] -translate-x-[50%] translate-y-[-30%] 
+  
+  {/* 1. Bakgrunnslags */}
+  <div class="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+    
+    {/* RUTENETTET: Bruker den nye utility-klassen fra global.css */}
+    <div class="absolute inset-0 bg-grid-comino opacity-[0.25] dark:opacity-[0.15] [mask-image:linear-gradient(to_bottom,black_60%,transparent)]"></div>
+
+    {/* Gradienten - Gjort litt mindre for å ikke vaske ut rutenettet */}
+    <div class="absolute left-[50%] top-0 h-[800px] w-[800px] -translate-x-[50%] translate-y-[-20%] 
       [background:radial-gradient(closest-side,var(--color-blue-100),transparent)] 
-      dark:[background:radial-gradient(closest-side,rgba(0,125,210,0.15),transparent)] 
-      opacity-40 dark:opacity-20">
+      dark:[background:radial-gradient(closest-side,rgba(0,125,210,0.1),transparent)] 
+      opacity-50">
     </div>
+
+    {/* Arkitektoniske elementer - Beholdt for klasse */}
+    <div class="absolute -top-24 -left-24 w-[600px] h-[600px] border border-slate-200 dark:border-blue-500/10 rounded-full"></div>
+    <div class="absolute top-0 left-10 w-px h-full bg-linear-to-b from-transparent via-slate-200 dark:via-blue-500/20 to-transparent"></div>
   </div>
 
-  <div class="container mx-auto px-6">
-    <div class="max-w-4xl">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full 
-        bg-white dark:bg-blue-500/10 
-        border border-slate-200 dark:border-blue-500/20 
-        text-primary dark:text-blue-300 
-        text-sm font-medium mb-6 animate-fade-in shadow-sm">
-        <span class="relative flex h-2 w-2">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-        </span>
-        Tilgjengelig for nye prosjekter i 2026
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="grid lg:grid-cols-12 gap-12 items-center">
+      
+      {/* 2. Tekst-innhold */}
+      <div class="lg:col-span-7 flex flex-col items-start">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full 
+          bg-white dark:bg-blue-500/10 
+          border border-slate-200 dark:border-blue-500/20 
+          text-primary dark:text-blue-300 
+          text-sm font-medium mb-6 animate-fade-in shadow-sm">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+          </span>
+          Tilgjengelig for nye prosjekter i 2026
+        </div>
+
+        <h1 class="text-5xl md:text-7xl font-bold text-slate-900 dark:text-white tracking-tight mb-8">
+          Vi bygger fremtidens <br />
+          <span class="italic text-transparent bg-clip-text bg-linear-to-r from-primary to-blue-500 dark:from-primary-light dark:to-blue-400">
+            digitale løsninger
+          </span>
+        </h1>
+
+        <p class="text-xl text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl mb-10">
+          Comino Web AS kombinerer lynrask ytelse med skalerbar arkitektur. 
+          Fra moderne nettsider til komplekse webapplikasjoner – vi koder for vekst.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+          <a href="/kontakt" class="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-primary text-white font-bold hover:bg-primary-hover transition-all hover:shadow-xl hover:-translate-y-1">
+            Start et prosjekt
+          </a>
+          <a href="#tjenester" class="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-white dark:bg-slate-800/50 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700/50 font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
+            Se hva vi gjør
+          </a>
+        </div>
       </div>
 
-      <h1 class="text-5xl md:text-7xl font-bold text-slate-900 dark:text-white tracking-tight mb-8">
-        Vi bygger fremtidens <br />
-        <span class="italic text-transparent bg-clip-text bg-linear-to-r from-primary to-blue-500 dark:from-primary-light dark:to-blue-400">
-          digitale løsninger
-        </span>
-      </h1>
-
-      <p class="text-xl text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl mb-10">
-        Comino Web AS kombinerer lynrask ytelse med skalerbar arkitektur. 
-        Fra moderne nettsider til komplekse webapplikasjoner – vi koder for vekst.
-      </p>
-
-      <div class="flex flex-col sm:flex-row gap-4">
-        <a 
-          href="/kontakt" 
-          class="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-primary text-white font-bold hover:bg-primary-hover transition-all hover:shadow-xl hover:-translate-y-1 shadow-primary/20 dark:shadow-primary/10"
-        >
-          Start et prosjekt
-        </a>
+      {/* 3. Bilde-seksjon */}
+      <div class="lg:col-span-5 relative animate-fade-in-right">
+        {/* Subtil glød som rammer inn bildet i stedet for et kort */}
+        <div class="absolute -inset-4 bg-primary/10 dark:bg-primary/20 rounded-[3rem] blur-3xl opacity-50"></div>
         
-        <a 
-          href="#tjenester" 
-          class="inline-flex items-center justify-center px-8 py-4 rounded-xl 
-          bg-white dark:bg-slate-800/50 
-          text-slate-900 dark:text-white 
-          border border-slate-200 dark:border-slate-700/50 
-          font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition-all shadow-sm"
-        >
-          Se hva vi gjør
-        </a>
+        <div class="relative aspect-square overflow-hidden rounded-[2.5rem] border border-slate-200 dark:border-slate-800 shadow-2xl">
+          <Image 
+            src={desktopImage} 
+            alt="Moderne arbeidsstasjon"
+            class="w-full h-full object-cover"
+            loading="eager" 
+          />
+        </div>
       </div>
+
     </div>
   </div>
 </section>
 
 <style>
+  /* KRAFTIGERE rutenett for å sikre at det synes */
+  .bg-grid-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M 60 0 L 0 0 0 60' fill='none' stroke='%2364748b' stroke-width='1.5' stroke-opacity='0.25'/%3E%3C/svg%3E");
+    mask-image: radial-gradient(ellipse at center, black, transparent 90%);
+  }
+  
+  .dark .bg-grid-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M 60 0 L 0 0 0 60' fill='none' stroke='%23ffffff' stroke-width='1' stroke-opacity='0.15'/%3E%3C/svg%3E");
+  }
+
   .animate-fade-in {
     animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  
+  .animate-fade-in-right {
+    animation: fadeInRight 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(40px); }
+    to { opacity: 1; transform: translateX(0); }
   }
 </style>

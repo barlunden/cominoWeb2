@@ -94,3 +94,12 @@
 ::view-transition-new(nav-indicator-mobile) {
   border-radius: 9999px;
 }
+
+@utility bg-grid-comino {
+  background-image: radial-gradient(circle, var(--color-slate-300) 1px, transparent 1px);
+  background-size: 40px 40px;
+  
+  @variant dark {
+    background-image: radial-gradient(circle, var(--color-blue-500) 1px, transparent 1px);
+  }
+}
