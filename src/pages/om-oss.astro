@@ -1,131 +1,120 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import PageHeader from "../components/PageHeader.astro";
-// Metadata for SEO
+
 const title = "Om oss | Comino Web";
-const description =
-  "Møt Åge og Steinar i Comino Web. Vi bygger raske og trygge nettsider med fokus på detaljer og presisjon.";
+const description = "Møt Åge og Steinar i Comino Web. Vi bygger raske og trygge nettsider med fokus på detaljer og presisjon.";
 ---
 
 <Layout title={title} description={description}>
-  <main class="bg-page-light dark:bg-page-dark transition-colors duration-300">
-    <section class="container mx-auto px-6 pt-24 mt-20 pb-16 text-center">
+  <main class="bg-page-light dark:bg-page-dark transition-colors duration-500 min-h-screen">
+    <section class="container mx-auto px-6 pt-24 mt-20 pb-16">
       <PageHeader
-        preTitle="Hei! Vi er"
-        title="Comino"
-        accentWord="Web"
-        description="Vi består av oss to: Åge og Steinar. Vi hjelper småbedrifter med å få nettsider som faktisk fungerer."
+        preTitle="Håndverkere i kode"
+        title="Om"
+        accentWord="oss"
+        description="Vi er Åge og Steinar. Vi bygger ikke bare nettsider – vi konstruerer digitale verktøy med kirurgisk presisjon."
       />
     </section>
 
     <section class="container mx-auto px-6 py-12">
-      <div class="max-w-4xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center mb-24">
-          <div class="md:col-span-7">
-            <h2
-              class="text-3xl font-bold text-slate-900 dark:text-white mb-6 underline decoration-primary decoration-4 underline-offset-8"
-            >
-              Detaljene som utgjør forskjellen
+      <div class="max-w-5xl mx-auto">
+        
+        {/* Hovedseksjon: Fokus på koding */}
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center mb-32">
+          <div class="lg:col-span-7">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-6 italic">
+              Logikk, struktur og <span class="text-primary">ren kildekode</span>
             </h2>
-            <div class="prose prose-slate dark:prose-invert">
+            <div class="prose prose-lg prose-slate dark:prose-invert leading-relaxed">
               <p>
-                Vi kommer begge fra miljøer der det ikke finnes rom for slurv.
-                Enten man står foran et orkester eller skal utføre en illusjon
-                på en scene, er det de små marginene som avgjør resultatet.
+                Hos oss starter ethvert prosjekt i en tekst-editor, ikke i et ferdig oppsett. Vi mener at de beste digitale løsningene bygges fra bunnen av, linje for linje. 
               </p>
               <p>
-                Denne yrkesstoltheten har vi tatt med oss inn i webutvikling. En
-                god nettside handler om alle de små detaljene i koden som gjør
-                siden <strong>rask, sikker og stabil</strong>.
+                Dette gir oss full kontroll over **ytelse, sikkerhet og skalerbarhet**. Vi bruker moderne verktøy som Astro og Tailwind CSS for å sikre at din bedrift får en løsning som er lynrask i dag, og enkel å utvide i morgen.
               </p>
             </div>
           </div>
-          <div
-            class="md:col-span-5 bg-slate-50 dark:bg-slate-900 p-8 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm text-center italic text-slate-600 dark:text-slate-400"
-          >
-            "En digital løsning skal være like presis som et velsmurt urverk."
+          
+          <div class="lg:col-span-5">
+            <div class="relative group">
+              <div class="absolute -inset-2 bg-linear-to-r from-primary to-blue-400 rounded-[2.5rem] blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+              <div class="relative bg-white dark:bg-slate-900 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-800 shadow-xl">
+                <code class="text-sm text-blue-600 dark:text-blue-400 font-mono block mb-4">// Presisjon i hver linje</code>
+                <p class="italic text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+                  "En digital løsning skal være like presis som et velsmurt urverk. Hvis koden under panseret er rotete, vil det før eller siden merkes på utsiden."
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
-          <div
-            class="p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm"
-          >
-            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">
-              Åge
-            </h3>
+        {/* Team-seksjon */}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-32">
+          <div class="group p-10 rounded-[2.5rem] bg-white dark:bg-slate-800/30 border border-slate-200 dark:border-slate-800/60 transition-all hover:shadow-2xl">
+            <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-blue-50 dark:bg-slate-800 text-primary mb-6">
+               <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2z" /></svg>
+            </div>
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">Åge</h3>
+            <p class="text-slate-600 dark:text-slate-400 leading-relaxed italic mb-4">Utvikler & Dirigent</p>
             <p class="text-slate-700 dark:text-slate-400 leading-relaxed">
-              Bakgrunn som musiker og dirigent. For meg handler webutvikling om
-              struktur og nøyaktighet. Jeg liker å ha kontroll på alle ledd,
-              slik at ingenting blir overlatt til tilfeldighetene.
+              Med bakgrunn fra podiet som dirigent, vet jeg at suksess ligger i samspillet. I webutvikling oversetter jeg dette til struktur og nøyaktighet. Jeg sørger for at arkitekturen i koden er like stødig som en symfoni.
             </p>
           </div>
-          <div
-            class="p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm"
-          >
-            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">
-              Steinar
-            </h3>
+
+          <div class="group p-10 rounded-[2.5rem] bg-white dark:bg-slate-800/30 border border-slate-200 dark:border-slate-800/60 transition-all hover:shadow-2xl">
+            <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-blue-50 dark:bg-slate-800 text-primary mb-6">
+               <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 00-1 1v1a2 2 0 11-4 0v-1a1 1 0 00-1-1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" /></svg>
+            </div>
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">Steinar</h3>
+            <p class="text-slate-600 dark:text-slate-400 leading-relaxed italic mb-4">Utvikler & Tryllekunstner</p>
             <p class="text-slate-700 dark:text-slate-400 leading-relaxed">
-              Amatørmusiker, dirigent og tryllekunstner. Han er opptatt av det
-              som skjer "under panseret" og finpusser koden slik at alt fungerer
-              sømløst – akkurat slik en god tryllekunstner planlegger hver
-              bevegelse.
+              Som tryllekunstner vet jeg at det som skjer usett er det viktigste for opplevelsen. Jeg finpusser koden "under panseret" slik at alt fungerer sømløst for brukeren – uten at de trenger å vite hvorfor det går så fort.
             </p>
           </div>
         </div>
 
-        <div class="bg-blue-950 text-white p-10 md:p-16 rounded-[3rem] mb-24">
-          <h2 class="text-3xl text-slate-100 font-bold mb-10 text-center">
-            Hvorfor velge oss?
-          </h2>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-            <div class="text-center md:text-left">
-              <div class="text-4xl mb-4">⚡</div>
-              <h4 class="font-bold text-blue-400 text-xl mb-2">
-                Laster med en gang
-              </h4>
-              <p class="text-slate-100 font-semibold text-sm">
-                Takket være Astro-teknologi laster siden din lynraskt uten
-                unødvendig "bloat".
+        {/* Verdi-seksjon */}
+        <div class="bg-slate-900 dark:bg-slate-900/40 border border-slate-800 rounded-[3rem] p-10 md:p-16 mb-32 relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl -mr-32 -mt-32"></div>
+          
+          <h2 class="text-3xl text-white font-bold mb-12 text-center italic">Våre leveranse-prinsipper</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10">
+            <div>
+              <div class="text-blue-400 font-mono mb-4">01.</div>
+              <h4 class="font-bold text-white text-xl mb-3">Ytelse først</h4>
+              <p class="text-slate-400 text-sm leading-relaxed">
+                Vi bygger nettsider som laster på millisekunder. Hastighet er ikke bare luksus, det er kritisk for konvertering.
               </p>
             </div>
-            <div class="text-center md:text-left">
-              <div class="text-4xl mb-4">🛡️</div>
-              <h4 class="font-bold text-blue-400 text-xl mb-2">
-                Trygg og solid
-              </h4>
-              <p class="text-slate-100 font-semibold text-sm">
-                Vi bygger alt fra bunnen. Det gir en løsning som er ekstremt
-                sikker over tid.
+            <div>
+              <div class="text-blue-400 font-mono mb-4">02.</div>
+              <h4 class="font-bold text-white text-xl mb-3">Sikkerhet i bunn</h4>
+              <p class="text-slate-400 text-sm leading-relaxed">
+                Ved å bruke statiske generatorer og moderne arkitektur fjerner vi de vanligste sikkerhetshullene.
               </p>
             </div>
-            <div class="text-center md:text-left">
-              <div class="text-4xl mb-4">💬</div>
-              <h4 class="font-bold text-blue-400 text-xl mb-2">
-                Ryddig prosess
-              </h4>
-              <p class="text-slate-100 font-semibold text-sm">
-                Vi snakker vanlig norsk og holder deg oppdatert uten for mye
-                teknisk prat.
+            <div>
+              <div class="text-blue-400 font-mono mb-4">03.</div>
+              <h4 class="font-bold text-white text-xl mb-3">Ingen "Bloat"</h4>
+              <p class="text-slate-400 text-sm leading-relaxed">
+                Vi bruker ikke tunge ferdigløsninger. Du får nøyaktig den koden du trenger, og ingenting annet.
               </p>
             </div>
           </div>
         </div>
 
+        {/* Enkel CTA */}
         <div class="text-center pb-20">
-          <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-6">
-            Lyst på en prat om din neste nettside?
+          <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-6 italic">
+            Skal vi bygge noe sammen?
           </h2>
-          <p class="text-slate-600 dark:text-slate-400 mb-10 max-w-lg mx-auto">
-            Send oss en melding, så tar vi en uforpliktende sjekk av hva du
-            trenger.
-          </p>
           <a
             href="/kontakt"
-            class="inline-block bg-primary text-white px-12 py-5 rounded-2xl font-bold hover:shadow-2xl hover:shadow-primary/30 transition-all hover:-translate-y-1"
+            class="inline-flex items-center bg-primary text-white px-10 py-5 rounded-2xl font-bold hover:scale-105 transition-all shadow-xl shadow-primary/20"
           >
-            Kontakt oss
+            Start en samtale
+            <svg class="w-5 h-5 ml-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
           </a>
         </div>
       </div>

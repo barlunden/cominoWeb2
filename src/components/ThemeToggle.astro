@@ -4,37 +4,59 @@
 
 <button
   id="theme-toggle"
-  class="fixed bottom-6 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-white dark:bg-zinc-800 shadow-2xl border border-slate-200 dark:border-zinc-700 hover:scale-110 active:scale-95 transition-all duration-300 group cursor-pointer"
+  class="fixed bottom-8 right-8 z-50 flex h-14 w-14 items-center justify-center rounded-2xl 
+         bg-slate-900 dark:bg-white
+         shadow-xl hover:shadow-primary/20
+         hover:scale-110 active:scale-95 transition-all duration-300 group cursor-pointer"
   aria-label="Bytt fargetema"
 >
-  <svg class="hidden dark:block w-6 h-6 text-amber-400 group-hover:rotate-45 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  {/* Sol (vises i dark mode på hvit knapp) */}
+  <svg class="hidden dark:block w-7 h-7 text-primary group-hover:rotate-90 transition-transform duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M16.243 17.657l.707.707M7.757 7.757l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
   </svg>
   
-  <svg class="block dark:hidden w-6 h-6 text-slate-700 group-hover:-rotate-12 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  {/* Måne (vises i light mode på mørk knapp) */}
+  <svg class="block dark:hidden w-6 h-6 text-white group-hover:-rotate-12 transition-transform duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
   </svg>
 </button>
 
 <script is:inline>
-  // Vi treng berre toggle-funksjonen her
-  function toggleTheme() {
-    const element = document.documentElement;
-    element.classList.toggle("dark");
-    const isDark = element.classList.contains("dark");
-    localStorage.setItem("theme", isDark ? "dark" : "light");
-  }
+  function themeToggleSetup() {
+    const theme = (() => {
+      if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+        return localStorage.getItem('theme');
+      }
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark';
+      }
+      return 'light';
+    })();
 
-  function setupToggle() {
+    if (theme === 'light') {
+      document.documentElement.classList.remove('dark');
+    } else {
+      document.documentElement.classList.add('dark');
+    }
+
+    window.localStorage.setItem('theme', theme);
+
+    const handleToggleClick = () => {
+      const element = document.documentElement;
+      element.classList.toggle("dark");
+
+      const isDark = element.classList.contains("dark");
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    };
+
     const btn = document.getElementById("theme-toggle");
     if (btn) {
-      btn.addEventListener("click", toggleTheme);
+      // Fjern gammal listener for å unngå duplikatar ved View Transitions
+      btn.removeEventListener("click", handleToggleClick);
+      btn.addEventListener("click", handleToggleClick);
     }
   }
 
-  // Køyr setup ved første last
-  setupToggle();
-
-  // Køyr setup på nytt når Astro byter side (View Transitions)
-  document.addEventListener('astro:page-load', setupToggle);
+  themeToggleSetup();
+  document.addEventListener('astro:after-swap', themeToggleSetup);
 </script>

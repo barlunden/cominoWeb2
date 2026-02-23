@@ -15,66 +15,58 @@ const isActive = (path: string) =>
 ---
 
 <header
-  class="fixed top-0 w-full bg-white/95 dark:bg-slate-950/95 backdrop-blur-md shadow-sm z-100 border-b border-slate-100 dark:border-slate-800 transition-colors duration-300"
+  class="fixed top-0 w-full bg-white/90 dark:bg-[#0f172a]/90 backdrop-blur-md z-50 border-b border-slate-100 dark:border-slate-800/60 transition-colors duration-500"
 >
   <nav class="container mx-auto px-6 h-20 flex items-center justify-between">
     <Logo />
 
-    <div class="flex items-center gap-4">
+    <div class="flex items-center">
+      {/* Mobil-knapp */}
       <button
-        class="group md:hidden w-12 h-12 flex items-center justify-center relative z-120 cursor-pointer"
+        class="group md:hidden w-12 h-12 flex items-center justify-center relative z-[120] cursor-pointer"
         aria-label="Meny"
         id="hamburger-btn"
       >
-        <div class="relative w-8 h-5">
-          <span
-            id="line-1"
-            class="absolute block w-8 h-0.5 bg-primary transition-all duration-300 top-0"
-          ></span>
-          <span
-            id="line-2"
-            class="absolute block w-8 h-0.5 bg-primary transition-all duration-300 top-2"
-          ></span>
-          <span
-            id="line-3"
-            class="absolute block w-8 h-0.5 bg-primary transition-all duration-300 top-4"
-          ></span>
+        <div class="relative w-7 h-5">
+          <span id="line-1" class="absolute block w-7 h-0.5 bg-slate-900 dark:bg-white transition-all duration-300 top-0 rounded-full"></span>
+          <span id="line-2" class="absolute block w-7 h-0.5 bg-slate-900 dark:bg-white transition-all duration-300 top-2 rounded-full"></span>
+          <span id="line-3" class="absolute block w-7 h-0.5 bg-slate-900 dark:bg-white transition-all duration-300 top-4 rounded-full"></span>
         </div>
       </button>
 
-      <ul class="hidden md:flex items-center space-x-8">
+      {/* Desktop Meny */}
+      <ul class="hidden md:flex items-center space-x-10">
         {
           navLinks.map((link) => {
             const active = isActive(link.href);
             return (
-              <li class="relative group">
+              <li class="relative">
                 <a
                   href={link.href}
                   class:list={[
-                    "transition-colors font-semibold py-2",
+                    "transition-colors font-bold text-sm uppercase tracking-widest py-2",
                     active
-                      ? "text-primary"
-                      : "text-slate-600 dark:text-slate-400 hover:text-primary",
+                      ? "text-primary dark:text-primary-light"
+                      : "text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white",
                   ]}
                 >
                   {link.name}
                 </a>
 
-                {/* Her er den magiske markøren */}
                 {active && (
                   <div
                     transition:name="nav-indicator"
-                    class="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary"
+                    class="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary dark:bg-primary-light rounded-full"
                   />
                 )}
               </li>
             );
           })
         }
-        <li>
+        <li class="pl-4">
           <a
             href="/kontakt"
-            class="bg-primary text-white px-5 py-2.5 rounded-xl font-semibold hover:scale-105 transition-all shadow-sm"
+            class="bg-primary text-white px-6 py-2.5 rounded-xl font-bold hover:scale-105 active:scale-95 transition-all shadow-lg shadow-primary/20 text-sm uppercase tracking-wider"
           >
             Kontakt
           </a>
@@ -83,11 +75,12 @@ const isActive = (path: string) =>
     </div>
   </nav>
 
+  {/* Mobilmeny Overlay */}
   <div
     id="mobilmeny-menu"
-    class="hidden fixed inset-0 bg-white dark:bg-slate-950 z-110 flex-col p-6 h-screen w-screen overflow-y-auto pt-28 transition-colors duration-300"
+    class="hidden fixed inset-0 bg-white dark:bg-page-dark z-[110] flex-col p-8 h-screen w-screen pt-32 transition-colors duration-500"
   >
-    <nav class="flex flex-col space-y-6">
+    <nav class="flex flex-col space-y-4">
       {
         navLinks.map((link) => {
           const active = isActive(link.href);
@@ -95,60 +88,52 @@ const isActive = (path: string) =>
             <a
               href={link.href}
               class:list={[
-                "relative text-2xl font-bold pl-6 pb-4 border-b border-slate-100 dark:border-slate-800",
-                active ? "text-primary" : "text-slate-600 dark:text-slate-300",
+                "relative text-3xl font-bold py-4 transition-colors",
+                active ? "text-primary dark:text-primary-light italic" : "text-slate-900 dark:text-slate-400",
               ]}
             >
-              {/* Den vertikale markøren for mobil */}
-              {active && (
-                <div
-                  transition:name="nav-indicator-mobile"
-                  class="absolute left-0 top-0 bottom-0 w-1 bg-primary"
-                />
-              )}
               {link.name}
+              {active && (
+                <span class="text-primary dark:text-primary-light ml-2">.</span>
+              )}
             </a>
           );
         })
       }
-      <a
-        href="/kontakt"
-        class="bg-primary text-white text-center px-8 py-4 rounded-xl font-bold text-xl mt-4 shadow-lg shadow-primary/20"
-      >
-        Kontakt oss
-      </a>
+      <div class="pt-8">
+        <a
+          href="/kontakt"
+          class="block bg-primary text-white text-center px-8 py-5 rounded-2xl font-bold text-xl shadow-xl shadow-primary/20"
+        >
+          Kontakt oss
+        </a>
+      </div>
     </nav>
   </div>
 </header>
 
 <script>
+  /* Samme init-logikk som du hadde, den fungerer utmerket */
   const initNavbar = () => {
     const btn = document.getElementById("hamburger-btn");
     const menu = document.getElementById("mobilmeny-menu");
-
-    // Hent linjene individuelt for bedre kontroll
     const l1 = document.getElementById("line-1");
     const l2 = document.getElementById("line-2");
     const l3 = document.getElementById("line-3");
 
-    // Sjekk at ALLE elementene finnes før vi fortsetter
     if (!btn || !menu || !l1 || !l2 || !l3) return;
 
     const toggleMenu = () => {
       const isOpen = menu.classList.contains("flex");
-
       if (!isOpen) {
         menu.classList.replace("hidden", "flex");
         document.body.style.overflow = "hidden";
-
-        // TypeScript vet nå at disse ikke er null pga. sjekken over
         l1.style.transform = "translateY(8px) rotate(45deg)";
         l2.style.opacity = "0";
         l3.style.transform = "translateY(-8px) rotate(-45deg)";
       } else {
         menu.classList.replace("flex", "hidden");
         document.body.style.overflow = "";
-
         l1.style.transform = "translateY(0) rotate(0)";
         l2.style.opacity = "1";
         l3.style.transform = "translateY(0) rotate(0)";
@@ -156,12 +141,9 @@ const isActive = (path: string) =>
     };
 
     btn.addEventListener("click", toggleMenu);
-
-    menu.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => {
-        if (menu.classList.contains("flex")) toggleMenu();
-      });
-    });
+    menu.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
+      if (menu.classList.contains("flex")) toggleMenu();
+    }));
   };
 
   initNavbar();

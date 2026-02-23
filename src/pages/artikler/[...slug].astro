@@ -4,37 +4,30 @@ import Layout from '../../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 
 export async function getStaticPaths() {
-  // 1. Hent kolleksjonen med filter for kladder
   const articles = await getCollection('articles', ({ data }) => {
-    // I produksjon (når du publiserer) fjerner vi alle kladder.
-    // I utvikling (npm run dev) beholder vi dem så du kan forhåndsvise arbeidet ditt.
     return import.meta.env.PROD ? data.draft !== true : true;
   });
   
-  // 2. Sorter de filtrerte artiklene
   const sortedArticles = articles.sort((a, b) => 
     b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
   );
 
   return sortedArticles.map((entry, index) => {
-    // Relaterte artikler må også hentes fra den filtrerte listen
     const related = sortedArticles
       .filter(item => item.slug !== entry.slug && item.data.tags.some(tag => entry.data.tags.includes(tag)))
-      .slice(0, 3);
+      .slice(0, 2); // Vi viser 2 relaterte for å holde det ryddig
 
     return {
       params: { slug: entry.slug },
       props: { 
         entry,
-        prevPost: index === sortedArticles.length - 1 ? null : sortedArticles[index + 1],
-        nextPost: index === 0 ? null : sortedArticles[index - 1],
         related
       },
     };
   });
 }
 
-const { entry, prevPost, nextPost, related } = Astro.props;
+const { entry, related } = Astro.props;
 const { Content } = await entry.render();
 
 const formatDate = (date: Date) => {
@@ -47,25 +40,25 @@ const formatDate = (date: Date) => {
 ---
 
 <Layout title={`${entry.data.title} - Comino Web`}>
-  <main class="pt-32 pb-20 bg-white dark:bg-slate-950 transition-colors duration-300">
-    <article class="container mx-auto px-6 max-w-4xl">
+  <main class="pt-32 pb-20 bg-page-light dark:bg-page-dark transition-colors duration-500 min-h-screen">
+    <article class="container mx-auto px-6 max-w-3xl">
       <header class="mb-12 text-center">
         <div class="flex items-center justify-center gap-3 text-slate-500 dark:text-slate-400 mb-6 font-medium">
           <time datetime={entry.data.publishDate.toISOString()}>
             {formatDate(entry.data.publishDate)}
           </time>
           <span class="w-1.5 h-1.5 rounded-full bg-primary/30"></span>
-          <span class="text-primary font-bold uppercase tracking-wider text-xs">
+          <span class="text-primary dark:text-primary-light font-bold uppercase tracking-widest text-[10px]">
             {entry.data.tags[0]}
           </span>
         </div>
         
-        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white leading-tight mb-8 italic">
+        <h1 class="text-4xl md:text-6xl font-bold text-slate-900 dark:text-white leading-[1.1] mb-12 italic tracking-tight">
           {entry.data.title}
         </h1>
 
         {entry.data.image && (
-          <div class="rounded-[2.5rem] overflow-hidden shadow-2xl mb-12 aspect-video border border-slate-100 dark:border-slate-800">
+          <div class="rounded-[2.5rem] overflow-hidden shadow-2xl shadow-blue-900/10 dark:shadow-none mb-16 aspect-video bg-slate-200 dark:bg-slate-800 border border-slate-100 dark:border-slate-800">
             <Image 
               src={entry.data.image} 
               alt={entry.data.title}
@@ -76,10 +69,44 @@ const formatDate = (date: Date) => {
         )}
       </header>
 
-      <div class="prose prose-lg prose-slate dark:prose-invert max-w-none">
+      {/* Selve innholdet */}
+      <div class="prose prose-lg prose-slate dark:prose-invert max-w-none 
+        prose-headings:text-slate-900 dark:prose-headings:text-white
+        prose-headings:italic prose-headings:font-bold
+        prose-strong:text-primary dark:prose-strong:text-primary-light
+        prose-a:text-primary dark:prose-a:text-primary-light
+        prose-img:rounded-4xl
+        transition-colors duration-500">
         <Content />
       </div>
-      
-      </article>
+
+      {/* Relaterte artikler / Footer */}
+      <footer class="mt-24 pt-12 border-t border-slate-200 dark:border-slate-800">
+        {related.length > 0 && (
+          <div class="mb-16">
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-8 italic">Les mer om {entry.data.tags[0]}</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {related.map(post => (
+                <a href={`/artikler/${post.slug}`} class="group p-6 rounded-3xl bg-white dark:bg-slate-800/30 border border-slate-200 dark:border-slate-800 hover:border-primary/30 transition-all">
+                  <h4 class="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">{post.data.title}</h4>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <a
+          href="/artikler"
+          class="group inline-flex items-center font-bold text-primary dark:text-primary-light hover:text-primary-hover transition-all"
+        >
+          <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4 group-hover:bg-primary group-hover:text-white transition-all">
+            <svg class="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+          </div>
+          Tilbake til oversikten
+        </a>
+      </footer>
+    </article>
   </main>
 </Layout>

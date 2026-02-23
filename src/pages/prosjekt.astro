@@ -2,28 +2,14 @@
 import Layout from "../layouts/Layout.astro";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
-import type { CollectionEntry } from "astro:content";
 import PageHeader from "../components/PageHeader.astro";
 
-// Hent alle prosjekter fra Content Collections
 const allProjects = await getCollection("projects");
 const sortedProjects = allProjects.sort((a, b) => a.data.order - b.data.order);
-
-// Teknologifarger - Oppdatert for å fungere bedre i både lyst og mørkt tema
-const techStyles: Record<string, string> = {
-  Astro:
-    "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400",
-  React: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
-  Tailwind: "bg-sky-100 text-sky-700 dark:bg-sky-900/30 dark:text-sky-400",
-  "Node.js":
-    "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
-};
 ---
 
 <Layout title="Våre Prosjekter - Comino Web">
-  <main
-    class="bg-page-light dark:bg-page-dark min-h-screen pt-24 mt-20 pb-20 transition-colors duration-300"
-  >
+  <main class="bg-page-light dark:bg-page-dark min-h-screen pt-24 mt-20 pb-20 transition-colors duration-500">
     <section class="container mx-auto px-6">
       <PageHeader
         title="Utvalgte"
@@ -32,29 +18,27 @@ const techStyles: Record<string, string> = {
       />
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-        {
-          sortedProjects.map((project) => (
-            <div class="group  rounded-[2.5rem] bg-white dark:bg-slate-950 shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col relative">
+        {sortedProjects.map((project) => (
+            /* Endret bg-slate-950 til bg-slate-900/50 for mer dybde */
+            <div class="group rounded-[2.5rem] bg-white dark:bg-slate-800/30 shadow-sm border border-slate-200 dark:border-slate-800/60 overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col relative">
               <a
                 href={`/prosjekt/${project.slug}`}
                 class="absolute inset-0 z-10"
                 aria-label={`Les mer om ${project.data.title}`}
               />
 
-              <div
-                class="aspect-video overflow-hidden rounded-t-[2.5rem] bg-slate-100"
-                transition:name={`container-${project.slug}`}
-              >
+              <div class="aspect-video overflow-hidden rounded-t-[2.5rem] bg-slate-100 dark:bg-slate-800">
                 <Image
                   src={project.data.thumbnail}
                   alt={project.data.title}
-                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  transition:name={`img-${project.slug}`}
+                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 rounded-t-[2.5rem]"
                 />
               </div>
 
               <div class="p-8 flex flex-col flex-1">
                 <div class="flex-1">
-                  <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors italic">
+                  <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary dark:group-hover:text-primary-light transition-colors italic">
                     {project.data.title}
                   </h2>
                   <p class="text-slate-600 dark:text-slate-400 mb-6 leading-relaxed line-clamp-3">
@@ -62,30 +46,20 @@ const techStyles: Record<string, string> = {
                   </p>
                 </div>
 
-                <div class="mt-auto pt-6 border-t border-slate-50 dark:border-slate-800 flex items-center justify-between relative z-20 pointer-events-none">
+                {/* Footer i kortet med bedre skillelinje */}
+                <div class="mt-auto pt-6 border-t border-slate-100 dark:border-slate-800/50 flex items-center justify-between relative z-20 pointer-events-none">
                   <div class="flex flex-wrap gap-2">
                     {project.data.technologies.slice(0, 2).map((tech) => (
-                      <span class="px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[10px] font-bold uppercase tracking-wider">
+                      <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-400 text-[10px] font-bold uppercase tracking-wider rounded-lg border border-transparent dark:border-slate-700/50">
                         {tech}
                       </span>
                     ))}
                   </div>
 
-                  <span class="text-primary font-bold text-sm inline-flex items-center group-hover:translate-x-1 transition-transform">
+                  <span class="text-primary dark:text-primary-light font-bold text-sm inline-flex items-center group-hover:translate-x-1 transition-transform">
                     Se case
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="w-4 h-4 ml-1"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M9 5l7 7-7 7"
-                      />
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                     </svg>
                   </span>
                 </div>
@@ -95,16 +69,13 @@ const techStyles: Record<string, string> = {
         }
       </div>
 
-      <div
-        class="mt-24 text-center bg-white dark:bg-slate-950 rounded-[3rem] p-12 md:p-20 border border-slate-100 dark:border-slate-800 shadow-sm relative overflow-hidden"
-      >
+      {/* Bunn-CTA: Oppdatert for å poppe mot den nye bakgrunnen */}
+      <div class="mt-24 text-center bg-white dark:bg-slate-900/40 rounded-[3rem] p-12 md:p-20 border border-slate-200 dark:border-slate-800 shadow-xl shadow-blue-900/5 dark:shadow-none relative overflow-hidden">
         <div class="relative z-10">
-          <h3 class="text-3xl font-bold mb-4 text-slate-900 dark:text-white">
+          <h3 class="text-3xl md:text-4xl font-bold mb-4 text-slate-900 dark:text-white italic">
             Har du et spennende prosjekt i tankene?
           </h3>
-          <p
-            class="text-slate-600 dark:text-slate-400 mb-10 max-w-xl mx-auto text-lg"
-          >
+          <p class="text-slate-600 dark:text-slate-400 mb-10 max-w-xl mx-auto text-lg leading-relaxed">
             Vi tar gjerne en uforpliktende prat om hvordan vi kan hjelpe deg med
             din neste digitale løsning.
           </p>
@@ -115,10 +86,10 @@ const techStyles: Record<string, string> = {
             La oss prate sammen
           </a>
         </div>
-        <div
-          class="absolute -bottom-24 -right-24 w-64 h-64 bg-primary/5 rounded-full blur-3xl"
-        >
-        </div>
+        
+        {/* Dekorative elementer for å bryte opp det mørke */}
+        <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-primary/10 dark:bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -top-24 -left-24 w-72 h-72 bg-blue-400/10 dark:bg-blue-400/5 rounded-full blur-3xl pointer-events-none"></div>
       </div>
     </section>
   </main>
