@@ -1,9 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import PageHeader from "../components/PageHeader.astro";
-// 1. VI MÅ IMPORTERE ASTRO IMAGE-KOMPONENTEN OG BILDET
 import { Image } from "astro:assets";
+// Importerer alle bildene vi trenger
 import ansatteImage from "../assets/images/ansatte.png";
+import aageImage from "../assets/images/aage.png";
+import steinarImage from "../assets/images/steinar.png";
 
 const title = "Om oss | Comino Web";
 const description =
@@ -14,7 +16,8 @@ const description =
   <main
     class="bg-page-light dark:bg-page-dark transition-colors duration-500 min-h-screen"
   >
-    <section class="container mx-auto px-6 pt-24 mt-20 pb-16">
+    {/* HEADER SEKSJON */}
+    <section class="container mx-auto px-6 pt-24 mt-20 pb-10">
       <PageHeader
         preTitle="Profesjonelt håndverk"
         title="Om"
@@ -23,10 +26,31 @@ const description =
       />
     </section>
 
+    {/* STORT BILDE AV ANSATTE - Flyttet hit */}
+    <section class="container mx-auto px-6 mb-24">
+       <div class="relative group max-w-5xl mx-auto mt-0">
+          {/* Dekorativ glød bak bildet */}
+          <div class="absolute -inset-4 bg-linear-to-r from-primary/20 to-blue-500/20 dark:from-primary/10 dark:to-blue-500/10 rounded-[3rem] blur-2xl opacity-50 group-hover:opacity-80 transition duration-1000"></div>
+          
+          {/* Selve bildet i en ramme */}
+          <div class="relative aspect-video rounded-[2.5rem] overflow-hidden border border-slate-200 dark:border-slate-800 shadow-2xl bg-white dark:bg-slate-900">
+            <Image
+              src={ansatteImage}
+              alt="Åge og Steinar i Comino Web"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            {/* Subtilt overlay for å blande bildet bedre inn i dark mode */}
+            <div class="absolute inset-0 bg-primary/5 dark:bg-primary/10 mix-blend-overlay pointer-events-none"></div>
+          </div>
+        </div>
+    </section>
+
+    {/* HOVEDINNHOLD */}
     <section class="container mx-auto px-6 py-12">
       <div class="max-w-5xl mx-auto">
-        {/* Hovedseksjon: Fokus på koding */}
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center mb-24">
+        
+        {/* Intro-tekst og sitat */}
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center mb-32">
           <div class="lg:col-span-7">
             <h2
               class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-6 italic"
@@ -80,42 +104,21 @@ const description =
           </div>
         </div>
 
-        {/* 2. NY BILDE-SEKSJON HER */}
-        <div class="my-32 relative group max-w-4xl mx-auto">
-          {/* Dekorativ glød bak bildet (samme stil som Hero) */}
-          <div class="absolute -inset-4 bg-linear-to-r from-primary/20 to-blue-500/20 dark:from-primary/10 dark:to-blue-500/10 rounded-[3rem] blur-2xl opacity-50 group-hover:opacity-80 transition duration-1000"></div>
-          
-          {/* Selve bildet i en ramme */}
-          <div class="relative aspect-video rounded-[2.5rem] overflow-hidden border border-slate-200 dark:border-slate-800 shadow-2xl bg-white dark:bg-slate-900">
-            <Image
-              src={ansatteImage}
-              alt="Åge og Steinar i Comino Web"
-              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-            {/* Subtilt overlay for å blande bildet bedre inn i dark mode */}
-            <div class="absolute inset-0 bg-primary/5 dark:bg-primary/10 mix-blend-overlay pointer-events-none"></div>
-          </div>
-        </div>
-
-        {/* Team-seksjon */}
+        {/* Team-seksjon med portrettbilder */}
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-32">
+          {/* ÅGE sitt kort */}
           <div
-            class="group p-10 rounded-[2.5rem] bg-white dark:bg-slate-800/30 border border-slate-200 dark:border-slate-800/60 transition-all hover:shadow-2xl"
+            class="group p-10 rounded-[2.5rem] bg-white dark:bg-slate-800/30 border border-slate-200 dark:border-slate-800/60 transition-all hover:shadow-2xl relative overflow-hidden"
           >
-            <div
-              class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-blue-50 dark:bg-slate-800 text-primary mb-6"
-            >
-              <svg
-                class="w-6 h-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                ><path
-                  stroke-width="2"
-                  d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2z"
-                ></path></svg
-              >
-            </div>
+             <div class="mb-8 relative">
+                <div class="absolute inset-0 bg-primary/20 blur-2xl rounded-full scale-90 group-hover:scale-110 transition-transform duration-500"></div>
+                <Image 
+                  src={aageImage} 
+                  alt="Portrett av Åge" 
+                  class="w-32 h-32 rounded-full border-4 border-white dark:border-slate-700 shadow-lg object-cover relative z-10 group-hover:scale-105 transition-transform duration-300"
+                />
+             </div>
+            
             <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">
               Åge
             </h3>
@@ -131,23 +134,18 @@ const description =
             </p>
           </div>
 
+          {/* STEINAR sitt kort */}
           <div
-            class="group p-10 rounded-[2.5rem] bg-white dark:bg-slate-800/30 border border-slate-200 dark:border-slate-800/60 transition-all hover:shadow-2xl"
+            class="group p-10 rounded-[2.5rem] bg-white dark:bg-slate-800/30 border border-slate-200 dark:border-slate-800/60 transition-all hover:shadow-2xl relative overflow-hidden"
           >
-            <div
-              class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-blue-50 dark:bg-slate-800 text-primary mb-6"
-            >
-              <svg
-                class="w-6 h-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                ><path
-                  stroke-width="2"
-                  d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 00-1 1v1a2 2 0 11-4 0v-1a1 1 0 00-1-1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"
-                ></path></svg
-              >
-            </div>
+            <div class="mb-8 relative">
+                <div class="absolute inset-0 bg-primary/20 blur-2xl rounded-full scale-90 group-hover:scale-110 transition-transform duration-500"></div>
+                <Image 
+                  src={steinarImage} 
+                  alt="Portrett av Steinar" 
+                  class="w-32 h-32 rounded-full border-4 border-white dark:border-slate-700 shadow-lg object-cover relative z-10 group-hover:scale-105 transition-transform duration-300"
+                />
+             </div>
             <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">
               Steinar
             </h3>
@@ -163,7 +161,7 @@ const description =
           </div>
         </div>
 
-        {/* Verdi-seksjon */}
+        {/* Verdi-seksjon (uendret) */}
         <div
           class="bg-slate-900 dark:bg-slate-900/40 border border-slate-800 rounded-[3rem] p-10 md:p-16 mb-32 relative overflow-hidden"
         >
@@ -207,7 +205,7 @@ const description =
           </div>
         </div>
 
-        {/* Enkel CTA */}
+        {/* Enkel CTA (uendret) */}
         <div class="text-center pb-20">
           <h2
             class="text-3xl font-bold text-slate-900 dark:text-white mb-6 italic"
