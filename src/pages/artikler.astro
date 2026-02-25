@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 import PageHeader from "../components/PageHeader.astro";
+import CTA from "../components/CTA.astro";
 
 const allArticles = await getCollection("articles", ({ data }) => {
   // Vis alle i utvikling, men skjul kladder i produksjon
@@ -123,5 +124,12 @@ const formatDate = (date: Date) => {
         }
       </div>
     </section>
+    <CTA
+      title="Fra teori til teknisk realitet"
+      description="Vi deler jevnlig vår innsikt om moderne webutvikling, men vi trives aller best når vi får bruke denne kunnskapen i praksis. Ta kontakt for en uforpliktende prat om ditt neste prosjekt."
+      ctaText="Start en samtale"
+      secondaryText="Se våre tjenester"
+      secondaryLink="/tjenester"
+    />
   </main>
 </Layout>

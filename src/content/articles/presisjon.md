@@ -1,11 +1,14 @@
 ---
-title: Presisjon som fagfelt – derfor koder vi fra bunnen av
-description: I Comino Web kombinerer vi teknisk utvikling med en unik sans for detaljer. Les hvorfor vi koder nettsider med kirurgisk nøyaktighet.
+title: "Presisjon som fagfelt – derfor koder vi fra bunnen av"
+description: "I Comino Web kombinerer vi teknisk utvikling med en unik sans for detaljer. Les hvorfor vi koder nettsider med kirurgisk nøyaktighet."
 publishDate: 2026-02-23
 image: "../../assets/images/webDev.jpg"
-tags: [Om oss, Comino Web, Webutvikling, Presisjon, Håndverk]
-category: Om oss
+tags: ["Om oss", "Comino Web", "Webutvikling", "Presisjon", "Håndverk"]
 draft: false
+cta:
+  title: "Trenger du en nettside med ekte håndverk?"
+  description: "Ta kontakt for en profesjonell vurdering av ditt prosjekt."
+  buttonText: "Bestill møte"
 ---
 
 I Comino Web er vi først og fremst utviklere med lidenskap for solid håndverk. Vi har spesialisert oss på å bygge lynraske, skreddersydde nettsider fordi vi mener at hyllevare sjelden er godt nok for bedrifter som vil opp og frem.
@@ -29,7 +32,3 @@ Vi i Comino Web – **Åge** og **Steinar** – er her for å være din faste sa
 
 **Vår leveranse til deg er enkel:**
 Gjennomtenkt design, feilfri kildekode og en digital tilstedeværelse som fungerer like presist som et velsmurt orkester.
-
----
-
-**Trenger din bedrift en nettside bygget med ekte håndverk? Ta kontakt for en profesjonell vurdering av ditt prosjekt.**

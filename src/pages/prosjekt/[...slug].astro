@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import { Image } from "astro:assets";
+import CTA from "../../components/CTA.astro";
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
@@ -16,26 +17,34 @@ const { Content } = await entry.render();
 ---
 
 <Layout title={`${entry.data.title} - Comino Web`}>
-  <main class="pt-32 pb-20 bg-page-light dark:bg-page-dark transition-colors duration-500 min-h-screen">
+  <main
+    class="pt-32 pb-20 bg-page-light dark:bg-page-dark transition-colors duration-500 min-h-screen"
+  >
     <article class="container mx-auto px-6 max-w-5xl">
-      
       <div class="grid lg:grid-cols-2 gap-12 items-center mb-16 md:mb-24">
         <div transition:animate="fade">
           {/* Brødsmulesti / Kategori */}
-          <span class="text-primary dark:text-primary-light font-bold uppercase tracking-[0.2em] text-xs mb-4 block">
+          <span
+            class="text-primary dark:text-primary-light font-bold uppercase tracking-[0.2em] text-xs mb-4 block"
+          >
             Utvalgt Case
           </span>
-          
-          <h1 class="text-5xl md:text-6xl font-bold text-slate-900 dark:text-white leading-[1.1] mb-6 tracking-tight">
+
+          <h1
+            class="text-5xl md:text-6xl font-bold text-slate-900 dark:text-white leading-[1.1] mb-6 tracking-tight"
+          >
             {entry.data.title}<span class="text-primary italic">.</span>
           </h1>
-          
-          <p class="text-xl text-slate-600 dark:text-slate-400 mb-8 leading-relaxed font-medium">
+
+          <p
+            class="text-xl text-slate-600 dark:text-slate-400 mb-8 leading-relaxed font-medium"
+          >
             {entry.data.description}
           </p>
 
           <div class="flex flex-wrap gap-3">
-            {entry.data.technologies.map((tech) => (
+            {
+              entry.data.technologies.map((tech) => (
                 <span class="px-4 py-2 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-300 rounded-xl text-sm font-bold border border-slate-200 dark:border-slate-800 shadow-sm">
                   {tech}
                 </span>
@@ -45,7 +54,9 @@ const { Content } = await entry.render();
         </div>
 
         {/* Bildet som animerer fra forrige side */}
-        <div class="aspect-video overflow-hidden rounded-[2.5rem] shadow-2xl shadow-blue-900/10 dark:shadow-none bg-slate-200 dark:bg-slate-800">
+        <div
+          class="aspect-video overflow-hidden rounded-[2.5rem] shadow-2xl shadow-blue-900/10 dark:shadow-none bg-slate-200 dark:bg-slate-800"
+        >
           <Image
             src={entry.data.thumbnail}
             alt={entry.data.title}
@@ -56,31 +67,53 @@ const { Content } = await entry.render();
       </div>
 
       <div class="max-w-3xl">
-         <div class="prose prose-lg prose-slate dark:prose-invert 
+        <div
+          class="prose prose-lg prose-slate dark:prose-invert
             prose-headings:text-slate-900 dark:prose-headings:text-white
             prose-headings:italic prose-headings:font-bold
             prose-strong:text-primary dark:prose-strong:text-primary-light
             prose-a:text-primary dark:prose-a:text-primary-light
             prose-img:rounded-4xl
             prose-img:shadow-xl
-            transition-colors duration-500">
+            transition-colors duration-500"
+        >
           <Content />
         </div>
       </div>
 
-      <footer class="mt-24 pt-10 border-t border-slate-200 dark:border-slate-800">
+      <footer
+        class="mt-24 pt-10 border-t border-slate-200 dark:border-slate-800"
+      >
         <a
           href="/prosjekt"
           class="group inline-flex items-center font-bold text-primary dark:text-primary-light hover:text-primary-hover transition-all"
         >
-          <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4 group-hover:bg-primary group-hover:text-white transition-all">
-            <svg class="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          <div
+            class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4 group-hover:bg-primary group-hover:text-white transition-all"
+          >
+            <svg
+              class="w-5 h-5 transform group-hover:-translate-x-1 transition-transform"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 19l-7-7 7-7"></path>
             </svg>
           </div>
           Tilbake til oversikten
         </a>
       </footer>
     </article>
+    <CTA
+      title="Klar for å bygge ditt neste flaggskip?"
+      description="Vi brenner for prosjekter der ytelse og presisjon står i sentrum. Har du en idé som krever stødig håndverk og kompromissløs koding?"
+      ctaText="Start et prosjekt"
+      secondaryText="Se våre tjenester"
+      secondaryLink="/tjenester"
+    />
   </main>
 </Layout>

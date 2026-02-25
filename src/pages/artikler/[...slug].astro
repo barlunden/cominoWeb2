@@ -1,28 +1,29 @@
 ---
-import { getCollection } from 'astro:content';
-import Layout from '../../layouts/Layout.astro';
-import { Image } from 'astro:assets';
-
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import CTA from "../../components/CTA.astro";
 export async function getStaticPaths() {
-  const allArticles = await getCollection('articles', ({ data }) => {
+  const allArticles = await getCollection("articles", ({ data }) => {
     return import.meta.env.PROD ? !data.draft : true;
   });
-  
-  const sortedArticles = allArticles.sort((a, b) => 
-    b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+
+  const sortedArticles = allArticles.sort(
+    (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
   );
 
   return sortedArticles.map((entry, index) => {
     // Finn neste og førre (hugs at lista er sortert nyast -> eldast)
     const next = index > 0 ? sortedArticles[index - 1] : null;
-    const prev = index < sortedArticles.length - 1 ? sortedArticles[index + 1] : null;
+    const prev =
+      index < sortedArticles.length - 1 ? sortedArticles[index + 1] : null;
 
     return {
       params: { slug: entry.slug },
-      props: { 
+      props: {
         entry,
         next,
-        prev
+        prev,
       },
     };
   });
@@ -32,85 +33,133 @@ const { entry, next, prev } = Astro.props;
 const { Content } = await entry.render();
 
 const formatDate = (date: Date) => {
-  return new Intl.DateTimeFormat('nb-NO', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
+  return new Intl.DateTimeFormat("nb-NO", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
   }).format(date);
 };
 ---
 
 <Layout title={`${entry.data.title} - Comino Web`}>
-  <main class="pt-32 pb-20 bg-page-light dark:bg-page-dark transition-colors duration-500 min-h-screen">
+  <main
+    class="pt-32 pb-20 bg-page-light dark:bg-page-dark transition-colors duration-500 min-h-screen"
+  >
     <article class="container mx-auto px-6 max-w-3xl">
       <header class="mb-12 text-center">
-        <div class="flex items-center justify-center gap-3 text-slate-500 dark:text-slate-400 mb-6 font-medium">
+        <div
+          class="flex items-center justify-center gap-3 text-slate-500 dark:text-slate-400 mb-6 font-medium"
+        >
           <time datetime={entry.data.publishDate.toISOString()}>
             {formatDate(entry.data.publishDate)}
           </time>
           <span class="w-1.5 h-1.5 rounded-full bg-primary/30"></span>
-          <span class="text-primary dark:text-primary-light font-bold uppercase tracking-widest text-[10px]">
+          <span
+            class="text-primary dark:text-primary-light font-bold uppercase tracking-widest text-[10px]"
+          >
             {entry.data.tags[0]}
           </span>
         </div>
-        
-        <h1 class="text-4xl md:text-6xl font-bold text-slate-900 dark:text-white leading-[1.1] mb-12 italic tracking-tight">
+
+        <h1
+          class="text-4xl md:text-6xl font-bold text-slate-900 dark:text-white leading-[1.1] mb-12 italic tracking-tight"
+        >
           {entry.data.title}
         </h1>
 
-        {entry.data.image && (
-          <div class="rounded-[2.5rem] overflow-hidden shadow-2xl shadow-blue-900/10 dark:shadow-none mb-16 aspect-video bg-slate-200 dark:bg-slate-800 border border-slate-100 dark:border-slate-800">
-            <Image 
-              src={entry.data.image} 
-              alt={entry.data.title}
-              transition:name={`img-${entry.slug}`}
-              class="w-full h-full object-cover rounded-[2.5rem]" 
-            />
-          </div>
-        )}
+        {
+          entry.data.image && (
+            <div class="rounded-[2.5rem] overflow-hidden shadow-2xl shadow-blue-900/10 dark:shadow-none mb-16 aspect-video bg-slate-200 dark:bg-slate-800 border border-slate-100 dark:border-slate-800">
+              <Image
+                src={entry.data.image}
+                alt={entry.data.title}
+                transition:name={`img-${entry.slug}`}
+                class="w-full h-full object-cover rounded-[2.5rem]"
+              />
+            </div>
+          )
+        }
       </header>
 
       {/* Selve innholdet */}
-      <div class="prose prose-lg prose-slate dark:prose-invert max-w-none 
+      <div
+        class="prose prose-lg prose-slate dark:prose-invert max-w-none
         prose-headings:text-slate-900 dark:prose-headings:text-white
         prose-headings:italic prose-headings:font-bold
         prose-strong:text-primary dark:prose-strong:text-primary-light
         prose-a:text-primary dark:prose-a:text-primary-light
         prose-img:rounded-4xl
-        transition-colors duration-500">
+        transition-colors duration-500"
+      >
         <Content />
       </div>
 
       {/* Relaterte artikler / Footer */}
-      <footer class="mt-24 pt-12 border-t border-slate-200 dark:border-slate-800">
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-    {prev && (
-      <a href={`/artikler/${prev.slug}`} class="group p-8 rounded-3xl bg-white dark:bg-slate-800/30 border border-slate-200 dark:border-slate-800 hover:border-primary transition-all">
-        <span class="text-[10px] uppercase tracking-widest text-slate-500 mb-2 block">Førre artikkel</span>
-        <h4 class="font-bold text-xl text-slate-900 dark:text-white group-hover:text-primary transition-colors line-clamp-2">{prev.data.title}</h4>
-      </a>
-    )}
-    
-    {next && (
-      <a href={`/artikler/${next.slug}`} class="group p-8 rounded-3xl bg-white dark:bg-slate-800/30 border border-slate-200 dark:border-slate-800 hover:border-primary transition-all md:text-right">
-        <span class="text-[10px] uppercase tracking-widest text-slate-500 mb-2 block">Neste artikkel</span>
-        <h4 class="font-bold text-xl text-slate-900 dark:text-white group-hover:text-primary transition-colors line-clamp-2">{next.data.title}</h4>
-      </a>
-    )}
-  </div>
+      <footer
+        class="mt-24 pt-12 border-t border-slate-200 dark:border-slate-800"
+      >
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+          {
+            prev && (
+              <a
+                href={`/artikler/${prev.slug}`}
+                class="group p-8 rounded-3xl bg-white dark:bg-slate-800/30 border border-slate-200 dark:border-slate-800 hover:border-primary transition-all"
+              >
+                <span class="text-[10px] uppercase tracking-widest text-slate-500 mb-2 block">
+                  Forige artikkel
+                </span>
+                <h4 class="font-bold text-xl text-slate-900 dark:text-white group-hover:text-primary transition-colors line-clamp-2">
+                  {prev.data.title}
+                </h4>
+              </a>
+            )
+          }
+
+          {
+            next && (
+              <a
+                href={`/artikler/${next.slug}`}
+                class="group p-8 rounded-3xl bg-white dark:bg-slate-800/30 border border-slate-200 dark:border-slate-800 hover:border-primary transition-all md:text-right"
+              >
+                <span class="text-[10px] uppercase tracking-widest text-slate-500 mb-2 block">
+                  Neste artikkel
+                </span>
+                <h4 class="font-bold text-xl text-slate-900 dark:text-white group-hover:text-primary transition-colors line-clamp-2">
+                  {next.data.title}
+                </h4>
+              </a>
+            )
+          }
+        </div>
 
         <a
           href="/artikler"
           class="group inline-flex items-center font-bold text-primary dark:text-primary-light hover:text-primary-hover transition-all"
         >
-          <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4 group-hover:bg-primary group-hover:text-white transition-all">
-            <svg class="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          <div
+            class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4 group-hover:bg-primary group-hover:text-white transition-all"
+          >
+            <svg
+              class="w-5 h-5 transform group-hover:-translate-x-1 transition-transform"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 19l-7-7 7-7"></path>
             </svg>
           </div>
           Tilbake til oversikten
         </a>
       </footer>
     </article>
+    <CTA
+      title={entry.data.cta?.title || "Fra teknisk innsikt til digital realitet"}
+  description={entry.data.cta?.description || "Likte du det du leste? Vi omsetter moderne web-teori til lynrask kildekode hver eneste dag. La oss ta en prat om hvordan vi kan bruke denne teknologien for din bedrift."}
+  ctaText={entry.data.cta?.buttonText || "Diskuter teknologi med oss"}
+    />
   </main>
 </Layout>

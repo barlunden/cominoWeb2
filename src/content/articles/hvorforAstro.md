@@ -5,6 +5,10 @@ publishDate: 2026-01-19
 image: "../../assets/images/lightningSpeed.png"
 tags: ["Teknologi", "SEO"]
 draft: false
+cta:
+  title: "Klar for din neste nettside?"
+  description: "Vi starter alltid med Astro og tilpasser løsningen til dine behov."
+  buttonText: "Ta kontakt"
 ---
 
 ## Vi starter alltid med Astro – her er hvorfor
