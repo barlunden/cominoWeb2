@@ -4,30 +4,31 @@ import Layout from '../../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 
 export async function getStaticPaths() {
-  const articles = await getCollection('articles', ({ data }) => {
-    return import.meta.env.PROD ? data.draft !== true : true;
+  const allArticles = await getCollection('articles', ({ data }) => {
+    return import.meta.env.PROD ? !data.draft : true;
   });
   
-  const sortedArticles = articles.sort((a, b) => 
+  const sortedArticles = allArticles.sort((a, b) => 
     b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
   );
 
   return sortedArticles.map((entry, index) => {
-    const related = sortedArticles
-      .filter(item => item.slug !== entry.slug && item.data.tags.some(tag => entry.data.tags.includes(tag)))
-      .slice(0, 2); // Vi viser 2 relaterte for å holde det ryddig
+    // Finn neste og førre (hugs at lista er sortert nyast -> eldast)
+    const next = index > 0 ? sortedArticles[index - 1] : null;
+    const prev = index < sortedArticles.length - 1 ? sortedArticles[index + 1] : null;
 
     return {
       params: { slug: entry.slug },
       props: { 
         entry,
-        related
+        next,
+        prev
       },
     };
   });
 }
 
-const { entry, related } = Astro.props;
+const { entry, next, prev } = Astro.props;
 const { Content } = await entry.render();
 
 const formatDate = (date: Date) => {
@@ -82,18 +83,21 @@ const formatDate = (date: Date) => {
 
       {/* Relaterte artikler / Footer */}
       <footer class="mt-24 pt-12 border-t border-slate-200 dark:border-slate-800">
-        {related.length > 0 && (
-          <div class="mb-16">
-            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-8 italic">Les mer om {entry.data.tags[0]}</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {related.map(post => (
-                <a href={`/artikler/${post.slug}`} class="group p-6 rounded-3xl bg-white dark:bg-slate-800/30 border border-slate-200 dark:border-slate-800 hover:border-primary/30 transition-all">
-                  <h4 class="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">{post.data.title}</h4>
-                </a>
-              ))}
-            </div>
-          </div>
-        )}
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+    {prev && (
+      <a href={`/artikler/${prev.slug}`} class="group p-8 rounded-3xl bg-white dark:bg-slate-800/30 border border-slate-200 dark:border-slate-800 hover:border-primary transition-all">
+        <span class="text-[10px] uppercase tracking-widest text-slate-500 mb-2 block">Førre artikkel</span>
+        <h4 class="font-bold text-xl text-slate-900 dark:text-white group-hover:text-primary transition-colors line-clamp-2">{prev.data.title}</h4>
+      </a>
+    )}
+    
+    {next && (
+      <a href={`/artikler/${next.slug}`} class="group p-8 rounded-3xl bg-white dark:bg-slate-800/30 border border-slate-200 dark:border-slate-800 hover:border-primary transition-all md:text-right">
+        <span class="text-[10px] uppercase tracking-widest text-slate-500 mb-2 block">Neste artikkel</span>
+        <h4 class="font-bold text-xl text-slate-900 dark:text-white group-hover:text-primary transition-colors line-clamp-2">{next.data.title}</h4>
+      </a>
+    )}
+  </div>
 
         <a
           href="/artikler"

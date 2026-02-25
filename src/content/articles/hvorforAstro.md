@@ -1,28 +1,46 @@
 ---
-title: "Hvorfor velge Astro for din neste nettside?"
-description: "Vi ser på fordelene med Zero-JS arkitektur og hvordan det påvirker SEO."
+title: "Hvorfor vi starter alle våre prosjekter med Astro"
+description: "Rask, SEO-vennlig og fleksibel – slik bygger vi fremtidsrettede nettsider som holder mål over tid."
 publishDate: 2026-01-19
 image: "../../assets/images/lightningSpeed.png"
 tags: ["Teknologi", "SEO"]
 draft: false
 ---
 
-## Skreddersydd løsninger for ekte behov
+## Vi starter alltid med Astro – her er hvorfor
 
-Når du koder en nettside fra bunnen av, får du kontroll over hver minste detalj.[web:1] Du slipper å kjempe mot begrensninger i ferdiglagde maler og tunge pagebuildere, og kan tilpasse funksjoner og utseende til akkurat det du eller kunden trenger.[web:1]
+Hos Comino Web begynner alle våre nettsideprosjekter med Astro som grunnlag. Det er en moderne plattform som kombinerer fart, fleksibilitet og pålitelighet på en måte som passer perfekt for de fleste virksomheter. Her er de viktigste grunnene til at vi velger dette som standard utgangspunkt.
 
-## Bedre ytelse og vedlikehold
+## Lynrask lastetid fra dag én
 
-Koden din blir ofte både raskere og enklere å vedlikeholde når du skriver alt selv.[web:1] Du unngår unødvendig ballast fra overflødige plugins og skript, og får kortere lastetider og lavere ressursbruk.[web:1]
+Astro er laget for ytelse: Den sender minimalt med JavaScript til nettleseren og leverer ferdig HTML som vises øyeblikkelig. Det gir kortere ventetid på mobil og tregere nett, bedre brukeropplevelse og høyere score i Google PageSpeed.
 
-## Ingen skjulte overraskelser
+Raske sider holder på besøkende lenger og gir et profesjonelt inntrykk – uten tunge plugins eller sidebyggere.
 
-Når du har bygget alt fra grunnen av, vet du også nøyaktig hva nettstedet ditt består av. Du risikerer ikke at et tema eller plugin plutselig slutter å fungere etter en oppdatering.[web:1]
+## Topp SEO rett ut av boksen
 
-## Eierskap og læring
+Google elsker enkle, rene sider som den kan indeksere raskt. Astro genererer statisk HTML som søkemotorene leser direkte, noe som gir bedre synlighet og rangering enn mange tradisjonelle løsninger.
 
-Å kode fra bunnen gir deg et langt dypere forhold til prosjektet.[web:1] Du lærer mer, og får eierskap til hver beslutning og linje kode – og ikke minst er det morsommere å se resultatet vokse fram![web:1]
+Du får en solid teknisk grunnmur for innhold, nøkkelord og lenker – uten ekstra arbeid for å fikse hastighet eller struktur.
 
----
+## Fleksibel og fremtidsrettet
 
-Vil du ha en skreddersydd nettside bygget fra grunnen? Ta kontakt med oss i Comino Web – vi elsker å lage nettsider som passer akkurat for deg![web:1]
+Astro låser deg ikke til én teknologi. Vi kan blande React, Vue eller andre rammeverk der du trenger interaktivitet, mens resten forblir superenkelt og raskt. Det betyr frihet til å legge til nye funksjoner senere, uten å rive hele siden.
+
+Din investering i nettsiden varer lenger – innhold og struktur kan utvikles videre når behovene endres.
+
+## Mindre vedlikehold, mer kontroll
+
+Med Astro slipper vi avhengighet av et hav av temaer og plugins som må oppdateres. Vi bygger med kontrollert kode, noe som gir færre feil, krasj og nedetid etter oppdateringer.
+
+Det betyr roligere drift og mer tid til å fokusere på innhold og forretning, i stedet for teknisk feilsøking.
+
+## Perfekt utgangspunkt for dine behov
+
+Astro passer spesielt godt til:
+
+- Bedriftsnettsider med fokus på informasjon og konvertering.
+- Landingssider og blogger der SEO og fart teller.
+- Prosjekter som skal vokse over tid, med rom for nye funksjoner.
+
+Er du klar for en nettside som er rask, synlig og klar for fremtiden? Ta kontakt med oss i Comino Web for en uforpliktende prat – vi starter med Astro og tilpasser resten til akkurat deg.
