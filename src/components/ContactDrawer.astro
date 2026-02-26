@@ -4,7 +4,7 @@
 
 <div
   id="contact-drawer"
-  class="fixed inset-0 z-[200] invisible pointer-events-none transition-all duration-300"
+  class="fixed inset-0 z-200 invisible pointer-events-none transition-all duration-300"
   aria-labelledby="drawer-title"
   role="dialog"
   aria-modal="true"
@@ -81,7 +81,8 @@
       <form 
         id="drawer-form" 
         name="contact-drawer" 
-        method="POST" 
+        method="POST"
+        action="/takk"
         data-netlify="true" 
         netlify-honeypot="bot-field"
         class="space-y-6 mt-4"
