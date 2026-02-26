@@ -4,7 +4,7 @@
 
 <div
   id="contact-drawer"
-  class="fixed inset-0 z-200 invisible pointer-events-none transition-all duration-300"
+  class="fixed inset-0 z-[200] invisible pointer-events-none transition-all duration-300"
   aria-labelledby="drawer-title"
   role="dialog"
   aria-modal="true"
@@ -25,7 +25,7 @@
     <div
       class="px-8 pt-10 pb-6 flex items-center justify-between relative overflow-hidden"
     >
-      {/* Subtilt rutenett i bakgrunnen av headeren */}
+      {/* Subtilt rutenett i bakgrunnen */}
       <svg
         class="absolute inset-0 h-full w-full pointer-events-none opacity-[0.05] dark:opacity-[0.1]"
         xmlns="http://www.w3.org/2000/svg"
@@ -76,7 +76,22 @@
 
     {/* Innhold / Skjema */}
     <div class="flex-1 overflow-y-auto px-8 pb-10">
-      <form id="drawer-form" class="space-y-6 mt-4">
+      
+      {/* NETLIFY FORM START */}
+      <form 
+        id="drawer-form" 
+        name="contact-drawer" 
+        method="POST" 
+        data-netlify="true" 
+        netlify-honeypot="bot-field"
+        class="space-y-6 mt-4"
+      >
+        {/* Skjulte felt for Netlify-funksjonalitet */}
+        <input type="hidden" name="form-name" value="contact-drawer" />
+        <p class="hidden">
+          <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+        </p>
+
         <div class="space-y-2">
           <label
             for="drawer-name"
@@ -86,6 +101,7 @@
           <input
             type="text"
             id="drawer-name"
+            name="name"
             required
             class="w-full px-5 py-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/50 transition-all outline-none"
             placeholder="Ditt navn"
@@ -101,6 +117,7 @@
           <input
             type="email"
             id="drawer-email"
+            name="email"
             required
             class="w-full px-5 py-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/50 transition-all outline-none"
             placeholder="din@epost.no"
@@ -117,6 +134,7 @@
           <input
             type="text"
             id="drawer-subject"
+            name="subject"
             required
             class="w-full px-5 py-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/50 transition-all outline-none"
             placeholder="Eks: Ny nettside, teknisk hjelp..."
@@ -131,6 +149,7 @@
           >
           <textarea
             id="drawer-message"
+            name="message"
             required
             rows="4"
             class="w-full px-5 py-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/50 transition-all outline-none resize-none"
@@ -152,12 +171,11 @@
         </button>
       </form>
 
-      {/* Ny tekst under skjemaet */}
+      {/* Info-seksjon under skjema */}
       <div class="mt-10 space-y-8">
         <div
           class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800/60 relative overflow-hidden group"
         >
-          {/* Subtilt dekor-element */}
           <div
             class="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full blur-2xl -mr-12 -mt-12"
           >
@@ -225,7 +243,6 @@
     const openDrawer = (e: Event) => {
       e.preventDefault();
       drawer.classList.remove("invisible", "pointer-events-none");
-      // Liten timeout for å sikre at 'invisible' er borte før animasjonen starter
       setTimeout(() => {
         overlay.classList.add("opacity-100");
         panel.classList.remove("translate-x-full");
@@ -247,13 +264,11 @@
     closeBtn.addEventListener("click", closeDrawer);
     overlay.addEventListener("click", closeDrawer);
 
-    // Lukk på Escape
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") closeDrawer();
     });
   };
 
   setupDrawer();
-  // For Astro View Transitions
   document.addEventListener("astro:after-swap", setupDrawer);
 </script>
