@@ -7,21 +7,20 @@ interface Props {
   ctaLink?: string;
   secondaryText?: string;
   secondaryLink?: string;
-  // Vi fjernar 'tag' frå Props sidan vi no brukar spesifikk tekst
 }
 
 const { 
   title, 
   description, 
   ctaText = "Kontakt oss", 
-  ctaLink = "/kontakt",
+  ctaLink = "#", // Vi endrer default fra /kontakt til # siden vi bruker drawer
   secondaryText,
   secondaryLink,
 } = Astro.props;
 
-// ENKEL OG TYDELEG FALLBACK-LOGIKK
+// BOKMÅL FALLBACK-LOGIKK
 const displayTitle = title || "Klar for å realisere neste store prosjekt?";
-const displayDescription = description || "Uansett om du treng ein lynrask bedriftsside eller ein kompleks webapplikasjon, står vi klare til å hjelpe deg med moderne teknologi og rådgivning.";
+const displayDescription = description || "Uansett om du trenger en lynrask bedriftsside eller en kompleks webapplikasjon, står vi klare til å hjelpe deg med moderne teknologi og rådgivning.";
 ---
 
 <section class="bg-page-light dark:bg-page-dark transition-colors duration-500">
@@ -34,7 +33,7 @@ const displayDescription = description || "Uansett om du treng ein lynrask bedri
              border border-slate-200 dark:border-slate-800 
              transition-all duration-500 group"
     >
-      {/* Rutenett og lyskilder (behalt frå før) */}
+      {/* SVG Rutenett (uendret) */}
       <svg class="absolute inset-0 h-full w-full pointer-events-none opacity-[0.07] dark:opacity-[0.15]" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <pattern id="cta-grid" width="40" height="40" patternUnits="userSpaceOnUse">
@@ -54,7 +53,14 @@ const displayDescription = description || "Uansett om du treng ein lynrask bedri
         </p>
 
         <div class="flex flex-col sm:flex-row gap-4">
-          <a href={ctaLink} class="inline-flex items-center justify-center bg-primary hover:bg-primary-hover transition-all text-white px-8 py-4 rounded-xl font-bold hover:scale-105 shadow-lg shadow-primary/20">
+          {/* HOVEDKNAPP: Her legger vi til 'open-contact-drawer' klassen */}
+          <a 
+            href={ctaLink} 
+            class:list={[
+              "inline-flex items-center justify-center bg-primary hover:bg-primary-hover transition-all text-white px-8 py-4 rounded-xl font-bold hover:scale-105 shadow-lg shadow-primary/20",
+              ctaLink === "#" || ctaLink === "/kontakt" ? "open-contact-drawer" : ""
+            ]}
+          >
             {ctaText}
             <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
