@@ -88,8 +88,8 @@ const { title, description, thumbnail, technologies, url } = project.data;
               </a>
             )}
             
-            <a href={`/prosjekt/${project.slug}`} class="inline-flex items-center gap-2 font-bold text-slate-600 dark:text-slate-400 hover:text-primary transition-colors py-4 group">
-              Les caset
+            <a href="/prosjekt" class="inline-flex items-center gap-2 font-bold text-slate-600 dark:text-slate-400 hover:text-primary transition-colors py-4 group">
+              Prosjekter
               <svg class="w-5 h-5 group-hover:translate-x-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
@@ -98,12 +98,7 @@ const { title, description, thumbnail, technologies, url } = project.data;
         </div>
 
       </div>
-      {/* Lenke til alle prosjekt */}
-      <div class="mt-20 text-center">
-        <a href="/prosjekt" class="inline-flex items-center gap-2 text-sm font-bold text-slate-400 hover:text-primary transition-colors uppercase tracking-[0.2em]">
-          <span>+</span> Se flere prosjekt
-        </a>
-      </div>
+      
     </div>
   </div>
 </section>
