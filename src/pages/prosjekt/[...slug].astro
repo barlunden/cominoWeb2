@@ -16,16 +16,18 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
+
+// Hentar ut url frå frontmatter
+const { title, description, thumbnail, technologies, url } = entry.data;
 ---
 
-<Layout title={`${entry.data.title} - Comino Web`}>
+<Layout title={`${title} - Comino Web`}>
   <main
     class="pt-32 pb-20 bg-page-light dark:bg-page-dark transition-colors duration-500 min-h-screen"
   >
     <article class="container mx-auto px-6 max-w-5xl">
       <div class="grid lg:grid-cols-2 gap-12 items-center mb-16 md:mb-24">
         <div transition:animate="fade">
-          {/* Brødsmulesti / Kategori */}
           <span
             class="text-primary dark:text-primary-light font-bold uppercase tracking-[0.2em] text-xs mb-4 block"
           >
@@ -35,35 +37,49 @@ const { Content } = await entry.render();
           <h1
             class="text-5xl md:text-6xl font-bold text-slate-900 dark:text-white leading-[1.1] mb-6 tracking-tight"
           >
-            {entry.data.title}<span class="text-primary italic">.</span>
+            {title}<span class="text-primary italic">.</span>
           </h1>
 
           <p
             class="text-xl text-slate-600 dark:text-slate-400 mb-8 leading-relaxed font-medium"
           >
-            {entry.data.description}
+            {description}
           </p>
 
-          <div class="flex flex-wrap gap-3">
+          <div class="flex flex-wrap gap-3 mb-10">
             {
-              entry.data.technologies.map((tech) => (
+              technologies.map((tech) => (
                 <span class="px-4 py-2 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-300 rounded-xl text-sm font-bold border border-slate-200 dark:border-slate-800 shadow-sm">
                   {tech}
                 </span>
               ))
             }
           </div>
+
+          {/* EKSTERN LENKE - Plassert strategisk i helten */}
+          {url && (
+            <a 
+              href={url} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="inline-flex items-center justify-center gap-3 bg-primary text-white px-8 py-4 rounded-xl font-bold hover:scale-105 hover:shadow-xl hover:shadow-primary/20 transition-all group"
+            >
+              Besøk nettsiden
+              <svg class="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+          )}
         </div>
 
-        {/* Bildet som animerer fra forrige side */}
         <div
-          class="aspect-video overflow-hidden rounded-[2.5rem] shadow-2xl shadow-blue-900/10 dark:shadow-none bg-slate-200 dark:bg-slate-800"
+          class="aspect-video overflow-hidden rounded-[2.5rem] shadow-2xl shadow-blue-900/10 dark:shadow-none bg-slate-200 dark:bg-slate-800 border border-slate-200 dark:border-slate-800"
         >
           <Image
-            src={entry.data.thumbnail}
-            alt={entry.data.title}
+            src={thumbnail}
+            alt={title}
             transition:name={`img-${entry.slug}`}
-            class="w-full h-full object-cover rounded-[2.5rem]"
+            class="w-full h-full object-cover rounded-[2.5rem] transition-transform duration-700 hover:scale-105"
           />
         </div>
       </div>
@@ -110,6 +126,7 @@ const { Content } = await entry.render();
         </a>
       </footer>
     </article>
+    
     <CTA
       title="Klar for å bygge ditt neste flaggskip?"
       description="Vi brenner for prosjekter der ytelse og presisjon står i sentrum. Har du en idé som krever stødig håndverk og kompromissløs koding?"
