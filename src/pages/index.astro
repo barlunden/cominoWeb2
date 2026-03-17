@@ -2,24 +2,26 @@
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import Layout from "../layouts/Layout.astro";
-import Services from '../components/Services.astro';
-import WhyUs from '../components/WhyUs.astro';
-import CTA from '../components/CTA.astro';
+import Services from "../components/Services.astro";
+import WhyUs from "../components/WhyUs.astro";
+import CTA from "../components/CTA.astro";
 import Hero from "../components/Hero.astro";
+import FeaturedTeaser from "../components/FeaturedTeaser.astro";
 
-
-const allServices = await getCollection('services');
+const allServices = await getCollection("services");
 
 // Spesifiser typen i sort-funksjonen for å fjerne TypeScript-feilen
-const sortedServices = allServices.sort((a: CollectionEntry<'services'>, b: CollectionEntry<'services'>) => {
-  return (a.data.order ?? 0) - (b.data.order ?? 0);
-});
+const sortedServices = allServices.sort(
+  (a: CollectionEntry<"services">, b: CollectionEntry<"services">) => {
+    return (a.data.order ?? 0) - (b.data.order ?? 0);
+  },
+);
 
 // Formater data for komponenten
-const serviceItems = sortedServices.map((s: CollectionEntry<'services'>) => ({
+const serviceItems = sortedServices.map((s: CollectionEntry<"services">) => ({
   title: s.data.title,
   desc: s.data.description,
-  icon: s.data.icon ?? "" // Sikrer at icon alltid er en streng
+  icon: s.data.icon ?? "", // Sikrer at icon alltid er en streng
 }));
 ---
 
@@ -28,11 +30,12 @@ const serviceItems = sortedServices.map((s: CollectionEntry<'services'>) => ({
     <!-- Hero Section -->
     <Hero />
 
-  <!-- Features Section -->
-  <Services items={serviceItems} />
+    <!-- Features Section -->
+    <Services items={serviceItems} />
+    <FeaturedTeaser />
+    <WhyUs />
 
-  <WhyUs />
-
-  <!-- CTA Section -->
-  <CTA secondaryText="Se våre prosjekter" secondaryLink="/prosjekt" />
+    <!-- CTA Section -->
+    <CTA secondaryText="Se våre prosjekter" secondaryLink="/prosjekt" />
+  </main>
 </Layout>

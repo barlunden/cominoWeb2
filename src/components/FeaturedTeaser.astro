@@ -1,0 +1,109 @@
+---
+/* src/components/FeaturedTeaser.astro */
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+
+const allProjects = await getCollection('projects');
+const project = allProjects[Math.floor(Math.random() * allProjects.length)];
+
+if (!project) return null;
+
+const { title, description, thumbnail, technologies, url } = project.data;
+---
+
+<section class="py-24 bg-white dark:bg-page-dark transition-colors duration-500 relative overflow-hidden">
+  
+  {/* Bakgrunnsdekor (Rutenett) */}
+  <div class="absolute inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.05]">
+    <svg class="h-full w-full" xmlns="http://www.w3.org/2000/svg">
+      <pattern id="teaser-grid" width="60" height="60" patternUnits="userSpaceOnUse">
+        <path d="M 60 0 L 0 0 0 60" fill="none" stroke="currentColor" stroke-width="1" class="text-slate-400 dark:text-blue-500" />
+      </pattern>
+      <rect width="100%" height="100%" fill="url(#teaser-grid)" />
+    </svg>
+  </div>
+
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="max-w-6xl mx-auto">
+      
+      <div class="flex items-center gap-6 mb-16">
+        <h2 class="text-xs font-bold text-primary uppercase tracking-[0.4em] whitespace-nowrap italic">
+          // Prosjekt i fokus
+        </h2>
+        <div class="h-px w-full bg-slate-100 dark:bg-slate-800/60"></div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+        
+        {/* Venstre side: Bilete med Astro Image */}
+        <div class="lg:col-span-7">
+          <div class="relative aspect-16/10 rounded-[2.5rem] overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 shadow-2xl transition-all duration-700 group">
+            
+            <Image 
+              src={thumbnail} 
+              alt={title}
+              width={800}
+              height={500}
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+            />
+            
+            {/* Subtilt lysglimt ved hover */}
+            <div class="absolute inset-0 bg-linear-to-tr from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+          </div>
+        </div>
+
+        {/* Høgre side: Tekst og action */}
+        <div class="lg:col-span-5 space-y-8">
+          <div class="space-y-4">
+            <h3 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white italic tracking-tight leading-[1.05]">
+              {title}
+            </h3>
+            <p class="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+              {description}
+            </p>
+          </div>
+
+          {/* Tags */}
+          <div class="flex flex-wrap gap-2">
+            {technologies.map((tech) => (
+              <span class="px-4 py-1.5 rounded-full text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700/50">
+                {tech}
+              </span>
+            ))}
+          </div>
+
+          {/* Knappar */}
+          <div class="pt-8 border-t border-slate-100 dark:border-slate-800/60 flex flex-wrap gap-6">
+            {url && (
+              <a 
+                href={url} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="inline-flex items-center justify-center gap-3 bg-primary text-white px-7 py-4 rounded-xl font-bold hover:scale-105 transition-all shadow-lg shadow-primary/20 group"
+              >
+                Besøk nettsiden
+                <svg class="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            )}
+            
+            <a href={`/prosjekt/${project.slug}`} class="inline-flex items-center gap-2 font-bold text-slate-600 dark:text-slate-400 hover:text-primary transition-colors py-4 group">
+              Les caset
+              <svg class="w-5 h-5 group-hover:translate-x-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+      {/* Lenke til alle prosjekt */}
+      <div class="mt-20 text-center">
+        <a href="/prosjekt" class="inline-flex items-center gap-2 text-sm font-bold text-slate-400 hover:text-primary transition-colors uppercase tracking-[0.2em]">
+          <span>+</span> Se flere prosjekt
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

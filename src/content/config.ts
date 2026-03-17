@@ -31,6 +31,7 @@ const projects = defineCollection({
     order: z.number().default(0),
     customer: z.string().optional(),
     publishDate: z.date().optional(),
+    url: z.string().url().optional(),
     featured: z.boolean().default(false),
     cta: ctaSchema, // For prosjektspesifikke avslutningar
   }),

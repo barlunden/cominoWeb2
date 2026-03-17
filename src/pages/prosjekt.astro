@@ -5,7 +5,18 @@ import { getCollection } from "astro:content";
 import PageHeader from "../components/PageHeader.astro";
 
 const allProjects = await getCollection("projects");
-const sortedProjects = allProjects.sort((a, b) => a.data.order - b.data.order);
+
+// Funksjon for å stokke lista (Fisher-Yates Shuffle)
+function shuffle(array: any[]) {
+  const newArray = [...array];
+  for (let i = newArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+  }
+  return newArray;
+}
+
+const sortedProjects = shuffle(allProjects).slice(0, 3);
 ---
 
 <Layout title="Våre Prosjekter - Comino Web">
@@ -49,7 +60,7 @@ const sortedProjects = allProjects.sort((a, b) => a.data.order - b.data.order);
                 {/* Footer i kortet med bedre skillelinje */}
                 <div class="mt-auto pt-6 border-t border-slate-100 dark:border-slate-800/50 flex items-center justify-between relative z-20 pointer-events-none">
                   <div class="flex flex-wrap gap-2">
-                    {project.data.technologies.slice(0, 2).map((tech) => (
+                    {project.data.technologies.slice(0, 2).map((tech: string) => (
                       <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-400 text-[10px] font-bold uppercase tracking-wider rounded-lg border border-transparent dark:border-slate-700/50">
                         {tech}
                       </span>
